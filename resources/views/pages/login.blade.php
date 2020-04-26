@@ -5,16 +5,22 @@
 @section('content')
     
     <div id="app">
-        
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <Login></Login>
-        {{-- <Todo></Todo> --}}
     </div>
     {{-- @include('shared._weekend') --}}
 @endsection
 
 @section('footer')
-    <script src="../../js/login.js"></script>
     <script src="../../js/app.js"></script>
-    {{-- <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> --}}
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 @endsection

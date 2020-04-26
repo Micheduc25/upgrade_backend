@@ -38,6 +38,7 @@ window.Vue = require('vue');
 
 import Hello from "./components/hello.vue";
 import Todo from "./components/Todo.vue";
+import Login from "./components/login.vue";
 
 // Vue.component(
 //     'hello',
@@ -49,5 +50,6 @@ new Vue({
     components: {
         Hello,
         Todo,
+        Login,
     }
 });
