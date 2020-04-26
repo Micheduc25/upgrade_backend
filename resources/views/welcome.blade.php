@@ -16,3 +16,4 @@
 @section('footer')
     <script src="../js/app.js"></script>
 @endsection
+

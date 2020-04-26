@@ -12,8 +12,8 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'neo4j',
+    //'default' => env('DB_CONNECTION', 'neo4j'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +25,15 @@ return [
     | supported by Laravel is shown below to make development simple.
     |
     |
+
+    'neo4j' => [
+            'driver' => 'neo4j',
+            'protocol' => 'bolt',
+            'host'   => env('DB_HOST', 'localhost'),
+            'port'   => env('DB_PORT', '7474'),
+            'username' => env('DB_USERNAME', null),
+            'password' => env('DB_PASSWORD', null)
+        ],
     | All database work in Laravel is done through the PHP PDO facilities
     | so make sure you have the driver for your particular database of
     | choice installed on your machine before you begin development.
@@ -32,6 +41,14 @@ return [
     */
 
     'connections' => [
+
+        'neo4j' => [
+            'driver' => 'neo4j',
+            'host'   => env('DB_HOST', 'localhost'),
+            'port'   => (int)env('DB_PORT', 7474),
+            'username' => env('DB_USERNAME', 'dylan'),
+            'password' => env('DB_PASSWORD', 'root')
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
