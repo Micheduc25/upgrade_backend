@@ -8,36 +8,59 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public $currentUser=null;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $test = User1::where('username','rodyl')->count();
-        $user = User1::where('username','rodyl')->first();
-        $test2 = TaskModel::all();
-        $task = TaskModel::all()->get(0);
-        dump($test);
-        dump(count($test2));
-        dump($user->username);
-        dump($task->title);
-        return view('pages.login');
+        // $test = User1::where('username','rodyl')->count();
+        // $user = User1::where('username','rodyl')->first();
+        // $test2 = TaskModel::all();
+        // $task = TaskModel::all()->get(0);
+        // dump($test);
+        // dump(count($test2));
+        // dump($user->username);
+        // dump($task->title);
+        //dump(User1::$currentUser);
+        return view('pages.help');
     }
 
     public function checklogin(Request $request){
-        $this->validate($request, [
-            'username'=>'required|username',
-            'password'=>'required|alphanum|min:3'
-        ]);
+        // $this->validate($request, [
+        //     'username'=>'required|username',
+        //     'password'=>'required|alphanum|min:3'
+        // ]);
 
-        $user1_data = array(
-            'username'=>'uname',
-            'password'=>'pwd'
-        );
+        //echo("test check");
+        // $user1_data = array(
+        //     'username'=>$request->get('username'),
+        //     'password'=>$request->get('password')
+        // );
+        //echo($request->input('username'));
+        // echo "separation";
+        $user = User1::where('username',$request->input('username'))
+                        ->where('password',$request->input('password'))
+                        ->first();
 
-        dd($user1_data);
 
+        $this->currentUser = $user;
+        return ($user);
+        // echo($user1_data);
+        // return $user1_data;
+        
+    }
+
+    public function getCurrentUser(){
+        return ($this->currentUser);
+        // return "currentUser";
+    }
+
+    public function store(Request $request){
+        echo("test check");
+        return view('welcome');
+        //return TaskModel::create($request->all());
     }
 
 }

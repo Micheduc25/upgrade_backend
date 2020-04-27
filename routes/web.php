@@ -14,8 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', function () {
+    return view('pages.login');
+});
+Route::get('/todo', function () {
+    return view('pages.todo');
+});
 
-Route::get('/login', 'LoginController@index');
+// Route::get('/login', 'LoginController@index');
 
 Route::get('/about', function () {
     return view('pages.about');

@@ -1,5 +1,6 @@
 <?php
 use App\User1;
+use App\TaskModel;
 use Illuminate\Database\Seeder;
 
 class User1sLabelSeeder extends Seeder
@@ -9,11 +10,41 @@ class User1sLabelSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        User1::create([
+    public function run(){
+
+        $t1 = TaskModel::create([
+            'title'=>'My first task',
+            'tstate'=>false,
+        ]);
+
+        $t2 = TaskModel::create([
+            'title'=>'My second task',
+            'tstate'=>false,
+        ]);
+
+        $t3 = TaskModel::create([
+            'title'=>'My third task',
+            'tstate'=>false,
+        ]);
+
+        $u1 = User1::create([
             'username'=>'rodyl',
             'password'=>'root',
         ]);
+        $u2 = User1::create([
+            'username'=>'joy',
+            'password'=>'1234',
+        ]);
+
+        $u1->task()->save($t1);
+        $u1->task()->save($t2);
+        $u2->task()->save($t3);
+
+        $r1 = $t1->user1()->save($u1);
+        $r2 = $t2->user1()->save($u1);
+        $r3 = $t3->user1()->save($u2);
+        // $r1->save();
+        // $r2->save();
+        // $r3->save();
     }
 }

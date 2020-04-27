@@ -11,8 +11,6 @@ class TasksLabelSeeder extends Seeder
      */
     public function run()
     {
-        TaskModel::create([
-            'title'=>'My first task',
-        ]);
+        
     }
 }

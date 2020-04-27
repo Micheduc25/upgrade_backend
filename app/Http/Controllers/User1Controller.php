@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User1;
+use App\TaskModel;
 use Illuminate\Http\Request;
 
 class User1Controller extends Controller
@@ -49,7 +50,12 @@ class User1Controller extends Controller
      */
     public function show(User1 $user1)
     {
-        //
+        return (TaskModel::where('username', $user1->id)->task);
+    }
+    public function getUserTasks($id)
+    {
+        return (User1::find($id)->task);
+        //return (User1::where('id', $id)->task);
     }
 
     /**
