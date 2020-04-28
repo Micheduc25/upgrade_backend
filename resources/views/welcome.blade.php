@@ -15,7 +15,7 @@
     {{ $name }}
     @include('shared._weekend') --}}
     {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
-    
+    <Signup></Signup>
 @endsection
 
 @section('footer')

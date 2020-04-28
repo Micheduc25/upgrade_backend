@@ -139,7 +139,7 @@ export default {
         },
         addTodo(){   
             axios.post(`api/addtask/${this.currentUser.id}`, {title: this.newTodo, tstate: false}).then(res => {
-                //console.log(res)
+                console.log(res)
                 this.actualiseTaskList()
                 this.todos.push({
                     taskid: this.completeTodo[this.completeTodo.length-1].taskid,

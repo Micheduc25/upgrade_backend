@@ -51,6 +51,17 @@ class LoginController extends Controller
         // return $user1_data;
         
     }
+    public function register(Request $request){
+        $user = User1::create([
+            'username'=>$request->input('username'),
+            'password'=>$request->input('password'),
+        ]);
+
+
+        $this->currentUser = $user;
+        return ($user);
+        
+    }
 
     public function getCurrentUser(){
         return ($this->currentUser);

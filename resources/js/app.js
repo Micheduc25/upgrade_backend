@@ -40,6 +40,7 @@ import Hello from "./components/hello.vue";
 import Todo from "./components/Todo.vue";
 import Login from "./components/login.vue";
 import mynav from "./components/mynav.vue";
+import Signup from "./components/signup.vue";
 
 // Vue.component(
 //     'hello',
@@ -53,5 +54,6 @@ new Vue({
         Todo,
         Login,
         mynav,
+        Signup,
     }
 });

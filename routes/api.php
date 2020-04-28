@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', 'LoginController@index');
 Route::get('/getCurrentUser', 'LoginController@getCurrentUser');
 Route::post('/login/checklogin', 'LoginController@checklogin');
+Route::post('/login/register', 'LoginController@register');
 Route::get('tasks/{id}', 'User1Controller@getUserTasks');
 Route::post('addtask/{id}', 'TasksController@store');
 Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
