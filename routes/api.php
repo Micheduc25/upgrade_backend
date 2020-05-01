@@ -14,13 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::get('/login', 'LoginController@index');
+Route::get('/getCurrentUser', 'LoginController@getCurrentUser');
+Route::post('/login/checklogin', 'LoginController@checklogin');
+Route::post('/login/register', 'LoginController@register');
+Route::get('tasks/{id}', 'User1Controller@getUserTasks');
+Route::post('addtask/{id}', 'TasksController@store');
+Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
+Route::put('updatetask/{id}', 'TasksController@updatetask');
+//Route::get('tasks/{userid}', 'TaskController@index');
+// Route::get('tasks/{userid}', 'TaskController@index');
+// Route::get('task/{id}', 'TaskController@show');
+// Route::post('task', 'TaskController@store');
+// Route::put('task/{id}', 'TaskController@update');
+// Route::delete('task/{id}', 'TaskController@delete');
+// Route::delete('person', 'PersonController@index');
 
-Route::get('tasks/{userid}', 'TaskController@index');
-Route::get('task/{id}', 'TaskController@show');
-Route::post('task', 'TaskController@store');
-Route::put('task/{id}', 'TaskController@update');
-Route::delete('task/{id}', 'TaskController@delete');
-Route::delete('person', 'PersonController@index');

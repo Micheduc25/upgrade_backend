@@ -24,6 +24,7 @@ class TaskController extends Controller
         // echo $result;
         return Task::whereUserid($userid)->get();
     }
+    
     public function show($id){
         return Task::find($id);
     }

@@ -1701,6 +1701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
 //
 //
 //
@@ -1737,16 +1738,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+ //import Login from "./login.vue"
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Todo',
   props: {
     value: {
       type: Array,
       "default": function _default() {
         return [];
       }
-    }
+    },
+    currentUser: {}
   },
   data: function data() {
     return {
@@ -1757,8 +1771,12 @@ __webpack_require__.r(__webpack_exports__);
       editing: null,
       oldTask: null,
       taskid: '',
-      description: ''
+      description: '',
+      currentUserName: ''
     };
+  },
+  components: {
+    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
     this.getTasks();
@@ -1772,21 +1790,36 @@ __webpack_require__.r(__webpack_exports__);
     getTasks: function getTasks() {
       var _this = this;
 
+      console.log(this.currentUser.username);
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         method: 'GET',
-        url: '/api/tasks/8'
+        url: "/api/tasks/".concat(this.currentUser.id)
       }).then(function (result) {
-        var tempTodo = [];
-        result.data.forEach(function (element) {
-          tempTodo.push({
-            taskid: element.taskid,
-            name: element.description,
-            completed: element.state === 1 ? true : false
-          });
+        console.log(result.data);
 
-          _this.completeTodo.push(element);
-        });
-        _this.todos = tempTodo;
+        if (result.data !== "" && result.data !== null) {
+          //this.gooduser = true
+          //this.currentUser = result.data
+          //this.currentUserName = this.currentUser.username
+          var tempTodo = [];
+          result.data.forEach(function (element) {
+            tempTodo.push({
+              taskid: element.id,
+              name: element.title,
+              completed: element.tstate // === 1 ? true : false
+
+            });
+
+            _this.completeTodo.push(element);
+          });
+          _this.todos = tempTodo; //console.log(this.gooduser)
+        } else {
+          console.log('Aucune tache'); //console.log(this.gooduser)
+          //console.log(result.data)
+
+          console.log(result); //getCurrentUser
+          //window.location.href = '/'
+        }
       }, function (error) {
         console.log(error);
       });
@@ -1796,7 +1829,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_1___default()({
         method: 'GET',
-        url: '/api/tasks/8'
+        url: "/api/tasks/".concat(this.currentUser.id)
       }).then(function (result) {
         result.data.forEach(function (element) {
           _this2.completeTodo.push(element);
@@ -1808,10 +1841,12 @@ __webpack_require__.r(__webpack_exports__);
     addTodo: function addTodo() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/task', {
-        userid: 8,
-        description: this.newTodo
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
+        title: this.newTodo,
+        tstate: false
       }).then(function (res) {
+        console.log(res);
+
         _this3.actualiseTaskList();
 
         _this3.todos.push({
@@ -1828,9 +1863,9 @@ __webpack_require__.r(__webpack_exports__);
     deleteTodo: function deleteTodo(todo) {
       var _this4 = this;
 
-      //console.log(todo.taskid)
-      //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/task/".concat(todo.taskid)).then(function (res) {
+      console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
         _this4.todos = _this4.todos.filter(function (t) {
           return t !== todo;
         });
@@ -1854,10 +1889,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     chageTaskState: function chageTaskState(todo) {
       todo.completed = !todo.completed;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/task/".concat(todo.taskid), {
-        userid: 8,
-        description: todo.name,
-        state: todo.completed ? 1 : 0
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: todo.name,
+        tstate: todo.completed
       }).then(function (res) {//this.editing = null
       })["catch"](function (err) {
         console.log(err);
@@ -1872,9 +1906,9 @@ __webpack_require__.r(__webpack_exports__);
       // console.log(this.todos.indexOf(todo))
       // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
       //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/task/".concat(todo.taskid), {
-        userid: 8,
-        description: todo.name
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: todo.name,
+        tstate: todo.completed
       }).then(function (res) {
         _this5.editing = null;
       })["catch"](function (err) {
@@ -1889,11 +1923,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     allDone: {
       get: function get() {
-        console.log('test');
         return this.remaining === 0;
       },
       set: function set(value) {
-        console.log(value);
         this.todos.forEach(function (todo) {
           todo.completed = value;
         });
@@ -1975,6 +2007,265 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/login.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/login.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
+/* harmony import */ var _Todo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todo.vue */ "./resources/js/components/Todo.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Login',
+  props: {},
+  data: function data() {
+    return {
+      username: '',
+      password: '',
+      currentUser: null,
+      gooduser: true
+    };
+  },
+  components: {
+    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Todo: _Todo_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  methods: {
+    login: function login() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/login/checklogin', {
+        username: this.username,
+        password: this.password
+      }).then(function (res) {
+        console.log(res.data);
+
+        if (res.data !== null && res.data !== "") {
+          console.log('is not null 1');
+          _this.currentUser = res.data;
+          _this.gooduser = false;
+        } else if (res.data === "") {
+          console.log('is empty');
+        } else {
+          console.log('not null');
+        } // if(res.data.username !== null){
+        //     //console.log(res.data)
+        //     this.currentUsername = res.data.username
+        //     window.location.href = '/welcome';//, res.data.username]
+        // }else{
+        //     console.log('Login ou mot de passe incorrect')
+        // }
+
+
+        _this.password = ''; //window.location.href = "/"
+        //router.push('/')
+      })["catch"](function (err) {
+        console.log(err + " ---> ERROR");
+      });
+    }
+  },
+  computed: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mynav.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {},
+  data: function data() {
+    return {};
+  },
+  methods: {
+    gotoLogin: function gotoLogin() {
+      window.location.href = "/login"; // axios({method: 'GET', url: '/api/login'}).then(
+      //     result => {
+      //         console.log(result)
+      //     },
+      //     error => {
+      //         console.log(error)
+      //     },
+      // )
+    },
+    gotoSignup: function gotoSignup() {
+      window.location.href = "/";
+    }
+  },
+  computed: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/signup.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/signup.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
+/* harmony import */ var _Todo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todo.vue */ "./resources/js/components/Todo.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Signup',
+  props: {},
+  data: function data() {
+    return {
+      username: '',
+      password: '',
+      currentUser: null,
+      gooduser: true
+    };
+  },
+  components: {
+    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Todo: _Todo_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  methods: {
+    signup: function signup() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/login/register', {
+        username: this.username,
+        password: this.password
+      }).then(function (res) {
+        console.log(res.data);
+
+        if (res.data !== null && res.data !== "") {
+          console.log('is not null 1');
+          _this.currentUser = res.data;
+          _this.gooduser = false;
+          window.location.href = '/login';
+        } else if (res.data === "") {
+          console.log('is empty');
+        } else {
+          console.log('not null');
+        } // if(res.data.username !== null){
+        //     //console.log(res.data)
+        //     this.currentUsername = res.data.username
+        //     window.location.href = '/welcome';//, res.data.username]
+        // }else{
+        //     console.log('Login ou mot de passe incorrect')
+        // }
+
+
+        _this.password = ''; //window.location.href = "/"
+        //router.push('/')
+      })["catch"](function (err) {
+        console.log(err + " ---> ERROR");
+      });
+    }
+  },
+  computed: {}
 });
 
 /***/ }),
@@ -38290,324 +38581,343 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "todoapp" }, [
-    _c("header", { staticClass: "header" }, [
-      _c("h1", [_vm._v("Todo")]),
+  return _c("div", [
+    _c("div", [
+      _c("h3", [_vm._v("Welcome " + _vm._s(this.currentUser.username))]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.newTodo,
-            expression: "newTodo"
-          }
-        ],
-        staticClass: "new-todo",
-        attrs: { type: "text", placeholder: "Ajouter une tache" },
-        domProps: { value: _vm.newTodo },
-        on: {
-          keyup: function($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
-            return _vm.addTodo($event)
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.newTodo = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "main" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.allDone,
-            expression: "allDone"
-          }
-        ],
-        staticClass: "toggle-all",
-        attrs: { id: "toggle-all", type: "checkbox" },
-        domProps: {
-          checked: Array.isArray(_vm.allDone)
-            ? _vm._i(_vm.allDone, null) > -1
-            : _vm.allDone
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.allDone,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && (_vm.allDone = $$a.concat([$$v]))
-              } else {
-                $$i > -1 &&
-                  (_vm.allDone = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+      _c("section", { staticClass: "todoapp" }, [
+        _c("header", { staticClass: "header" }, [
+          _c("h1", [_vm._v("Todo")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newTodo,
+                expression: "newTodo"
               }
-            } else {
-              _vm.allDone = $$c
-            }
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "toggle-all" } }, [
-        _vm._v("\n            Mark all as complete")
-      ]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "todo-list" },
-        _vm._l(_vm.filteredTodos, function(todo) {
-          return _c(
-            "li",
-            {
-              key: todo,
-              staticClass: "todo",
-              class: {
-                completed: todo.completed,
-                editing: todo === _vm.editing
-              }
-            },
-            [
-              _c("div", { staticClass: "view" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: todo.completed,
-                      expression: "todo.completed"
-                    }
-                  ],
-                  staticClass: "toggle",
-                  attrs: { type: "checkbox", name: "" },
-                  domProps: {
-                    checked: Array.isArray(todo.completed)
-                      ? _vm._i(todo.completed, null) > -1
-                      : todo.completed
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.chageTaskState(todo)
-                    },
-                    change: function($event) {
-                      var $$a = todo.completed,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(todo, "completed", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              todo,
-                              "completed",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(todo, "completed", $$c)
-                      }
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    on: {
-                      dblclick: function($event) {
-                        return _vm.editTodo(todo)
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(todo.name))]
-                ),
-                _c("br"),
-                _vm._v(" "),
-                _c("button", {
-                  staticClass: "destroy",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.deleteTodo(todo)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: todo.name,
-                    expression: "todo.name"
-                  },
-                  {
-                    name: "focus",
-                    rawName: "v-focus",
-                    value: todo === _vm.editing,
-                    expression: "todo === editing"
-                  }
-                ],
-                staticClass: "edit",
-                attrs: { type: "text" },
-                domProps: { value: todo.name },
-                on: {
-                  keyup: [
-                    function($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.doneEdit(todo)
-                    },
-                    function($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "esc", 27, $event.key, [
-                          "Esc",
-                          "Escape"
-                        ])
-                      ) {
-                        return null
-                      }
-                      return _vm.cancelEdit($event)
-                    }
-                  ],
-                  blur: function($event) {
-                    return _vm.doneEdit(todo)
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(todo, "name", $event.target.value)
-                  }
+            ],
+            staticClass: "new-todo",
+            attrs: { type: "text", placeholder: "Ajouter une tache" },
+            domProps: { value: _vm.newTodo },
+            on: {
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
                 }
-              })
-            ]
-          )
-        }),
-        0
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "footer",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.hasTodos,
-            expression: "hasTodos"
-          }
-        ],
-        staticClass: "footer"
-      },
-      [
-        _c("span", { staticClass: "todo-count" }, [
-          _c("strong", [_vm._v(_vm._s(_vm.remaining))]),
-          _vm._v(" taches a faire\n        ")
+                return _vm.addTodo($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newTodo = $event.target.value
+              }
+            }
+          })
         ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "filters" }, [
-          _c("li", [
-            _c(
-              "a",
+        _c("div", { staticClass: "main" }, [
+          _c("input", {
+            directives: [
               {
-                class: { selected: _vm.filter === "all" },
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.filter = "all"
+                name: "model",
+                rawName: "v-model",
+                value: _vm.allDone,
+                expression: "allDone"
+              }
+            ],
+            staticClass: "toggle-all",
+            attrs: { id: "toggle-all", type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.allDone)
+                ? _vm._i(_vm.allDone, null) > -1
+                : _vm.allDone
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.allDone,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.allDone = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.allDone = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
                   }
+                } else {
+                  _vm.allDone = $$c
                 }
-              },
-              [_vm._v("All task")]
-            )
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "toggle-all" } }, [
+            _vm._v("\n                Mark all as complete")
           ]),
           _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                class: { selected: _vm.filter === "todo" },
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.filter = "todo"
+          _c(
+            "ul",
+            { staticClass: "todo-list" },
+            _vm._l(_vm.filteredTodos, function(todoelt, idx) {
+              return _c(
+                "li",
+                {
+                  key: idx,
+                  staticClass: "todo",
+                  class: {
+                    completed: todoelt.completed,
+                    editing: todoelt === _vm.editing
                   }
-                }
-              },
-              [_vm._v("To do")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                class: { selected: _vm.filter === "done" },
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.filter = "done"
-                  }
-                }
-              },
-              [_vm._v("Done")]
-            )
-          ])
+                },
+                [
+                  _c("div", { staticClass: "view" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: todoelt.completed,
+                          expression: "todoelt.completed"
+                        }
+                      ],
+                      staticClass: "toggle",
+                      attrs: { type: "checkbox", name: "" },
+                      domProps: {
+                        checked: Array.isArray(todoelt.completed)
+                          ? _vm._i(todoelt.completed, null) > -1
+                          : todoelt.completed
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.chageTaskState(todoelt)
+                        },
+                        change: function($event) {
+                          var $$a = todoelt.completed,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  todoelt,
+                                  "completed",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  todoelt,
+                                  "completed",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(todoelt, "completed", $$c)
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        on: {
+                          dblclick: function($event) {
+                            return _vm.editTodo(todoelt)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(todoelt.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "destroy",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.deleteTodo(todoelt)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: todoelt.name,
+                        expression: "todoelt.name"
+                      },
+                      {
+                        name: "focus",
+                        rawName: "v-focus",
+                        value: todoelt === _vm.editing,
+                        expression: "todoelt === editing"
+                      }
+                    ],
+                    staticClass: "edit",
+                    attrs: { type: "text" },
+                    domProps: { value: todoelt.name },
+                    on: {
+                      keyup: [
+                        function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.doneEdit(todoelt)
+                        },
+                        function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k($event.keyCode, "esc", 27, $event.key, [
+                              "Esc",
+                              "Escape"
+                            ])
+                          ) {
+                            return null
+                          }
+                          return _vm.cancelEdit($event)
+                        }
+                      ],
+                      blur: function($event) {
+                        return _vm.doneEdit(todoelt)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(todoelt, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ]
+              )
+            }),
+            0
+          )
         ]),
         _vm._v(" "),
         _c(
-          "button",
+          "footer",
           {
             directives: [
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.doneTask,
-                expression: "doneTask"
+                value: _vm.hasTodos,
+                expression: "hasTodos"
               }
             ],
-            staticClass: "clear-completed",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.deleteCompleted($event)
-              }
-            }
+            staticClass: "footer"
           },
-          [_vm._v("Delete completed tasks")]
-        )
-      ]
-    )
+          [
+            _c("span", { staticClass: "todo-count" }, [
+              _c("strong", [_vm._v(_vm._s(_vm.remaining))]),
+              _vm._v(" taches a faire\n            ")
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "filters" }, [
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    class: { selected: _vm.filter === "all" },
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.filter = "all"
+                      }
+                    }
+                  },
+                  [_vm._v("All task")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    class: { selected: _vm.filter === "todo" },
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.filter = "todo"
+                      }
+                    }
+                  },
+                  [_vm._v("To do")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    class: { selected: _vm.filter === "done" },
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.filter = "done"
+                      }
+                    }
+                  },
+                  [_vm._v("Done")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.doneTask,
+                    expression: "doneTask"
+                  }
+                ],
+                staticClass: "clear-completed",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.deleteCompleted($event)
+                  }
+                }
+              },
+              [_vm._v("Delete completed tasks")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("br")
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -38644,6 +38954,338 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/login.vue?vue&type=template&id=172b28a4&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/login.vue?vue&type=template&id=172b28a4& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("mynav"),
+      _vm._v(" "),
+      _vm.gooduser
+        ? _c("div", [
+            _c("form", { attrs: { action: "", method: "post" } }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "username" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "password", name: "password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit", name: "login", value: "Login" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.login($event)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        : _c(
+            "div",
+            [_c("Todo", { attrs: { currentUser: _vm.currentUser } })],
+            1
+          )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mynav.vue?vue&type=template&id=06df9d88& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand-sm bg-dark navbar-dark" },
+    [
+      _c("ul", { staticClass: "navbar-nav" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.gotoLogin($event)
+                }
+              }
+            },
+            [_vm._v("TodoList")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(3)
+      ]),
+      _vm._v(" "),
+      _vm._m(4)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item active" }, [
+      _c(
+        "a",
+        { staticClass: "nav-link", attrs: { href: "http://127.0.0.1:8000/" } },
+        [_vm._v("Home")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("About")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _vm._v("Help")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("Events")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "a",
+          {
+            staticClass: "nav-link",
+            attrs: { href: "http://127.0.0.1:8000/" }
+          },
+          [
+            _c("span", { staticClass: "glyphicon glyphicon-user" }),
+            _vm._v(" Sign Up")
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "a",
+          {
+            staticClass: "nav-link",
+            attrs: { href: "http://127.0.0.1:8000/login" }
+          },
+          [
+            _c("span", { staticClass: "glyphicon glyphicon-log-in" }),
+            _vm._v(" Login")
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/signup.vue?vue&type=template&id=358611ba&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/signup.vue?vue&type=template&id=358611ba& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c("form", { attrs: { action: "", method: "post" } }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.username,
+                expression: "username"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "username" },
+            domProps: { value: _vm.username },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.username = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "password", name: "password" },
+            domProps: { value: _vm.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit", name: "signup", value: "Sign Up" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.signup($event)
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50818,6 +51460,9 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_hello_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/hello.vue */ "./resources/js/components/hello.vue");
 /* harmony import */ var _components_Todo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Todo.vue */ "./resources/js/components/Todo.vue");
+/* harmony import */ var _components_login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/login.vue */ "./resources/js/components/login.vue");
+/* harmony import */ var _components_mynav_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/mynav.vue */ "./resources/js/components/mynav.vue");
+/* harmony import */ var _components_signup_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/signup.vue */ "./resources/js/components/signup.vue");
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
 //  * includes Vue and other libraries. It is a great starting point when
@@ -50847,6 +51492,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+
+
+
  // Vue.component(
 //     'hello',
 //     require('./components/hello.vue')
@@ -50856,7 +51504,10 @@ new Vue({
   el: '#app',
   components: {
     Hello: _components_hello_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Todo: _components_Todo_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Todo: _components_Todo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Login: _components_login_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    mynav: _components_mynav_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Signup: _components_signup_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 
@@ -51060,6 +51711,213 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/login.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/login.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login.vue?vue&type=template&id=172b28a4& */ "./resources/js/components/login.vue?vue&type=template&id=172b28a4&");
+/* harmony import */ var _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login.vue?vue&type=script&lang=js& */ "./resources/js/components/login.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/login.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/login.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/login.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./login.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/login.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/login.vue?vue&type=template&id=172b28a4&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/login.vue?vue&type=template&id=172b28a4& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./login.vue?vue&type=template&id=172b28a4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/login.vue?vue&type=template&id=172b28a4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_172b28a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/mynav.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/mynav.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mynav.vue?vue&type=template&id=06df9d88& */ "./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&");
+/* harmony import */ var _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mynav.vue?vue&type=script&lang=js& */ "./resources/js/components/mynav.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/mynav.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/mynav.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/mynav.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./mynav.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/mynav.vue?vue&type=template&id=06df9d88& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./mynav.vue?vue&type=template&id=06df9d88& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/signup.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/signup.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./signup.vue?vue&type=template&id=358611ba& */ "./resources/js/components/signup.vue?vue&type=template&id=358611ba&");
+/* harmony import */ var _signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup.vue?vue&type=script&lang=js& */ "./resources/js/components/signup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/signup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/signup.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/signup.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./signup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/signup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/signup.vue?vue&type=template&id=358611ba&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/signup.vue?vue&type=template&id=358611ba& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./signup.vue?vue&type=template&id=358611ba& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/signup.vue?vue&type=template&id=358611ba&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/todo.css?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/todo.css?vue&type=style&index=0&lang=css& ***!
@@ -51094,8 +51952,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\JOY\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\JOY\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
