@@ -1804,9 +1804,17 @@ __webpack_require__.r(__webpack_exports__);
           //this.currentUserName = this.currentUser.username
           var tempTodo = [];
           result.data.forEach(function (element) {
+            var val = '';
+
+            if (element.description !== '' && element.description !== undefined && element.description !== null) {
+              val = element.description;
+            } else {
+              val = element.title;
+            }
+
             tempTodo.push({
               taskid: element.id,
-              name: element.title,
+              name: val,
               completed: element.tstate // === 1 ? true : false
 
             });
@@ -1843,7 +1851,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
-        title: this.newTodo,
+        title: '',
+        description: this.newTodo,
         tstate: false
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()

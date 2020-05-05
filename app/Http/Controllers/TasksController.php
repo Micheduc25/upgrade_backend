@@ -32,10 +32,14 @@ class TasksController extends Controller
         //
     }
     
-    public function addtask(Request $request)
+    public function maddtask(Request $request, $id)
     {
-        //return ($request->title);
-        return TaskModel::create($request->all());
+        $user = User1::find($id);
+        $task = TaskModel::create($request->all());
+
+        $user->task()->save($task);
+        $task->user1()->save($user);
+        return $task;
     }
 
     /**

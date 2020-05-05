@@ -100,9 +100,16 @@ export default {
                         //this.currentUserName = this.currentUser.username
                         let tempTodo = []
                         result.data.forEach(element => {
+                            let val = ''
+                            if(element.description !=='' && element.description !== undefined 
+                             && element.description !==null){
+                                val = element.description
+                             }else{
+                                 val = element.title
+                             }
                             tempTodo.push({
                                 taskid: element.id,
-                                name: element.title,
+                                name:  val,
                                 completed: element.tstate// === 1 ? true : false
                             })
                             this.completeTodo.push(element)
@@ -139,7 +146,7 @@ export default {
             )
         },
         addTodo(){   
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: this.newTodo, tstate: false}).then(res => {
+            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false}).then(res => {
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({

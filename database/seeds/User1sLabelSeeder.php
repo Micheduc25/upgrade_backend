@@ -13,17 +13,20 @@ class User1sLabelSeeder extends Seeder
     public function run(){
 
         $t1 = TaskModel::create([
-            'title'=>'My first task',
+            'title'=> 'title 1',
+            'description' => 'My first task',
             'tstate'=>false,
         ]);
 
         $t2 = TaskModel::create([
-            'title'=>'My second task',
+            'title'=>'title 2',
+            'description'=> 'My second task',
             'tstate'=>false,
         ]);
 
         $t3 = TaskModel::create([
-            'title'=>'My third task',
+            'title'=> 'title 3',
+            'description' => 'My third task',
             'tstate'=>false,
         ]);
 
