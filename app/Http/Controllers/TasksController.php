@@ -51,7 +51,7 @@ class TasksController extends Controller
 
         $user->task()->save($task);
         $task->user1()->save($user);
-
+        return $task;
     }
 
     /**

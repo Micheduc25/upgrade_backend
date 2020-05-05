@@ -80,6 +80,7 @@ export default {
         mynav,
     },
     mounted(){
+        console.log('Mounted all')
         this.getTasks()
     },
     watch: {
@@ -140,9 +141,9 @@ export default {
         addTodo(){   
             axios.post(`api/addtask/${this.currentUser.id}`, {title: this.newTodo, tstate: false}).then(res => {
                 console.log(res)
-                this.actualiseTaskList()
+                //this.actualiseTaskList()
                 this.todos.push({
-                    taskid: this.completeTodo[this.completeTodo.length-1].taskid,
+                    taskid: res.data.id,
                     name : this.newTodo,
                     completed: false
                 })
@@ -178,6 +179,9 @@ export default {
         },
         chageTaskState(todo){
             todo.completed = !todo.completed
+            console.log('todo.name')
+            console.log(todo.name)
+            console.log(todo)
             axios.put(`/api/updatetask/${todo.taskid}`, 
                 {title: todo.name, tstate: todo.completed })
                 .then(res => {

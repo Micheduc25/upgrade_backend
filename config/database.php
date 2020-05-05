@@ -13,7 +13,7 @@ return [
     |
     */
     'default' => 'neo4j',
-    //'default' => env('DB_CONNECTION', 'neo4j'),
+    'default' => env('DB_CONNECTION', 'neo4j'),
 
     /*
     |--------------------------------------------------------------------------

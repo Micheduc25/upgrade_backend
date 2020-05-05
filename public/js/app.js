@@ -1779,6 +1779,7 @@ __webpack_require__.r(__webpack_exports__);
     mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
+    console.log('Mounted all');
     this.getTasks();
   },
   watch: {
@@ -1845,12 +1846,10 @@ __webpack_require__.r(__webpack_exports__);
         title: this.newTodo,
         tstate: false
       }).then(function (res) {
-        console.log(res);
-
-        _this3.actualiseTaskList();
+        console.log(res); //this.actualiseTaskList()
 
         _this3.todos.push({
-          taskid: _this3.completeTodo[_this3.completeTodo.length - 1].taskid,
+          taskid: res.data.id,
           name: _this3.newTodo,
           completed: false
         });
@@ -1889,6 +1888,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     chageTaskState: function chageTaskState(todo) {
       todo.completed = !todo.completed;
+      console.log('todo.name');
+      console.log(todo.name);
+      console.log(todo);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
         title: todo.name,
         tstate: todo.completed
@@ -39123,7 +39125,7 @@ var staticRenderFns = [
     return _c("li", { staticClass: "nav-item active" }, [
       _c(
         "a",
-        { staticClass: "nav-link", attrs: { href: "http://127.0.0.1:8000/" } },
+        { staticClass: "nav-link", attrs: { href: "http://todo.local/" } },
         [_vm._v("Home")]
       )
     ])
@@ -39166,10 +39168,7 @@ var staticRenderFns = [
       _c("li", { staticClass: "nav-item" }, [
         _c(
           "a",
-          {
-            staticClass: "nav-link",
-            attrs: { href: "http://127.0.0.1:8000/" }
-          },
+          { staticClass: "nav-link", attrs: { href: "http://todo.local" } },
           [
             _c("span", { staticClass: "glyphicon glyphicon-user" }),
             _vm._v(" Sign Up")
@@ -39182,7 +39181,7 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "nav-link",
-            attrs: { href: "http://127.0.0.1:8000/login" }
+            attrs: { href: "http://todo.local/login" }
           },
           [
             _c("span", { staticClass: "glyphicon glyphicon-log-in" }),
@@ -51952,8 +51951,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\JOY\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\JOY\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

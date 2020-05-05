@@ -1,5 +1,6 @@
 <?php
 
+use Vinelab\NeoEloquent\Facade\Neo4jSchema;
 use Vinelab\NeoEloquent\Schema\Blueprint;
 use Vinelab\NeoEloquent\Migrations\Migration;
 

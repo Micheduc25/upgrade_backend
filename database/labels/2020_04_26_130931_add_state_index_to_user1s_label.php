@@ -1,5 +1,6 @@
 <?php
 
+use Vinelab\NeoEloquent\Facade\Neo4jSchema;
 use Vinelab\NeoEloquent\Schema\Blueprint;
 use Vinelab\NeoEloquent\Migrations\Migration;
 
@@ -12,7 +13,7 @@ class AddStateIndexToUser1sLabel extends Migration {
      */
     public function up()
     {
-        Neo4jSchema::label('user1s', function(Blueprint $label)
+        Neo4jSchema::label('tasks', function(Blueprint $label)
         {
             $label->index('tstate');
         });
@@ -25,7 +26,7 @@ class AddStateIndexToUser1sLabel extends Migration {
      */
     public function down()
     {
-        Neo4jSchema::label('user1s', function(Blueprint $label)
+        Neo4jSchema::label('tasks', function(Blueprint $label)
         {
             $label->dropIndex('tstate');
         });
