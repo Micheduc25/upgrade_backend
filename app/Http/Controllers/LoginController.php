@@ -46,7 +46,7 @@ class LoginController extends Controller
 
 
         $this->currentUser = $user;
-        return ($user);
+        return $user;
         // echo($user1_data);
         // return $user1_data;
         

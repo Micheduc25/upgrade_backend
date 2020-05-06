@@ -110,7 +110,9 @@ export default {
                             tempTodo.push({
                                 taskid: element.id,
                                 name:  val,
-                                completed: element.tstate// === 1 ? true : false
+                                completed: element.tstate, // === 1 ? true : false
+                                task_priority: element.task_priority,
+                                end_date: element.end_date,
                             })
                             this.completeTodo.push(element)
                         });
@@ -146,13 +148,15 @@ export default {
             )
         },
         addTodo(){   
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false}).then(res => {
+            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:''}).then(res => {
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({
                     taskid: res.data.id,
                     name : this.newTodo,
-                    completed: false
+                    completed: false,
+                    task_priority:'to do',
+                    end_date: '',
                 })
                 this.newTodo = ''
             })
@@ -190,7 +194,7 @@ export default {
             console.log(todo.name)
             console.log(todo)
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title: todo.name, tstate: todo.completed })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do', end_date:'' })
                 .then(res => {
                     //this.editing = null
                 })
@@ -207,7 +211,7 @@ export default {
             // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
             //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title: todo.name, tstate: todo.completed })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do',  end_date:'' })
                 .then(res => {
                     this.editing = null
                 })

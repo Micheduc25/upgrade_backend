@@ -1815,8 +1815,10 @@ __webpack_require__.r(__webpack_exports__);
             tempTodo.push({
               taskid: element.id,
               name: val,
-              completed: element.tstate // === 1 ? true : false
-
+              completed: element.tstate,
+              // === 1 ? true : false
+              task_priority: element.task_priority,
+              end_date: element.end_date
             });
 
             _this.completeTodo.push(element);
@@ -1853,14 +1855,18 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
         title: '',
         description: this.newTodo,
-        tstate: false
+        tstate: false,
+        task_priority: 'to do',
+        end_date: ''
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()
 
         _this3.todos.push({
           taskid: res.data.id,
           name: _this3.newTodo,
-          completed: false
+          completed: false,
+          task_priority: 'to do',
+          end_date: ''
         });
 
         _this3.newTodo = '';
@@ -1901,8 +1907,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log(todo.name);
       console.log(todo);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: todo.name,
-        tstate: todo.completed
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do',
+        end_date: ''
       }).then(function (res) {//this.editing = null
       })["catch"](function (err) {
         console.log(err);
@@ -1918,8 +1927,11 @@ __webpack_require__.r(__webpack_exports__);
       // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
       //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: todo.name,
-        tstate: todo.completed
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do',
+        end_date: ''
       }).then(function (res) {
         _this5.editing = null;
       })["catch"](function (err) {
