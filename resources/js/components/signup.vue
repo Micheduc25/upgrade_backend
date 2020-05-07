@@ -5,18 +5,18 @@
                     <div v-if="showWarning" class="text-red-700 font-bold bg-red-100">Password does not correspond with confirm password, try again!</div>
                     <div class="flex flex-col items-start mb-6">
                         <label for="uname" class="text-blue-800 font-bold ">Username</label>
-                        <input type="text" name="username" @input="showWarning=false" v-model="username" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
+                        <input type="text" name="username" @input="showWarning=false" v-model="username" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
                     </div>
                     <div class="flex flex-col items-start mb-6">
                         <label for="pwd" class="text-blue-800 font-bold ">Password</label>
-                        <input type="password" name="password" @input="showWarning=false" v-model="password" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
+                        <input type="password" name="password" @input="showWarning=false" v-model="password" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
                     </div>
                      <div class="flex flex-col items-start mb-6">
                         <label for="confirmpassword" class="text-blue-800 font-bold ">Confirm Password</label>
-                        <input type="password" name="cpassword" @input="showWarning=false" v-model="cpassword" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
+                        <input type="password" name="cpassword" @input="showWarning=false" v-model="cpassword" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
                     </div>
                     <div class="flex flex-col items-start mb-6">
-                        <input type="submit" name="signup" @click.prevent="signup" class="btn btn-primary border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Sign Up">
+                        <input type="submit" name="signup" @click.prevent="signup" class="border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Sign Up">
                     </div>
                 </form>
             </div>

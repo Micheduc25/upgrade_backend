@@ -3,16 +3,16 @@
             <mynav></mynav>
             <div v-if="gooduser">
                 <form action="" method="post">
-                <div class="form-group">
-                    <label for="uname">Username</label>
-                    <input type="text" name="username" v-model="username" class="form-control">
+                <div class="flex flex-col items-start mb-6">
+                    <label for="uname" class="text-blue-800 font-bold ">Username</label>
+                    <input type="text" name="username" v-model="username" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
                 </div>
-                <div class="form-group">
-                    <label for="pwd">Password</label>
-                    <input type="password" name="password" v-model="password" class="form-control">
+                <div class="flex flex-col items-start mb-6">
+                    <label for="pwd" class="text-blue-800 font-bold ">Password</label>
+                    <input type="password" name="password" v-model="password" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
                 </div>
-                <div class="form-group">
-                    <input type="submit" name="login" @click.prevent="login" class="btn btn-primary" value="Login">
+                <div class="flex flex-col items-start mb-6">
+                    <input type="submit" name="login" @click.prevent="login" class="border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Login">
                 </div>
             </form>
             </div>

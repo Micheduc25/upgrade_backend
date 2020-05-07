@@ -1747,6 +1747,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  //import Login from "./login.vue"
 
@@ -1772,7 +1806,13 @@ __webpack_require__.r(__webpack_exports__);
       oldTask: null,
       taskid: '',
       description: '',
-      currentUserName: ''
+      currentUserName: '',
+      priorities: ['Urgent', 'Important', 'Urgent and Important', 'Faire'],
+      todoData: {
+        ToDoTitle: '',
+        activityDetail: '',
+        selectedPriority: 'Urgent'
+      }
     };
   },
   components: {
@@ -1853,23 +1893,27 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
-        title: '',
-        description: this.newTodo,
+        title: this.todoData.ToDoTitle,
+        description: this.todoData.activityDetail,
         tstate: false,
-        task_priority: 'to do',
+        task_priority: this.todoData.selectedPriority,
         end_date: ''
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()
 
         _this3.todos.push({
           taskid: res.data.id,
-          name: _this3.newTodo,
+          name: _this3.todoData.ToDoTitle,
           completed: false,
-          task_priority: 'to do',
+          task_priority: _this3.todoData.selectedPriority,
           end_date: ''
         });
 
-        _this3.newTodo = '';
+        _this3.todoData = {
+          ToDoTitle: '',
+          selectedPriority: 'Urgent',
+          activityDetail: ''
+        };
       })["catch"](function (err) {
         console.log(err);
       }); //this.$emit('input', this.todos)
@@ -38621,42 +38665,172 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("h3", [_vm._v("Welcome " + _vm._s(this.currentUser.username))]),
+      _c(
+        "h3",
+        {
+          staticClass:
+            "w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg"
+        },
+        [_vm._v("Welcome " + _vm._s(this.currentUser.username))]
+      ),
       _vm._v(" "),
       _c("section", { staticClass: "todoapp" }, [
         _c("header", { staticClass: "header" }, [
-          _c("h1", [_vm._v("Todo")]),
+          _c("h1", { staticClass: "mt-16" }, [_vm._v("Todo2")]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.newTodo,
-                expression: "newTodo"
-              }
-            ],
-            staticClass: "new-todo",
-            attrs: { type: "text", placeholder: "Ajouter une tache" },
-            domProps: { value: _vm.newTodo },
-            on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.addTodo($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.newTodo = $event.target.value
-              }
-            }
-          })
+          _c(
+            "div",
+            { staticClass: "flex justify-center px-4 flex-wrap pt-4 mb-4" },
+            [
+              _c("div", { staticClass: "w-full md:w-64 px-3 mb-6 md:mb-0" }, [
+                _c("label", { staticClass: "text-blue-800 font-bold " }, [
+                  _vm._v(
+                    "\n                        Title\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.todoData.ToDoTitle,
+                      expression: "todoData.ToDoTitle"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: {
+                    id: "grid-city",
+                    type: "text",
+                    placeholder: "title"
+                  },
+                  domProps: { value: _vm.todoData.ToDoTitle },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.todoData, "ToDoTitle", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "w-full md:w-64 px-3 mb-6 md:mb-0 flex flex-col items-start mb-6"
+                },
+                [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "text-blue-800 font-bold ",
+                      attrs: { for: "priority" }
+                    },
+                    [_vm._v("Priority")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.todoData.selectedPriority,
+                          expression: "todoData.selectedPriority"
+                        }
+                      ],
+                      staticClass:
+                        "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: { id: "priority" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.todoData,
+                            "selectedPriority",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.priorities, function(priority) {
+                      return _c("option", [_vm._v(_vm._s(priority))])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex justify-center px-4 items-center flex-wrap" },
+            [
+              _c("div", [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.todoData.activityDetail,
+                      expression: "todoData. activityDetail"
+                    }
+                  ],
+                  staticClass:
+                    "border-2 border-blue-400 mr-8 focus:shadow-outline",
+                  attrs: {
+                    name: "",
+                    id: "",
+                    cols: "30",
+                    rows: "3",
+                    placeholder: "Enter todo description here"
+                  },
+                  domProps: { value: _vm.todoData.activityDetail },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.todoData,
+                        " activityDetail",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col items-center mb-6" }, [
+                _c("input", {
+                  staticClass:
+                    "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+                  attrs: { type: "submit", name: "addTodo", value: "Add Todo" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.addTodo($event)
+                    }
+                  }
+                })
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "main" }, [
@@ -39021,8 +39195,15 @@ var render = function() {
       _vm.gooduser
         ? _c("div", [
             _c("form", { attrs: { action: "", method: "post" } }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "text-blue-800 font-bold ",
+                    attrs: { for: "uname" }
+                  },
+                  [_vm._v("Username")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -39033,7 +39214,8 @@ var render = function() {
                       expression: "username"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass:
+                    "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
                   attrs: { type: "text", name: "username" },
                   domProps: { value: _vm.username },
                   on: {
@@ -39047,8 +39229,15 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "text-blue-800 font-bold ",
+                    attrs: { for: "pwd" }
+                  },
+                  [_vm._v("Password")]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -39059,7 +39248,8 @@ var render = function() {
                       expression: "password"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass:
+                    "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
                   attrs: { type: "password", name: "password" },
                   domProps: { value: _vm.password },
                   on: {
@@ -39073,9 +39263,10 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
                 _c("input", {
-                  staticClass: "btn btn-primary",
+                  staticClass:
+                    "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
                   attrs: { type: "submit", name: "login", value: "Login" },
                   on: {
                     click: function($event) {
@@ -39370,7 +39561,7 @@ var render = function() {
                 }
               ],
               staticClass:
-                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
               attrs: { type: "text", name: "username" },
               domProps: { value: _vm.username },
               on: {
@@ -39409,7 +39600,7 @@ var render = function() {
                 }
               ],
               staticClass:
-                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
               attrs: { type: "password", name: "password" },
               domProps: { value: _vm.password },
               on: {
@@ -39448,7 +39639,7 @@ var render = function() {
                 }
               ],
               staticClass:
-                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
               attrs: { type: "password", name: "cpassword" },
               domProps: { value: _vm.cpassword },
               on: {
@@ -39470,7 +39661,7 @@ var render = function() {
           _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
             _c("input", {
               staticClass:
-                "btn btn-primary border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+                "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
               attrs: { type: "submit", name: "signup", value: "Sign Up" },
               on: {
                 click: function($event) {
