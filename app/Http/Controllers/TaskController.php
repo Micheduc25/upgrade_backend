@@ -6,11 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+
+// require_once 'vendor/autoload.php';
+
+// use GraphAware\Neo4j\Client\ClientBuilder;
+
+
+
 class TaskController extends Controller
 {
     public function index($userid){
+        // $client = ClientBuilder::create()
+        //     ->addConnection('default', 'http://neo4j:localhost:7474') // Example for HTTP connection configuration (port is optional)
+        //     ->addConnection('bolt', 'bolt://neo4j:root@localhost:7687') // Example for BOLT connection configuration (port is optional)
+        //     ->build();
+        // $result = $client->run('MATCH (n:Person) RETURN n');
+        // echo $result;
         return Task::whereUserid($userid)->get();
     }
+    
     public function show($id){
         return Task::find($id);
     }

@@ -1,3 +1,13 @@
+## How to Run project ?
+# -> Run : copy .example.env .env
+# -> Configure de .env
+## RUN
+- composer install
+- npm install
+- php artisan neo4j:migrate
+- php artisan db:seed
+- php artisan serve
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
