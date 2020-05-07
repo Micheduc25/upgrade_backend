@@ -1,17 +1,22 @@
 <template>
         <div>
             <div>
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label for="uname">Username</label>
-                        <input type="text" name="username" v-model="username" class="form-control">
+                <form action="" method="post" class=" px-8 sm:px-4 md:px-0">
+                    <div v-if="showWarning" class="text-red-700 font-bold bg-red-100">Password does not correspond with confirm password, try again!</div>
+                    <div class="flex flex-col items-start mb-6">
+                        <label for="uname" class="text-blue-800 font-bold ">Username</label>
+                        <input type="text" name="username" @input="showWarning=false" v-model="username" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
                     </div>
-                    <div class="form-group">
-                        <label for="pwd">Password</label>
-                        <input type="password" name="password" v-model="password" class="form-control">
+                    <div class="flex flex-col items-start mb-6">
+                        <label for="pwd" class="text-blue-800 font-bold ">Password</label>
+                        <input type="password" name="password" @input="showWarning=false" v-model="password" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
                     </div>
-                    <div class="form-group">
-                        <input type="submit" name="signup" @click.prevent="signup" class="btn btn-primary" value="Sign Up">
+                     <div class="flex flex-col items-start mb-6">
+                        <label for="confirmpassword" class="text-blue-800 font-bold ">Confirm Password</label>
+                        <input type="password" name="cpassword" @input="showWarning=false" v-model="cpassword" class="form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6">
+                    </div>
+                    <div class="flex flex-col items-start mb-6">
+                        <input type="submit" name="signup" @click.prevent="signup" class="btn btn-primary border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Sign Up">
                     </div>
                 </form>
             </div>
@@ -34,8 +39,10 @@ export default {
         return{
             username:'',
             password:'',
+            cpassword:'',
             currentUser:null,
             gooduser:true,
+            showWarning:false,
         }
     },
     components: {
@@ -44,7 +51,10 @@ export default {
     },
     methods:{
         signup(){
-            axios.post('api/login/register', {username: this.username, password: this.password}).then(res => {
+            console.log(this.cpassword);
+            console.log(this.password)
+           if(this.cpassword==this.password){
+                axios.post('api/login/register', {username: this.username, password: this.password}).then(res => {
                 console.log(res.data)
                 if(res.data !== null && res.data !== ""){
                     console.log('is not null 1')
@@ -70,7 +80,15 @@ export default {
             .catch(err => {
                 console.log(err+" ---> ERROR")
             })
-        }
+           }else{
+              this.showWarning=true;
+              console.log(this.showWarning)
+              this.password = '';
+              this.cpassword = '';
+              
+           }
+        },
+
     },
     computed:{
 

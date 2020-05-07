@@ -2169,8 +2169,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2234,6 +2232,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2245,8 +2248,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       username: '',
       password: '',
+      cpassword: '',
       currentUser: null,
-      gooduser: true
+      gooduser: true,
+      showWarning: false
     };
   },
   components: {
@@ -2257,35 +2262,45 @@ __webpack_require__.r(__webpack_exports__);
     signup: function signup() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/login/register', {
-        username: this.username,
-        password: this.password
-      }).then(function (res) {
-        console.log(res.data);
+      console.log(this.cpassword);
+      console.log(this.password);
 
-        if (res.data !== null && res.data !== "") {
-          console.log('is not null 1');
-          _this.currentUser = res.data;
-          _this.gooduser = false;
-          window.location.href = '/login';
-        } else if (res.data === "") {
-          console.log('is empty');
-        } else {
-          console.log('not null');
-        } // if(res.data.username !== null){
-        //     //console.log(res.data)
-        //     this.currentUsername = res.data.username
-        //     window.location.href = '/welcome';//, res.data.username]
-        // }else{
-        //     console.log('Login ou mot de passe incorrect')
-        // }
+      if (this.cpassword == this.password) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/login/register', {
+          username: this.username,
+          password: this.password
+        }).then(function (res) {
+          console.log(res.data);
+
+          if (res.data !== null && res.data !== "") {
+            console.log('is not null 1');
+            _this.currentUser = res.data;
+            _this.gooduser = false;
+            window.location.href = '/login';
+          } else if (res.data === "") {
+            console.log('is empty');
+          } else {
+            console.log('not null');
+          } // if(res.data.username !== null){
+          //     //console.log(res.data)
+          //     this.currentUsername = res.data.username
+          //     window.location.href = '/welcome';//, res.data.username]
+          // }else{
+          //     console.log('Login ou mot de passe incorrect')
+          // }
 
 
-        _this.password = ''; //window.location.href = "/"
-        //router.push('/')
-      })["catch"](function (err) {
-        console.log(err + " ---> ERROR");
-      });
+          _this.password = ''; //window.location.href = "/"
+          //router.push('/')
+        })["catch"](function (err) {
+          console.log(err + " ---> ERROR");
+        });
+      } else {
+        this.showWarning = true;
+        console.log(this.showWarning);
+        this.password = '';
+        this.cpassword = '';
+      }
     }
   },
   computed: {}
@@ -6836,7 +6851,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nhtml,\r\nbody {\r\n\tmargin: 0;\r\n\tpadding: 0;\n}\nbutton {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tbackground: none;\r\n\tfont-size: 100%;\r\n\tvertical-align: baseline;\r\n\tfont-family: inherit;\r\n\tfont-weight: inherit;\r\n\tcolor: inherit;\r\n\t-webkit-appearance: none;\r\n\t-moz-appearance: none;\r\n\t     appearance: none;\r\n\t-webkit-font-smoothing: antialiased;\r\n\t-moz-osx-font-smoothing: grayscale;\n}\nbody {\r\n\tfont: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n\tline-height: 1.4em;\r\n\tbackground: #f5f5f5;\r\n\tcolor: #4d4d4d;\r\n\tmin-width: 230px;\r\n\tmax-width: 550px;\r\n\tmargin: 0 auto;\r\n\t-webkit-font-smoothing: antialiased;\r\n\t-moz-osx-font-smoothing: grayscale;\r\n\tfont-weight: 300;\n}\n:focus {\r\n\toutline: 0;\n}\n.hidden {\r\n\tdisplay: none;\n}\n.todoapp {\r\n\tbackground: #fff;\r\n\tmargin: 130px 0 40px 0;\r\n\tposition: relative;\r\n\tbox-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),\r\n\t            0 25px 50px 0 rgba(0, 0, 0, 0.1);\n}\n.todoapp input::-webkit-input-placeholder {\r\n\tfont-style: italic;\r\n\tfont-weight: 300;\r\n\tcolor: #e6e6e6;\n}\n.todoapp input::-moz-placeholder {\r\n\tfont-style: italic;\r\n\tfont-weight: 300;\r\n\tcolor: #e6e6e6;\n}\n.todoapp input::input-placeholder {\r\n\tfont-style: italic;\r\n\tfont-weight: 300;\r\n\tcolor: #e6e6e6;\n}\n.todoapp h1 {\r\n\tposition: absolute;\r\n\ttop: -155px;\r\n\twidth: 100%;\r\n\tfont-size: 100px;\r\n\tfont-weight: 100;\r\n\ttext-align: center;\r\n\tcolor: rgba(175, 47, 47, 0.15);\r\n\t-webkit-text-rendering: optimizeLegibility;\r\n\t-moz-text-rendering: optimizeLegibility;\r\n\ttext-rendering: optimizeLegibility;\n}\n.new-todo,\r\n.edit {\r\n\tposition: relative;\r\n\tmargin: 0;\r\n\twidth: 100%;\r\n\tfont-size: 24px;\r\n\tfont-family: inherit;\r\n\tfont-weight: inherit;\r\n\tline-height: 1.4em;\r\n\tborder: 0;\r\n\tcolor: inherit;\r\n\tpadding: 6px;\r\n\tborder: 1px solid #999;\r\n\tbox-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\r\n\tbox-sizing: border-box;\r\n\t-webkit-font-smoothing: antialiased;\r\n\t-moz-osx-font-smoothing: grayscale;\n}\n.new-todo {\r\n\tpadding: 16px 16px 16px 60px;\r\n\tborder: none;\r\n\tbackground: rgba(0, 0, 0, 0.003);\r\n\tbox-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);\n}\n.main {\r\n\tposition: relative;\r\n\tz-index: 2;\r\n\tborder-top: 1px solid #e6e6e6;\n}\n.toggle-all {\r\n\ttext-align: center;\r\n\tborder: none; /* Mobile Safari */\r\n\topacity: 0;\r\n\tposition: absolute;\n}\n.toggle-all + label {\r\n\twidth: 60px;\r\n\theight: 34px;\r\n\tfont-size: 0;\r\n\tposition: absolute;\r\n\ttop: -52px;\r\n\tleft: -13px;\r\n\ttransform: rotate(90deg);\n}\n.toggle-all + label:before {\r\n\tcontent: '\\276F';\r\n\tfont-size: 22px;\r\n\tcolor: #e6e6e6;\r\n\tpadding: 10px 27px 10px 27px;\n}\n.toggle-all:checked + label:before {\r\n\tcolor: #737373;\n}\n.todo-list {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tlist-style: none;\n}\n.todo-list li {\r\n\tposition: relative;\r\n\tfont-size: 24px;\r\n\tborder-bottom: 1px solid #ededed;\n}\n.todo-list li:last-child {\r\n\tborder-bottom: none;\n}\n.todo-list li.editing {\r\n\tborder-bottom: none;\r\n\tpadding: 0;\n}\n.todo-list li.editing .edit {\r\n\tdisplay: block;\r\n\twidth: 506px;\r\n\tpadding: 12px 16px;\r\n\tmargin: 0 0 0 43px;\n}\n.todo-list li.editing .view {\r\n\tdisplay: none;\n}\n.todo-list li .toggle {\r\n\ttext-align: center;\r\n\twidth: 40px;\r\n\t/* auto, since non-WebKit browsers doesn't support input styling */\r\n\theight: auto;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tbottom: 0;\r\n\tmargin: auto 0;\r\n\tborder: none; /* Mobile Safari */\r\n\t-webkit-appearance: none;\r\n\t-moz-appearance: none;\r\n\t     appearance: none;\n}\n.todo-list li .toggle {\r\n\topacity: 0;\n}\n.todo-list li .toggle + label {\r\n\t/*\r\n\t\tFirefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433\r\n\t\tIE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/\r\n\t*/\r\n\tbackground-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');\r\n\tbackground-repeat: no-repeat;\r\n\tbackground-position: center left;\n}\n.todo-list li .toggle:checked + label {\r\n\tbackground-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');\n}\n.todo-list li label {\r\n\tword-break: break-all;\r\n\tpadding: 15px 15px 15px 60px;\r\n\tdisplay: block;\r\n\tline-height: 1.2;\r\n\ttransition: color 0.4s;\n}\n.todo-list li.completed label {\r\n\tcolor: #d9d9d9;\r\n\ttext-decoration: line-through;\n}\n.todo-list li .destroy {\r\n\tdisplay: none;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tright: 10px;\r\n\tbottom: 0;\r\n\twidth: 40px;\r\n\theight: 40px;\r\n\tmargin: auto 0;\r\n\tfont-size: 30px;\r\n\tcolor: #cc9a9a;\r\n\tmargin-bottom: 11px;\r\n\ttransition: color 0.2s ease-out;\n}\n.todo-list li .destroy:hover {\r\n\tcolor: #af5b5e;\n}\n.todo-list li .destroy:after {\r\n\tcontent: '\\D7';\n}\n.todo-list li:hover .destroy {\r\n\tdisplay: block;\n}\n.todo-list li .edit {\r\n\tdisplay: none;\n}\n.todo-list li.editing:last-child {\r\n\tmargin-bottom: -1px;\n}\n.footer {\r\n\tcolor: #777;\r\n\tpadding: 10px 15px;\r\n\theight: 20px;\r\n\ttext-align: center;\r\n\tborder-top: 1px solid #e6e6e6;\n}\n.footer:before {\r\n\tcontent: '';\r\n\tposition: absolute;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tleft: 0;\r\n\theight: 50px;\r\n\toverflow: hidden;\r\n\tbox-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),\r\n\t            0 8px 0 -3px #f6f6f6,\r\n\t            0 9px 1px -3px rgba(0, 0, 0, 0.2),\r\n\t            0 16px 0 -6px #f6f6f6,\r\n\t            0 17px 2px -6px rgba(0, 0, 0, 0.2);\n}\n.todo-count {\r\n\tfloat: left;\r\n\ttext-align: left;\n}\n.todo-count strong {\r\n\tfont-weight: 300;\n}\n.filters {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\tlist-style: none;\r\n\tposition: absolute;\r\n\tright: 0;\r\n\tleft: 0;\n}\n.filters li {\r\n\tdisplay: inline;\n}\n.filters li a {\r\n\tcolor: inherit;\r\n\tmargin: 3px;\r\n\tpadding: 3px 7px;\r\n\ttext-decoration: none;\r\n\tborder: 1px solid transparent;\r\n\tborder-radius: 3px;\n}\n.filters li a:hover {\r\n\tborder-color: rgba(175, 47, 47, 0.1);\n}\n.filters li a.selected {\r\n\tborder-color: rgba(175, 47, 47, 0.2);\n}\n.clear-completed,\r\nhtml .clear-completed:active {\r\n\tfloat: right;\r\n\tposition: relative;\r\n\tline-height: 20px;\r\n\ttext-decoration: none;\r\n\tcursor: pointer;\n}\n.clear-completed:hover {\r\n\ttext-decoration: underline;\n}\n.info {\r\n\tmargin: 65px auto 0;\r\n\tcolor: #bfbfbf;\r\n\tfont-size: 10px;\r\n\ttext-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);\r\n\ttext-align: center;\n}\n.info p {\r\n\tline-height: 1;\n}\n.info a {\r\n\tcolor: inherit;\r\n\ttext-decoration: none;\r\n\tfont-weight: 400;\n}\n.info a:hover {\r\n\ttext-decoration: underline;\n}\r\n\r\n/*\r\n\tHack to remove background from Mobile Safari.\r\n\tCan't use it globally since it destroys checkboxes in Firefox\r\n*/\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n.toggle-all,\r\n\t.todo-list li .toggle {\r\n\t\tbackground: none;\n}\n.todo-list li .toggle {\r\n\t\theight: 40px;\n}\n}\n@media (max-width: 430px) {\n.footer {\r\n\t\theight: 50px;\n}\n.filters {\r\n\t\tbottom: 10px;\n}\n}\r\n", ""]);
+exports.push([module.i, "html,\r\nbody {\n  margin: 0;\n  padding: 0;\n}\nbutton {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: 100%;\n  vertical-align: baseline;\n  font-family: inherit;\n  font-weight: inherit;\n  color: inherit;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\nbody {\n  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  line-height: 1.4em;\n  background: #f5f5f5;\n  color: #4d4d4d;\n  min-width: 230px;\n  max-width: 550px;\n  margin: 0 auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  font-weight: 300;\n}\n:focus {\n  outline: 0;\n}\n.hidden {\n  display: none;\n}\n.todoapp {\n  background: #fff;\n  margin: 130px 0 40px 0;\n  position: relative;\n  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),\r\n\t            0 25px 50px 0 rgba(0, 0, 0, 0.1);\n}\n.todoapp input::-webkit-input-placeholder {\n  font-style: italic;\n  font-weight: 300;\n  color: #e6e6e6;\n}\n.todoapp input::-moz-placeholder {\n  font-style: italic;\n  font-weight: 300;\n  color: #e6e6e6;\n}\n.todoapp input::input-placeholder {\n  font-style: italic;\n  font-weight: 300;\n  color: #e6e6e6;\n}\n.todoapp h1 {\n  position: absolute;\n  top: -155px;\n  width: 100%;\n  font-size: 100px;\n  font-weight: 100;\n  text-align: center;\n  color: rgba(175, 47, 47, 0.15);\n  -webkit-text-rendering: optimizeLegibility;\n  -moz-text-rendering: optimizeLegibility;\n  text-rendering: optimizeLegibility;\n}\n.new-todo,\r\n.edit {\n  position: relative;\n  margin: 0;\n  width: 100%;\n  font-size: 24px;\n  font-family: inherit;\n  font-weight: inherit;\n  line-height: 1.4em;\n  border: 0;\n  color: inherit;\n  padding: 6px;\n  border: 1px solid #999;\n  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n  box-sizing: border-box;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.new-todo {\n  padding: 16px 16px 16px 60px;\n  border: none;\n  background: rgba(0, 0, 0, 0.003);\n  box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);\n}\n.main {\n  position: relative;\n  z-index: 2;\n  border-top: 1px solid #e6e6e6;\n}\n.toggle-all {\n  text-align: center;\n  border: none; /* Mobile Safari */\n  opacity: 0;\n  position: absolute;\n}\n.toggle-all + label {\n  width: 60px;\n  height: 34px;\n  font-size: 0;\n  position: absolute;\n  top: -52px;\n  left: -13px;\n  transform: rotate(90deg);\n}\n.toggle-all + label:before {\n  content: '\\276F';\n  font-size: 22px;\n  color: #e6e6e6;\n  padding: 10px 27px 10px 27px;\n}\n.toggle-all:checked + label:before {\n  color: #737373;\n}\n.todo-list {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.todo-list li {\n  position: relative;\n  font-size: 24px;\n  border-bottom: 1px solid #ededed;\n}\n.todo-list li:last-child {\n  border-bottom: none;\n}\n.todo-list li.editing {\n  border-bottom: none;\n  padding: 0;\n}\n.todo-list li.editing .edit {\n  display: block;\n  width: 506px;\n  padding: 12px 16px;\n  margin: 0 0 0 43px;\n}\n.todo-list li.editing .view {\n  display: none;\n}\n.todo-list li .toggle {\n  text-align: center;\n  width: 40px;\n  /* auto, since non-WebKit browsers doesn't support input styling */\n  height: auto;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  margin: auto 0;\n  border: none; /* Mobile Safari */\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n}\n.todo-list li .toggle {\n  opacity: 0;\n}\n.todo-list li .toggle + label {\n  /*\r\n\t\tFirefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433\r\n\t\tIE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/\r\n\t*/\n  background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');\n  background-repeat: no-repeat;\n  background-position: center left;\n}\n.todo-list li .toggle:checked + label {\n  background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');\n}\n.todo-list li label {\n  word-break: break-all;\n  padding: 15px 15px 15px 60px;\n  display: block;\n  line-height: 1.2;\n  transition: color 0.4s;\n}\n.todo-list li.completed label {\n  color: #d9d9d9;\n  text-decoration: line-through;\n}\n.todo-list li .destroy {\n  display: none;\n  position: absolute;\n  top: 0;\n  right: 10px;\n  bottom: 0;\n  width: 40px;\n  height: 40px;\n  margin: auto 0;\n  font-size: 30px;\n  color: #cc9a9a;\n  margin-bottom: 11px;\n  transition: color 0.2s ease-out;\n}\n.todo-list li .destroy:hover {\n  color: #af5b5e;\n}\n.todo-list li .destroy:after {\n  content: '\\D7';\n}\n.todo-list li:hover .destroy {\n  display: block;\n}\n.todo-list li .edit {\n  display: none;\n}\n.todo-list li.editing:last-child {\n  margin-bottom: -1px;\n}\n.footer {\n  color: #777;\n  padding: 10px 15px;\n  height: 20px;\n  text-align: center;\n  border-top: 1px solid #e6e6e6;\n}\n.footer:before {\n  content: '';\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 50px;\n  overflow: hidden;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),\r\n\t            0 8px 0 -3px #f6f6f6,\r\n\t            0 9px 1px -3px rgba(0, 0, 0, 0.2),\r\n\t            0 16px 0 -6px #f6f6f6,\r\n\t            0 17px 2px -6px rgba(0, 0, 0, 0.2);\n}\n.todo-count {\n  float: left;\n  text-align: left;\n}\n.todo-count strong {\n  font-weight: 300;\n}\n.filters {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  position: absolute;\n  right: 0;\n  left: 0;\n}\n.filters li {\n  display: inline;\n}\n.filters li a {\n  color: inherit;\n  margin: 3px;\n  padding: 3px 7px;\n  text-decoration: none;\n  border: 1px solid transparent;\n  border-radius: 3px;\n}\n.filters li a:hover {\n  border-color: rgba(175, 47, 47, 0.1);\n}\n.filters li a.selected {\n  border-color: rgba(175, 47, 47, 0.2);\n}\n.clear-completed,\r\nhtml .clear-completed:active {\n  float: right;\n  position: relative;\n  line-height: 20px;\n  text-decoration: none;\n  cursor: pointer;\n}\n.clear-completed:hover {\n  text-decoration: underline;\n}\n.info {\n  margin: 65px auto 0;\n  color: #bfbfbf;\n  font-size: 10px;\n  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);\n  text-align: center;\n}\n.info p {\n  line-height: 1;\n}\n.info a {\n  color: inherit;\n  text-decoration: none;\n  font-weight: 400;\n}\n.info a:hover {\n  text-decoration: underline;\n}\n\n/*\r\n\tHack to remove background from Mobile Safari.\r\n\tCan't use it globally since it destroys checkboxes in Firefox\r\n*/\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n.toggle-all,\r\n\t.todo-list li .toggle {\n    background: none;\n}\n.todo-list li .toggle {\n    height: 40px;\n}\n}\n@media (max-width: 430px) {\n.footer {\n    height: 50px;\n}\n.filters {\n    bottom: 10px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -39105,36 +39120,55 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "navbar navbar-expand-sm bg-dark navbar-dark" },
+    {
+      staticClass:
+        "navbar navbar-expand-sm bg-dark bg-black flex pt-6 px-4 mb-6 rounded-b md:rounded-bl-full"
+    },
     [
-      _c("ul", { staticClass: "navbar-nav" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "ul",
+        {
+          staticClass:
+            "navbar-nav flex flex-wrap w-full justify-start justify-center"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
           _c(
-            "a",
+            "li",
             {
-              staticClass: "nav-link",
-              attrs: { href: "" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.gotoLogin($event)
-                }
-              }
+              staticClass:
+                "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
             },
-            [_vm._v("TodoList")]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(3)
-      ]),
-      _vm._v(" "),
-      _vm._m(4)
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-teal-500 hover:text-white",
+                  attrs: { href: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.gotoLogin($event)
+                    }
+                  }
+                },
+                [_vm._v("TodoList")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5)
+        ]
+      )
     ]
   )
 }
@@ -39143,74 +39177,139 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item active" }, [
-      _c(
-        "a",
-        { staticClass: "nav-link", attrs: { href: "http://todo.local/" } },
-        [_vm._v("Home")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("About")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _vm._v("Help")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
-        _vm._v("Events")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
-      _c("li", { staticClass: "nav-item" }, [
+    return _c(
+      "li",
+      {
+        staticClass:
+          "active mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-6 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
         _c(
           "a",
-          { staticClass: "nav-link", attrs: { href: "http://todo.local" } },
+          {
+            staticClass: "text-teal-500 hover:text-white",
+            attrs: { href: "http://127.0.0.1:8000" }
+          },
+          [_vm._v("Home")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-teal-500 hover:text-white",
+            attrs: { href: "#" }
+          },
+          [_vm._v("About")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          " mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-teal-500 hover:text-white ",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Help")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "disabled text-teal-500 hover:text-white",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Events")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-teal-500 hover:text-white",
+            attrs: { href: "http://127.0.0.1:8000" }
+          },
           [
             _c("span", { staticClass: "glyphicon glyphicon-user" }),
             _vm._v(" Sign Up")
           ]
         )
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item" }, [
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+      },
+      [
         _c(
           "a",
           {
-            staticClass: "nav-link",
-            attrs: { href: "http://todo.local/login" }
+            staticClass: "text-teal-500 hover:text-white",
+            attrs: { href: "http://127.0.0.1:8000/login" }
           },
           [
             _c("span", { staticClass: "glyphicon glyphicon-log-in" }),
             _vm._v(" Login")
           ]
         )
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -39236,72 +39335,153 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("form", { attrs: { action: "", method: "post" } }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
+      _c(
+        "form",
+        {
+          staticClass: " px-8 sm:px-4 md:px-0",
+          attrs: { action: "", method: "post" }
+        },
+        [
+          _vm.showWarning
+            ? _c("div", { staticClass: "text-red-700 font-bold bg-red-100" }, [
+                _vm._v(
+                  "Password does not correspond with confirm password, try again!"
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("input", {
-            directives: [
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.username,
-                expression: "username"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "username" },
-            domProps: { value: _vm.username },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "uname" }
+              },
+              [_vm._v("Username")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.username,
+                  expression: "username"
                 }
-                _vm.username = $event.target.value
+              ],
+              staticClass:
+                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+              attrs: { type: "text", name: "username" },
+              domProps: { value: _vm.username },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.username = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
               }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+            })
+          ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "password", name: "password" },
-            domProps: { value: _vm.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "pwd" }
+              },
+              [_vm._v("Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
                 }
-                _vm.password = $event.target.value
+              ],
+              staticClass:
+                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+              attrs: { type: "password", name: "password" },
+              domProps: { value: _vm.password },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
               }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "btn btn-primary",
-            attrs: { type: "submit", name: "signup", value: "Sign Up" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.signup($event)
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "confirmpassword" }
+              },
+              [_vm._v("Confirm Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cpassword,
+                  expression: "cpassword"
+                }
+              ],
+              staticClass:
+                "form-control w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr md:rounded-tr-full rounded-bl md:rounded-bl-full sm:pl-6",
+              attrs: { type: "password", name: "cpassword" },
+              domProps: { value: _vm.cpassword },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cpassword = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
               }
-            }
-          })
-        ])
-      ])
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c("input", {
+              staticClass:
+                "btn btn-primary border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+              attrs: { type: "submit", name: "signup", value: "Sign Up" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.signup($event)
+                }
+              }
+            })
+          ])
+        ]
+      )
     ])
   ])
 }
