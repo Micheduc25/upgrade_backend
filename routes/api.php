@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::get('/login', 'LoginController@index');
+Route::get('/todo', 'TodoController@index');
+Route::get('/todo/{id}', 'TodoController@getUser');
 Route::get('/getCurrentUser', 'LoginController@getCurrentUser');
 Route::post('/login/checklogin', 'LoginController@checklogin');
 Route::post('/login/register', 'LoginController@register');

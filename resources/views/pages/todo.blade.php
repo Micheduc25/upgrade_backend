@@ -8,7 +8,8 @@
     {{ $name }}
     @include('shared._weekend') --}}
     {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
-    <Todo user=""></Todo>
+        
+    <Todo user="{{$user}}"></Todo>
 @endsection
 
 @section('footer')

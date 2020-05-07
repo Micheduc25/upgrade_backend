@@ -11,7 +11,7 @@
                 <a class="nav-link" href="#" >Help</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="" @click.prevent="gotoLogin">TodoList</a>
+                <a class="nav-link" href="" @click.prevent="gotoTodo">TodoList</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Events</a>
@@ -37,9 +37,9 @@ export default {
         }
     },
     methods:{
-        gotoLogin(){
-            window.location.href = "/login"
-            // axios({method: 'GET', url: '/api/login'}).then(
+        gotoTodo(){
+            window.location.href = "/todo/325"
+            // axios({method: 'GET', url: '/api/todo'}).then(
             //     result => {
             //         console.log(result)
             //     },

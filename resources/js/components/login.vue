@@ -53,7 +53,9 @@ export default {
                 if(res.data !== null && res.data !== ""){
                     console.log('is not null 1')
                     this.currentUser = res.data
-                    this.gooduser = false
+                    //this.gooduser = false
+                    
+                    window.location.href = "/todo/"+this.currentUser.id
                 }else if(res.data === ""){
                     console.log('is empty')
                 }else{

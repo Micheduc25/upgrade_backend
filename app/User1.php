@@ -11,7 +11,7 @@ class User1 extends NeoEloquent{
     static public $currentUser = null;
 
     /**
-     * Get the phone record associated with the user.
+     * Get the task record associated with the user.
      */
     public function task()
     {
