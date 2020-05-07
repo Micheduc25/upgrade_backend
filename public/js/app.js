@@ -51094,8 +51094,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\ACADEMICS\internship\todo\todo_laravel_vuejs_neo4j\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\ACADEMICS\internship\todo\todo_laravel_vuejs_neo4j\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
