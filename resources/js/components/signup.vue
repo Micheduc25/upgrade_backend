@@ -26,7 +26,7 @@ import mynav from "./mynav.vue"
 import Todo from "./Todo.vue";
 
 export default {
-    name:'Signup',
+    //name:'Signup',
     props:{
 
     },
