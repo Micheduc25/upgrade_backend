@@ -1,7 +1,7 @@
 <template>
         <div>
             <div>
-                <form  action="" method="post" >
+                <form action="" method="post">
                     <div class="form-group">
                         <label for="uname">Username</label>
                         <input type="text" name="username" v-model="username" class="form-control">
@@ -11,10 +11,9 @@
                         <input type="password" name="password" v-model="password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="signup" v-on:click.prevent="signup" class="btn btn-primary" value="Sign Up">
+                        <input type="submit" name="signup" @click.prevent="signup" class="btn btn-primary" value="Sign Up">
                     </div>
                 </form>
-                <button class="btn btn-primary"  @click="signup">test 2</button>
             </div>
         </div>
 </template>
@@ -24,10 +23,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import mynav from "./mynav.vue"
-import Todo from "./Todo.vue"
+import Todo from "./Todo.vue";
 
 export default {
-    //name:'signup',
+    name:'Signup',
     props:{
 
     },
@@ -45,8 +44,6 @@ export default {
     },
     methods:{
         signup(){
-            console.log('Component signup. testing')
-            // this.$router.push("")
             axios.post('api/login/register', {username: this.username, password: this.password}).then(res => {
                 console.log(res.data)
                 if(res.data !== null && res.data !== ""){
@@ -78,9 +75,6 @@ export default {
     computed:{
 
     },
-    mounted() {
-            console.log('Component signup mounted.')
-        }
 }
 </script>
 

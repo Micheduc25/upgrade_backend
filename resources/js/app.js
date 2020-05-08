@@ -8,25 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
-import signup from "./components/signup.vue";
-import examplevue from "./components/ExampleComponent.vue";
-import login from "./components/login.vue";
-const routes = [
-    { path: '/', components: {
-        signup,
-        examplevue
-    } },
-    { path: '/login', component: {
-        login,
-    } }
-]
-
-const router = new VueRouter({
-    routes
-})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -39,7 +21,6 @@ const router = new VueRouter({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('sign-up', require('./components/signup.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48,6 +29,5 @@ Vue.component('sign-up', require('./components/signup.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
-    router
+    el: '#app'
 });
