@@ -54474,7 +54474,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('sign-up', __webpack_require__(/*! ./components/signup.vue */ "./resources/js/components/signup.vue")["default"]);
-Vue.component('my-nav', __webpack_require__(/*! ./components/mynav.vue */ "./resources/js/components/mynav.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

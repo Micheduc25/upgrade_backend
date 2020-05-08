@@ -40,7 +40,6 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('sign-up', require('./components/signup.vue').default);
-Vue.component('my-nav', require('./components/mynav.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
