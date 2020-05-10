@@ -1,6 +1,6 @@
 export default {
     state: {
-        currentUser: 0,
+        currentUser: null,
         task: [],
         gooduser: false
     },

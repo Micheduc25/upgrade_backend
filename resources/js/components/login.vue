@@ -1,24 +1,24 @@
 <template>
         <div>
             <mynav></mynav>
-            <div v-if="this.gooduser">
+            <div >
                 <form action="" method="post">
-                <div class="form-group">
-                    <label for="uname">Username</label>
-                    <input type="text" name="username" v-model="username" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password</label>
-                    <input type="password" name="password" v-model="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="login" @click.prevent="login" class="btn btn-primary" value="Login">
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label for="uname">Username</label>
+                        <input type="text" name="username" v-model="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password</label>
+                        <input type="password" name="password" v-model="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="login" @click.prevent="login" class="btn btn-primary" value="Login">
+                    </div>
+                </form>
             </div>
-            <div v-else>
+            <!-- <div v-else>
                 <Todo v-bind:currentUser="this.$store.state.currentUser"></Todo>
-            </div>
+            </div> -->
         </div>
 </template>
 
@@ -56,13 +56,14 @@ export default {
                     console.log('is not null 1')
                     this.currentUser = res.data
                     this.gooduser = false
-                    this.$router.push({path:"/todo"})
+                    
                     console.log('show id ==========>>>')
                     console.log(this.currentUser.id)
                     console.log(this.$store.state.currentUser)
                     this.$store.dispatch("setGoodUser", {gusr:false})
                     this.$store.dispatch("setCurrentuser", {currentUser:this.currentUser})
-                    
+                    this.$router.push({path:"/todo"})
+                    this.$router.go(this.$router.currentRoute)
                     //window.location.href = "/todo/"+this.currentUser.id
                 }else if(res.data === ""){
                     console.log('is empty')

@@ -12,7 +12,7 @@
         </ul>
     </div>
     @endif --}}
-    <log-in :user="user"></log-in>
+    <log-in></log-in>
     {{-- <example-component></example-component> --}}
     {{-- @include('shared._weekend') --}}
 @endsection

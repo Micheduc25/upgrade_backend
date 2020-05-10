@@ -1780,6 +1780,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  //import Login from "./login.vue"
 
@@ -1792,8 +1793,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
-    },
-    currentUser: {}
+    } // currentUser:{
+    // },
+
   },
   data: function data() {
     return {
@@ -1805,7 +1807,8 @@ __webpack_require__.r(__webpack_exports__);
       oldTask: null,
       taskid: '',
       description: '',
-      currentUserName: ''
+      currentUserName: '',
+      currentUser: {}
     };
   },
   components: {
@@ -2003,6 +2006,9 @@ __webpack_require__.r(__webpack_exports__);
       //final output from here
       return this.$store.getters.getCurrentuserFormGetters;
     },
+    isConnected: function isConnected() {
+      return this.currentUser !== undefined ? true : false;
+    },
     hasTodos: function hasTodos() {
       return this.todos.length > 0;
     },
@@ -2118,11 +2124,6 @@ __webpack_require__.r(__webpack_exports__);
           console.log('is not null 1');
           _this.currentUser = res.data;
           _this.gooduser = false;
-
-          _this.$router.push({
-            path: "/todo"
-          });
-
           console.log('show id ==========>>>');
           console.log(_this.currentUser.id);
           console.log(_this.$store.state.currentUser);
@@ -2133,7 +2134,13 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$store.dispatch("setCurrentuser", {
             currentUser: _this.currentUser
-          }); //window.location.href = "/todo/"+this.currentUser.id
+          });
+
+          _this.$router.push({
+            path: "/todo"
+          });
+
+          _this.$router.go(_this.$router.currentRoute); //window.location.href = "/todo/"+this.currentUser.id
 
         } else if (res.data === "") {
           console.log('is empty');
@@ -38902,7 +38909,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _c("h3", [_vm._v("Welcome " + _vm._s(this.currentUser.username))]),
+      _vm.isConnected
+        ? _c("h3", [_vm._v("Welcome " + _vm._s(this.currentUser.username))])
+        : _c(
+            "h3",
+            [
+              _vm._v("You must "),
+              _c("router-link", { attrs: { to: "/login" } }, [_vm._v("login")])
+            ],
+            1
+          ),
       _vm._v(" "),
       _c("section", { staticClass: "todoapp" }, [
         _c("header", { staticClass: "header" }, [
@@ -39266,84 +39282,74 @@ var render = function() {
     [
       _c("mynav"),
       _vm._v(" "),
-      this.gooduser
-        ? _c("div", [
-            _c("form", { attrs: { action: "", method: "post" } }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.username,
-                      expression: "username"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "username" },
-                  domProps: { value: _vm.username },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.username = $event.target.value
-                    }
+      _c("div", [
+        _c("form", { attrs: { action: "", method: "post" } }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "uname" } }, [_vm._v("Username")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.username,
+                  expression: "username"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "username" },
+              domProps: { value: _vm.username },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.password,
-                      expression: "password"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "password", name: "password" },
-                  domProps: { value: _vm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.password = $event.target.value
-                    }
+                  _vm.username = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "pwd" } }, [_vm._v("Password")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "password", name: "password" },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  staticClass: "btn btn-primary",
-                  attrs: { type: "submit", name: "login", value: "Login" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.login($event)
-                    }
-                  }
-                })
-              ])
-            ])
+                  _vm.password = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              staticClass: "btn btn-primary",
+              attrs: { type: "submit", name: "login", value: "Login" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.login($event)
+                }
+              }
+            })
           ])
-        : _c(
-            "div",
-            [
-              _c("Todo", {
-                attrs: { currentUser: this.$store.state.currentUser }
-              })
-            ],
-            1
-          )
+        ])
+      ])
     ],
     1
   )
@@ -56356,7 +56362,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
-    currentUser: 0,
+    currentUser: null,
     task: [],
     gooduser: false
   },

@@ -1,7 +1,8 @@
 <template>
     <div>
         <div>
-            <h3>Welcome {{ this.currentUser.username }}</h3>
+            <h3 v-if="isConnected">Welcome {{ this.currentUser.username }}</h3>
+            <h3 v-else>You must <router-link to="/login">login</router-link> </h3>
             <section class="todoapp">
             <header class="header">
                 <h1>Todo</h1>
@@ -59,9 +60,9 @@ export default {
                 return []
             }
         },
-        currentUser:{
+        // currentUser:{
 
-        },
+        // },
     },
     data(){
         return {
@@ -74,6 +75,9 @@ export default {
             taskid: '',
             description: '',
             currentUserName:'',
+            currentUser:{
+
+            },
         }
     },
     components: {
@@ -236,7 +240,8 @@ export default {
         cancelEdit(){
             this.editing.name = this.oldTask
             this.editing = null
-        }
+        },
+        
     },
     computed: {
         allDone:{
@@ -251,6 +256,9 @@ export default {
         },
         getCurrentUser(){ //final output from here
             return this.$store.getters.getCurrentuserFormGetters
+        },
+        isConnected(){
+            return this.currentUser !== undefined ? true : false
         },
         hasTodos(){
             return this.todos.length > 0
