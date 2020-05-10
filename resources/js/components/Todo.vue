@@ -4,7 +4,7 @@
             <h3 class="w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg">Welcome {{ this.currentUser.username }}</h3>
             <section class="todoapp">
             <header class="header">
-                <h1 class="mt-16">Todo2</h1>
+                <h1 class="mt-16">Todo</h1>
 
                 <!-- container of title and priority input -->
                 <div class="flex justify-center px-4 flex-wrap pt-4 mb-4">
@@ -32,11 +32,11 @@
                 <div class="flex justify-center px-4 items-center flex-wrap">
                     <div> 
                         <!-- <input type="text" class="new-todo" placeholder="Ajouter une tache" v-model="todoData. activityDetail" @keyup.enter="addTodo"> -->
-                        <textarea v-model="todoData. activityDetail" name="" id="" cols="30" rows="3" placeholder="Enter todo description here" class="border-2 border-blue-400 mr-8 focus:shadow-outline"></textarea>
+                        <textarea v-model="todoData. activityDetail" name="" id="" cols="30" rows="3" placeholder="Enter todo description here" class="border-2 border-gray-200 rounded sm:mr-12 focus:bg-white focus:border-gray-500 "></textarea>
                     </div>
 
                     <div class="flex flex-col items-center mb-6">
-                        <input type="submit" name="addTodo" @click.prevent="addTodo" class="border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Add Todo">
+                        <input type="submit" name="addTodo" @click.prevent="addTodo" class="border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 hover:shadow-outline text-white" value="Add Todo">
                     </div>
                 </div>
             </header>

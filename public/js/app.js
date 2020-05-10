@@ -2233,6 +2233,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     gotoSignup: function gotoSignup() {
       window.location.href = "/";
+    },
+    gotoAbout: function gotoAbout() {
+      window.location.href = "/about";
     }
   },
   computed: {}
@@ -38676,7 +38679,7 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "todoapp" }, [
         _c("header", { staticClass: "header" }, [
-          _c("h1", { staticClass: "mt-16" }, [_vm._v("Todo2")]),
+          _c("h1", { staticClass: "mt-16" }, [_vm._v("Todo")]),
           _vm._v(" "),
           _c(
             "div",
@@ -38792,7 +38795,7 @@ var render = function() {
                     }
                   ],
                   staticClass:
-                    "border-2 border-blue-400 mr-8 focus:shadow-outline",
+                    "border-2 border-gray-200 rounded sm:mr-12 focus:bg-white focus:border-gray-500 ",
                   attrs: {
                     name: "",
                     id: "",
@@ -38819,7 +38822,7 @@ var render = function() {
               _c("div", { staticClass: "flex flex-col items-center mb-6" }, [
                 _c("input", {
                   staticClass:
-                    "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+                    "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 hover:shadow-outline text-white",
                   attrs: { type: "submit", name: "addTodo", value: "Add Todo" },
                   on: {
                     click: function($event) {
@@ -39325,9 +39328,31 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
+          _c(
+            "li",
+            {
+              staticClass:
+                "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-teal-500 hover:text-white",
+                  attrs: { href: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.gotoAbout($event)
+                    }
+                  }
+                },
+                [_vm._v("About")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "li",
@@ -39353,11 +39378,11 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
           _vm._m(3),
           _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5)
+          _vm._m(4)
         ]
       )
     ]
@@ -39382,28 +39407,6 @@ var staticRenderFns = [
             attrs: { href: "http://127.0.0.1:8000" }
           },
           [_vm._v("Home")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      {
-        staticClass:
-          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
-      },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "text-teal-500 hover:text-white",
-            attrs: { href: "#" }
-          },
-          [_vm._v("About")]
         )
       ]
     )

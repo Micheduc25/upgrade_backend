@@ -5,7 +5,7 @@
                 <a class="text-teal-500 hover:text-white" href="http://127.0.0.1:8000" >Home</a>
             </li>
             <li class="mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
-                <a class="text-teal-500 hover:text-white" href="#">About</a>
+                <a class="text-teal-500 hover:text-white" href="" @click.prevent="gotoAbout">About</a>
             </li>
             <li class=" mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="text-teal-500 hover:text-white " href="#" >Help</a>
@@ -50,6 +50,10 @@ export default {
         gotoSignup(){
             window.location.href = "/"
         },
+        gotoAbout(){
+            window.location.href = "/about"
+        },
+
     },
     computed:{
 
