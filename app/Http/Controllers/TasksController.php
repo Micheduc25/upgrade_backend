@@ -18,8 +18,11 @@ class TasksController extends Controller
         // return view('pages.about',[
         //     'pages'=>TaskModel::all(),
         // ]);User1::$currentUser
-
-        return (TaskModel::all());
+        
+        $tasks =  TaskModel::all();
+        return response()->json([
+            "tasks" => $tasks
+        ], 200);
     }
 
     /**

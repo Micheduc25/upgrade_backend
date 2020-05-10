@@ -24,6 +24,14 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+<<<<<<< HEAD
         "tailwindcss": "^1.4.5"
+=======
+        "js-cookie": "^2.2.1",
+        "tailwindcss": "^1.4.5",
+        "vue-router": "^3.1.6",
+        "vuex": "^3.3.0",
+        "vuex-persistedstate": "^3.0.1"
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
     }
 }

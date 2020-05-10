@@ -1,13 +1,13 @@
 
 
 
-@extends('layouts.app', ['title' => 'Home'])
+@extends('layouts.app', ['title' => 'test'])
 
 @section('navigation')
     {{-- <h1>Demo</h1>
     {{ $name }}
     @include('shared._weekend') --}}
-    <mynav></mynav>
+    <my-nav></my-nav>
 @endsection
 
 @section('content')
@@ -15,7 +15,8 @@
     {{ $name }}
     @include('shared._weekend') --}}
     {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
-    <Signup></Signup>
+    <sign-up></sign-up>
+    <example-component></example-component>
 @endsection
 
 @section('footer')

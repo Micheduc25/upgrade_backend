@@ -8,10 +8,11 @@
     {{ $name }}
     @include('shared._weekend') --}}
     {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
-    <Todo user=""></Todo>
+    <my-nav></my-nav>
+    <to-do></to-do>
 @endsection
 
 @section('footer')
-    <script src="../js/app.js"></script>
+    <script src="../../js/app.js"></script>
 @endsection
 

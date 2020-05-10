@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::get('/login', 'LoginController@index');
+Route::get('/todo', 'TodoController@index');
+Route::get('/todo/{id}', 'TodoController@getUser');
 Route::get('/getCurrentUser', 'LoginController@getCurrentUser');
 Route::post('/login/checklogin', 'LoginController@checklogin');
 Route::post('/login/register', 'LoginController@register');
@@ -26,6 +28,18 @@ Route::post('addtask/{id}', 'TasksController@store');
 Route::post('maddtask/{id}', 'TasksController@maddtask');
 Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
 Route::put('updatetask/{id}', 'TasksController@updatetask');
+
+
+
+// Route::Resources(
+//     [
+//         'user1/{id}' => 'API\User1Controller@getCurrentUser',
+//         'task' => 'API\TasksController',
+//     ]
+// );
+
+
+
 //Route::get('tasks/{userid}', 'TaskController@index');
 // Route::get('tasks/{userid}', 'TaskController@index');https://ffe01eaf.ngrok.io/api/destroytask/{id}/{uid}
 // Route::get('task/{id}', 'TaskController@show');

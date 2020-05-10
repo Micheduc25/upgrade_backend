@@ -5,6 +5,7 @@
 // // Variables
 // @import 'variables';
 
+<<<<<<< HEAD
 // // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
@@ -18,3 +19,21 @@
 @tailwind components;
 
 @tailwind utilities;
+=======
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+// // tailwin
+// tailwin
+// @tailwind base;
+
+// @tailwind components;
+
+// @tailwind utilities;
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7

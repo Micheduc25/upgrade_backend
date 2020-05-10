@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User1;
-use App\TaskModel;
+use App\PersonModel;
 use Illuminate\Http\Request;
 
-class User1Controller extends Controller
+class PersonModelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $user = User1::all()->get(0);
-        dd($user->username);
-        return view('pages.login');
+    public function index()
+    {
+        //
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -45,34 +41,21 @@ class User1Controller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User1  $user1
+     * @param  \App\PersonModel  $personModel
      * @return \Illuminate\Http\Response
      */
-    public function show(User1 $user1)
+    public function show(PersonModel $personModel)
     {
-        return (TaskModel::where('username', $user1->id)->task);
-    }
-
-    public function getUserTasks($id)
-    {
-        return (User1::find($id)->task);
-        //return (User1::where('id', $id)->task);
-    }
-    public function getCurrentUser($id)
-    {
-        $user = User1::find($id);
-        return response()->json([
-            "currUser" => $user
-        ], 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User1  $user1
+     * @param  \App\PersonModel  $personModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(User1 $user1)
+    public function edit(PersonModel $personModel)
     {
         //
     }
@@ -81,10 +64,10 @@ class User1Controller extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User1  $user1
+     * @param  \App\PersonModel  $personModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User1 $user1)
+    public function update(Request $request, PersonModel $personModel)
     {
         //
     }
@@ -92,10 +75,10 @@ class User1Controller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User1  $user1
+     * @param  \App\PersonModel  $personModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User1 $user1)
+    public function destroy(PersonModel $personModel)
     {
         //
     }

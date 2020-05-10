@@ -1,7 +1,12 @@
 <template>
     <div>
         <div>
+<<<<<<< HEAD
             <h3 class="w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg">Welcome {{ this.currentUser.username }}</h3>
+=======
+            <h3 v-if="isConnected">Welcome {{ this.currentUser.username }}</h3>
+            <h3 v-else>You must <router-link to="/login">login</router-link> </h3>
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
             <section class="todoapp">
             <header class="header">
                 <h1 class="mt-16">Todo</h1>
@@ -93,9 +98,9 @@ export default {
                 return []
             }
         },
-        currentUser:{
+        // currentUser:{
 
-        },
+        // },
     },
     data(){
         return {
@@ -108,19 +113,37 @@ export default {
             taskid: '',
             description: '',
             currentUserName:'',
+<<<<<<< HEAD
             priorities: ['Urgent', 'Important', 'Urgent and Important', 'Faire'],
             todoData:{
                  ToDoTitle:'',
                  activityDetail:'',
                  selectedPriority: 'Urgent',
             }
+=======
+            currentUser:{
+
+            },
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
         }
     },
     components: {
         mynav,
     },
+    beforeMount(){
+        console.log("Getting user before mount")
+        console.log(this.getCurrentUser)
+        //this.currentUser = this.getCurrentUser.user;
+        console.log("Getting Store before mount")
+        //this.$store1.setState(this.$store.state)
+        console.log(this.$store.state.currentUser)
+    },
     mounted(){
         console.log('Mounted all')
+        console.log(this.$store.state.currentUser)
+        console.log("window.local test =-====>")
+        console.log(JSON.parse(window.localStorage.currentUser))
+        this.currentUser = JSON.parse(window.localStorage.currentUser).currentUser
         this.getTasks()
     },
     watch: {
@@ -187,16 +210,30 @@ export default {
 
             )
         },
+<<<<<<< HEAD
         addTodo(){   
             axios.post(`api/addtask/${this.currentUser.id}`, {title: this.todoData.ToDoTitle, description:this.todoData.activityDetail, tstate: false, task_priority:this.todoData.selectedPriority,  end_date:''}).then(res => {
+=======
+        addTodo(){  
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date+' '+time; 
+            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:dateTime}).then(res => {
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({
                     taskid: res.data.id,
                     name : this.todoData.ToDoTitle,
                     completed: false,
+<<<<<<< HEAD
                     task_priority:this.todoData.selectedPriority,
                     end_date: '',
+=======
+                    task_priority:'to do',
+                    end_date: dateTime,
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
                 })
                 this.todoData = {ToDoTitle:'', selectedPriority:'Urgent', activityDetail:''}
             })
@@ -234,7 +271,7 @@ export default {
             console.log(todo.name)
             console.log(todo)
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do', end_date:'' })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do'})
                 .then(res => {
                     //this.editing = null
                 })
@@ -251,7 +288,7 @@ export default {
             // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
             //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do',  end_date:'' })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do' })
                 .then(res => {
                     this.editing = null
                 })
@@ -264,7 +301,8 @@ export default {
         cancelEdit(){
             this.editing.name = this.oldTask
             this.editing = null
-        }
+        },
+        
     },
     computed: {
         allDone:{
@@ -276,6 +314,12 @@ export default {
                         todo.completed = value
                 })
             }
+        },
+        getCurrentUser(){ //final output from here
+            return this.$store.getters.getCurrentuserFormGetters
+        },
+        isConnected(){
+            return this.currentUser !== undefined ? true : false
         },
         hasTodos(){
             return this.todos.length > 0

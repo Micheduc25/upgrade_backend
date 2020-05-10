@@ -10,8 +10,13 @@
             <li class=" mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="text-teal-500 hover:text-white " href="#" >Help</a>
             </li>
+<<<<<<< HEAD
             <li class="mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="text-teal-500 hover:text-white" href="" @click.prevent="gotoLogin">TodoList</a>
+=======
+            <li class="nav-item">
+                <a class="nav-link" href="" @click.prevent="gotoTodo">TodoList</a>
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
             </li>
             <li class="mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="disabled text-teal-500 hover:text-white" href="#">Events</a>
@@ -19,6 +24,16 @@
             <li class="mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"><a class="text-teal-500 hover:text-white" href="http://127.0.0.1:8000"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
             <li class="mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"><a class="text-teal-500 hover:text-white" href="http://127.0.0.1:8000/login"><span class="glyphicon glyphicon-log-in" ></span> Login</a></li>
             </ul>
+<<<<<<< HEAD
+=======
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link" href="http://todo.local"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://todo.local/login"><span class="glyphicon glyphicon-log-in" ></span> Login</a></li>
+                <li class="nav-item"><button class="nav-link" @click.prevent="logOut"> LogOut</button></li>
+            </ul>
+        </nav>
+</template>
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
 
         </nav>
 </template> 
@@ -35,9 +50,9 @@ export default {
         }
     },
     methods:{
-        gotoLogin(){
-            window.location.href = "/login"
-            // axios({method: 'GET', url: '/api/login'}).then(
+        gotoTodo(){
+            window.location.href = "/todo/325"
+            // axios({method: 'GET', url: '/api/todo'}).then(
             //     result => {
             //         console.log(result)
             //     },
@@ -50,10 +65,18 @@ export default {
         gotoSignup(){
             window.location.href = "/"
         },
+<<<<<<< HEAD
         gotoAbout(){
             window.location.href = "/about"
         },
 
+=======
+        logOut(){
+            this.$store.dispatch("logout", {gusr:false})
+            this.$router.push({path:"/login"})
+            this.$router.go(this.$router.currentRoute)
+        }
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
     },
     computed:{
 

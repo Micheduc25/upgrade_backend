@@ -1,8 +1,9 @@
 <template>
         <div>
             <mynav></mynav>
-            <div v-if="gooduser">
+            <div >
                 <form action="" method="post">
+<<<<<<< HEAD
                 <div class="flex flex-col items-start mb-6">
                     <label for="uname" class="text-blue-800 font-bold ">Username</label>
                     <input type="text" name="username" v-model="username" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
@@ -18,7 +19,24 @@
             </div>
             <div v-else>
                 <Todo v-bind:currentUser="currentUser"></Todo>
+=======
+                    <div class="form-group">
+                        <label for="uname">Username</label>
+                        <input type="text" name="username" v-model="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password</label>
+                        <input type="password" name="password" v-model="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="login" @click.prevent="login" class="btn btn-primary" value="Login">
+                    </div>
+                </form>
+>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
             </div>
+            <!-- <div v-else>
+                <Todo v-bind:currentUser="this.$store.state.currentUser"></Todo>
+            </div> -->
         </div>
 </template>
 
@@ -30,9 +48,9 @@ import mynav from "./mynav.vue"
 import Todo from "./Todo.vue";
 
 export default {
-    name:'Login',
+    name:'login',
     props:{
-
+        //user:null
     },
     data(){
         return{
@@ -48,12 +66,23 @@ export default {
     },
     methods:{
         login(){
+            //console.log('debut login ==========>>>')
+
             axios.post('api/login/checklogin', {username: this.username, password: this.password}).then(res => {
                 console.log(res.data)
                 if(res.data !== null && res.data !== ""){
                     console.log('is not null 1')
                     this.currentUser = res.data
                     this.gooduser = false
+                    
+                    console.log('show id ==========>>>')
+                    console.log(this.currentUser.id)
+                    console.log(this.$store.state.currentUser)
+                    this.$store.dispatch("setGoodUser", {gusr:false})
+                    this.$store.dispatch("setCurrentuser", {currentUser:this.currentUser})
+                    this.$router.push({path:"/todo"})
+                    this.$router.go(this.$router.currentRoute)
+                    //window.location.href = "/todo/"+this.currentUser.id
                 }else if(res.data === ""){
                     console.log('is empty')
                 }else{
@@ -76,8 +105,15 @@ export default {
         }
     },
     computed:{
-
+        getGoodUser(){ //final output from here
+            return this.$store.getters.getGooduserFormGetters
+        },
     },
+    mounted(){
+        console.log('login mounted - currentUser')
+        console.log(this.$store.state.currentUser)
+        console.log(this.$router)
+    }
 }
 </script>
 
