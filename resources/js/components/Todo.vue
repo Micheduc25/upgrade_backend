@@ -163,8 +163,10 @@ export default {
 
             )
         },
-        addTodo(){   
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:''}).then(res => {
+        addTodo(){  
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
+            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:date}).then(res => {
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({
@@ -172,7 +174,7 @@ export default {
                     name : this.newTodo,
                     completed: false,
                     task_priority:'to do',
-                    end_date: '',
+                    end_date: date,
                 })
                 this.newTodo = ''
             })

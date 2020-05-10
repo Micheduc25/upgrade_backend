@@ -1900,12 +1900,14 @@ __webpack_require__.r(__webpack_exports__);
     addTodo: function addTodo() {
       var _this3 = this;
 
+      var today = new Date();
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
         title: '',
         description: this.newTodo,
         tstate: false,
         task_priority: 'to do',
-        end_date: ''
+        end_date: date
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()
 
@@ -1914,7 +1916,7 @@ __webpack_require__.r(__webpack_exports__);
           name: _this3.newTodo,
           completed: false,
           task_priority: 'to do',
-          end_date: ''
+          end_date: date
         });
 
         _this3.newTodo = '';
@@ -1958,8 +1960,7 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         description: todo.name,
         tstate: todo.completed,
-        task_priority: 'to do',
-        end_date: ''
+        task_priority: 'to do'
       }).then(function (res) {//this.editing = null
       })["catch"](function (err) {
         console.log(err);
@@ -1978,8 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         description: todo.name,
         tstate: todo.completed,
-        task_priority: 'to do',
-        end_date: ''
+        task_priority: 'to do'
       }).then(function (res) {
         _this5.editing = null;
       })["catch"](function (err) {
