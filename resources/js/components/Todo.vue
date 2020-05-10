@@ -210,7 +210,7 @@ export default {
             console.log(todo.name)
             console.log(todo)
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do', end_date:'' })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do'})
                 .then(res => {
                     //this.editing = null
                 })
@@ -227,7 +227,7 @@ export default {
             // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
             //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do',  end_date:'' })
+                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do' })
                 .then(res => {
                     this.editing = null
                 })
