@@ -165,8 +165,10 @@ export default {
         },
         addTodo(){  
             var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:date}).then(res => {
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date+' '+time; 
+            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:dateTime}).then(res => {
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({
@@ -174,7 +176,7 @@ export default {
                     name : this.newTodo,
                     completed: false,
                     task_priority:'to do',
-                    end_date: date,
+                    end_date: dateTime,
                 })
                 this.newTodo = ''
             })
