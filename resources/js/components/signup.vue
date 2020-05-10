@@ -37,6 +37,7 @@ export default {
             password:'',
             currentUser:null,
             gooduser:true,
+            user:true
         }
     },
     components: {
@@ -45,15 +46,19 @@ export default {
     },
     methods:{
         signup(){
-            console.log('Component signup. testing')
-            // this.$router.push("")
+            console.log('Component signup. testing 1')
+            // this.$router.push({path:"/login"})
+            // this.$router.go(this.$router.currentRoute)
             axios.post('api/login/register', {username: this.username, password: this.password}).then(res => {
                 console.log(res.data)
                 if(res.data !== null && res.data !== ""){
                     console.log('is not null 1')
                     this.currentUser = res.data
                     this.gooduser = false
-                    window.location.href = '/login'
+                    //window.location.href = '/login'
+                    this.$router.push({path:"/login", params:{user:this.currentUser}})
+                    this.$router.go(this.$router.currentRoute)
+                    this.$router.push({path:"/login", params:{user:this.currentUser}})
                 }else if(res.data === ""){
                     console.log('is empty')
                 }else{

@@ -52,10 +52,18 @@ class User1Controller extends Controller
     {
         return (TaskModel::where('username', $user1->id)->task);
     }
+
     public function getUserTasks($id)
     {
         return (User1::find($id)->task);
         //return (User1::where('id', $id)->task);
+    }
+    public function getCurrentUser($id)
+    {
+        $user = User1::find($id);
+        return response()->json([
+            "currUser" => $user
+        ], 200);
     }
 
     /**

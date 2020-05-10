@@ -7,7 +7,7 @@
     {{-- <h1>Demo</h1>
     {{ $name }}
     @include('shared._weekend') --}}
-    {{-- <mynav></mynav> --}}
+    <my-nav></my-nav>
 @endsection
 
 @section('content')

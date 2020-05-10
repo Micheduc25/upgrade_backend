@@ -14,19 +14,70 @@ Vue.use(VueRouter)
 import signup from "./components/signup.vue";
 import examplevue from "./components/ExampleComponent.vue";
 import login from "./components/login.vue";
+import todo from "./components/Todo.vue";
+import mynav from "./components/mynav.vue";
+
+
+//support vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeData from "./store/index"
+
+const store = new Vuex.Store(
+   storeData
+)
+
 const routes = [
-    { path: '/', components: {
-        signup,
-        examplevue
-    } },
-    { path: '/login', component: {
-        login,
-    } }
-]
+    {
+        path: "/",
+        components: {
+            signup,
+            examplevue,
+            mynav
+        }
+    },
+    {
+        path: "/login",
+        components: {
+            login,
+            examplevue,
+            mynav
+        }
+    },
+    {
+        path: "/todo",
+        components: {
+            todo,
+            examplevue,
+            mynav
+        },
+        params: {
+            data: store.state
+        }
+    }
+];
 
 const router = new VueRouter({
-    routes
+    mode: "history",
+    routes: routes
+});
+
+import { Store } from 'vuex' 
+import createPersistedState from 'vuex-persistedstate' 
+import * as Cookies from 'js-cookie' 
+const store1 = new Store({ 
+    // ... 
+    plugins: [ 
+        createPersistedState({ 
+            getState: (key) => Cookies.getJSON(key), 
+            setState: (key, state) => Cookies.set(key, state, { expires: 3, secure: true }) 
+        }) 
+    ] 
 })
+
+//Source: https://prograide.com/pregunta/42740/vuex-etat-sur-lactualisation-de-la-page
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -40,6 +91,9 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('sign-up', require('./components/signup.vue').default);
+Vue.component('log-in', require('./components/login.vue').default);
+Vue.component('to-do', require('./components/Todo.vue').default);
+Vue.component('my-nav', require('./components/mynav.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48,6 +102,8 @@ Vue.component('sign-up', require('./components/signup.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
-    router
+    el: "#app",
+    router,
+    store, //vuex
+    store1
 });

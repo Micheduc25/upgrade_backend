@@ -20,6 +20,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item"><a class="nav-link" href="http://todo.local"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://todo.local/login"><span class="glyphicon glyphicon-log-in" ></span> Login</a></li>
+                <li class="nav-item"><button class="nav-link" @click.prevent="logOut"> LogOut</button></li>
             </ul>
         </nav>
 </template>
@@ -52,6 +53,11 @@ export default {
         gotoSignup(){
             window.location.href = "/"
         },
+        logOut(){
+            this.$store.dispatch("logout", {gusr:false})
+            this.$router.push({path:"/login"})
+            this.$router.go(this.$router.currentRoute)
+        }
     },
     computed:{
 

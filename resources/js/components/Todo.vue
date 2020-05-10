@@ -79,8 +79,20 @@ export default {
     components: {
         mynav,
     },
+    beforeMount(){
+        console.log("Getting user before mount")
+        console.log(this.getCurrentUser)
+        //this.currentUser = this.getCurrentUser.user;
+        console.log("Getting Store before mount")
+        //this.$store1.setState(this.$store.state)
+        console.log(this.$store.state.currentUser)
+    },
     mounted(){
         console.log('Mounted all')
+        console.log(this.$store.state.currentUser)
+        console.log("window.local test =-====>")
+        console.log(JSON.parse(window.localStorage.currentUser))
+        this.currentUser = JSON.parse(window.localStorage.currentUser).currentUser
         this.getTasks()
     },
     watch: {
@@ -236,6 +248,9 @@ export default {
                         todo.completed = value
                 })
             }
+        },
+        getCurrentUser(){ //final output from here
+            return this.$store.getters.getCurrentuserFormGetters
         },
         hasTodos(){
             return this.todos.length > 0

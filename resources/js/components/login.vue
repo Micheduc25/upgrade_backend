@@ -1,7 +1,7 @@
 <template>
         <div>
             <mynav></mynav>
-            <div v-if="gooduser">
+            <div v-if="this.gooduser">
                 <form action="" method="post">
                 <div class="form-group">
                     <label for="uname">Username</label>
@@ -17,7 +17,7 @@
             </form>
             </div>
             <div v-else>
-                <Todo v-bind:currentUser="currentUser"></Todo>
+                <Todo v-bind:currentUser="this.$store.state.currentUser"></Todo>
             </div>
         </div>
 </template>
@@ -30,9 +30,9 @@ import mynav from "./mynav.vue"
 import Todo from "./Todo.vue";
 
 export default {
-    name:'Login',
+    name:'login',
     props:{
-
+        //user:null
     },
     data(){
         return{
@@ -48,13 +48,21 @@ export default {
     },
     methods:{
         login(){
+            //console.log('debut login ==========>>>')
+
             axios.post('api/login/checklogin', {username: this.username, password: this.password}).then(res => {
                 console.log(res.data)
                 if(res.data !== null && res.data !== ""){
                     console.log('is not null 1')
                     this.currentUser = res.data
-                    //this.gooduser = false
-                    this.$router.push("/")
+                    this.gooduser = false
+                    this.$router.push({path:"/todo"})
+                    console.log('show id ==========>>>')
+                    console.log(this.currentUser.id)
+                    console.log(this.$store.state.currentUser)
+                    this.$store.dispatch("setGoodUser", {gusr:false})
+                    this.$store.dispatch("setCurrentuser", {currentUser:this.currentUser})
+                    
                     //window.location.href = "/todo/"+this.currentUser.id
                 }else if(res.data === ""){
                     console.log('is empty')
@@ -78,8 +86,15 @@ export default {
         }
     },
     computed:{
-
+        getGoodUser(){ //final output from here
+            return this.$store.getters.getGooduserFormGetters
+        },
     },
+    mounted(){
+        console.log('login mounted - currentUser')
+        console.log(this.$store.state.currentUser)
+        console.log(this.$router)
+    }
 }
 </script>
 

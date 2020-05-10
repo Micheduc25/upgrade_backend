@@ -20,9 +20,11 @@
         <div id="app">
             {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
             @yield('navigation')
+            
             @yield('content')
             {{-- <Todo></Todo> --}}
             {{-- <signup></signup> --}}
+            <router-view></router-view>
         </div>
         <footer>
             @yield('footer')
