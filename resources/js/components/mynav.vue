@@ -1,12 +1,12 @@
 <template>
     <div>
             <nav class="navbar-expand-sm bg-dark bg-black flex pt-6 px-4 mb-6 mx-auto rounded-b md:rounded-bl-full">
-            <ul class="navbar-nav flex flex-wrap w-full justify-start justify-center">
+            <ul class="navbar-nav flex flex-wrap w-full justify-center items-center">
             <li class="active mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-6 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="text-teal-500 hover:text-white" href="http://127.0.0.1:8000" >Home</a>
             </li>
             <li class="mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
-                <a class="text-teal-500 hover:text-white" href="" @click.prevent="gotoAbout">About</a>
+                <a class="text-teal-500 hover:text-white" href=""  @click.prevent="gotoAbout">About</a>
             </li>
             <li class=" mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700">
                 <a class="text-teal-500 hover:text-white " href="#" >Help</a>
@@ -47,7 +47,7 @@ export default {
     },
     methods:{
         gotoTodo(){
-            window.location.href = "/todo/325"
+            window.location.href = "/todo"
             // axios({method: 'GET', url: '/api/todo'}).then(
             //     result => {
             //         console.log(result)
@@ -60,6 +60,9 @@ export default {
         },
         gotoSignup(){
             window.location.href = "/"
+        },
+         gotoAbout(){
+            window.location.href = "/about"
         },
         logOut(){
             this.$store.dispatch("logout", {gusr:false})

@@ -16,6 +16,7 @@ import examplevue from "./components/ExampleComponent.vue";
 import login from "./components/login.vue";
 import todo from "./components/Todo.vue";
 import mynav from "./components/mynav.vue";
+import about from "./components/about.vue";
 
 
 //support vuex
@@ -44,6 +45,15 @@ const routes = [
             mynav
         }
     },
+
+    {
+        path: "/about",
+        components: {
+            about,
+            mynav
+        }
+    },
+
     {
         path: "/todo",
         components: {
@@ -94,6 +104,7 @@ Vue.component('sign-up', require('./components/signup.vue').default);
 Vue.component('log-in', require('./components/login.vue').default);
 Vue.component('to-do', require('./components/Todo.vue').default);
 Vue.component('my-nav', require('./components/mynav.vue').default);
+Vue.component('about', require('./components/about.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

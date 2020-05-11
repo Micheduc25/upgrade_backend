@@ -10,7 +10,16 @@
                 
             <header class="header">
                 <h1 class="mt-8">Todo</h1>
-
+                <!-- sorting -->
+                <div id="custom-select" class="flex justify-end bg-gray-200 border border-gray-200 items-center">
+                    <button @click="orderTask('name')">sortBy</button>
+                    <select v-model="sortedOrder"
+                        id="priority"
+                        class="block appearance-none bg-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+                        <option v-for="item in sortOrder" ><button @click="todos = orderTask(item)">{{item}}</button></option>
+                    </select>
+                        <svg class="h-4 w-4 -ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
                 <!-- container of title and priority input -->
                 <div class="flex justify-center px-4 flex-wrap pt-4 mb-4">
                     <!-- title input -->
@@ -24,11 +33,15 @@
                     <!-- priority input -->
                     <div class="w-full md:w-64 px-3 mb-6 md:mb-0 flex flex-col items-start mb-6">
                         <label for="priority" class="text-blue-800 font-bold ">Priority</label>
-                       <select v-model="todoData.selectedPriority"
-                            id="priority"
-                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
-                            <option v-for="priority in priorities">{{priority}}</option>
-                        </select>
+
+                        <div id="custom-select" class="flex bg-gray-200 border border-gray-200 items-center">
+                            <select v-model="todoData.selectedPriority"
+                                id="priority"
+                                class="block appearance-none bg-gray-200 w-full text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+                                <option v-for="priority in priorities">{{priority}}</option>
+                            </select>
+                             <svg class="h-4 w-4 -ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
                     </div>
 
                  </div>
@@ -37,7 +50,7 @@
                 <div class="flex flex-col justify-center px-4 items-center flex-wrap">
                     <div class="w-full md:w-64 px-3 mb-6 md:mb-4"> 
                         <!-- <input type="text" class="new-todo" placeholder="Ajouter une tache" v-model="todoData. activityDetail" @keyup.enter="addTodo"> -->
-                        <textarea v-model="todoData. activityDetail" name="" cols="4" id="" placeholder="Enter todo description here" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
+                        <textarea v-model="todoData.activityDetail" name="" cols="4" id="" placeholder="Enter todo description here" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
                     </div>
 
                     <div class="flex flex-col items-center mb-6">
@@ -54,8 +67,16 @@
                 <ul class="todo-list">
                     <li class="todo" :class="{completed: todoelt.completed, editing: todoelt === editing}" :key="idx" v-for="(todoelt, idx) in filteredTodos">
                         <div class="view">
-                            <input type="checkbox" name="" class="toggle" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
-                            <label @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
+                            <input type="checkbox" name="" class="toggle w-4 h-4 bg-blue-500 z-10" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
+                            <div class="bg-gray-200 shadow">
+                                <label class="text-gold-300 text-lg font-bold uppercase" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
+                               
+                                <div class="text-blue-600 w-full text-base">
+                                     <label class="ml-4 justify" @dblclick="editTodo(todoelt)">{{ todoelt.description }}</label>
+                                      <label class="bg-teal-200 italic text-red-600 font-bold text-sm" @dblclick="editTodo(todoelt)">Priority:{{ todoelt.task_priority }} >>>>>>>>> created on:{{todoelt.end_date}}</label>
+                                </div>
+
+                            </div>
                             <button class="destroy" @click.prevent="deleteTodo(todoelt)"></button>
                         </div>
                         <input type="text" class="edit" v-model="todoelt.name" @keyup.enter="doneEdit(todoelt)" @blur="doneEdit(todoelt)" @keyup.esc="cancelEdit" v-focus="todoelt === editing">
@@ -113,11 +134,14 @@ export default {
             taskid: '',
             description: '',
             currentUserName:'',
-            priorities: ['Urgent', 'Important', 'Urgent and Important', 'Faire'],
+            priorities: [ 'A faire', 'important', 'urgent', 'urgent et importan'],
+            sortOrder:['end_date','name', 'task_priority'],
+            sortBy: 'end_date',
+            sortDirection: 'ASC',
             todoData:{
                  ToDoTitle:'',
                  activityDetail:'',
-                 selectedPriority: 'Urgent',
+                 selectedPriority: 'A faire',
             },
             currentUser:{
 
@@ -149,6 +173,28 @@ export default {
         }
     },
     methods:{
+          orderTask (value) {
+            //  console.log(_.orderBy(this.todos, value));
+            //  return this.todos.sortBy(value)
+            let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
+            console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
+            // var tempar = this.todos
+            //  for (var i=0; i<tempar.length; i++){
+            //      var temp 
+            //      for (var j=0; j<tempar; j++){
+            //          if(tempar[i].value > tempar[j].value){
+            //              temp = tempar[i]
+            //              tempar[i] = tempar[j]
+            //              tempar[j] = temp
+            //          }
+                 
+                    
+            //      }
+            //  }
+            //  console.log(tempar)
+            //  return tempar
+            
+        },
         getTasks(){
             console.log(this.currentUser.username)
             axios({method: 'GET', url: `/api/tasks/${this.currentUser.id}`}).then(
@@ -161,11 +207,11 @@ export default {
                         let tempTodo = []
                         result.data.forEach(element => {
                             let val = ''
-                            if(element.description !=='' && element.description !== undefined 
-                             && element.description !==null){
-                                val = element.description
+                            if(element.name !=='' && element.name !== undefined 
+                             && element.name !==null){
+                                val = element.name
                              }else{
-                                 val = element.title
+                                 val = element.description
                              }
                              
                             let valt = element.tstate
@@ -177,6 +223,7 @@ export default {
                             tempTodo.push({
                                 taskid: element.id,
                                 name:  val,
+                                description: element.description,
                                 completed: valt,
                                 task_priority: element.task_priority,
                                 end_date: element.end_date,
@@ -219,24 +266,19 @@ export default {
             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var dateTime = date+' '+time; 
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:dateTime}).then(res => {
+            axios.post(`api/addtask/${this.currentUser.id}`, {name: this.todoData.ToDoTitle, description:this.todoData.activityDetail, tstate: false, task_priority:this.todoData.selectedPriority,  end_date:dateTime}).then(res => {
                 console.log(res)
-                //this.actualiseTaskList()
+                //this.actualiseTaskList()www.wi
                 this.todos.push({
                     taskid: res.data.id,
                     name : this.todoData.ToDoTitle,
+                    description: this.todoData.activityDetail,
                     completed: false,
                     task_priority:this.todoData.selectedPriority,
-                    end_date: '',
-
-                    task_priority:'to do',
-
-                    task_priority:'A faire',
-
                     end_date: dateTime,
 
                 })
-                this.todoData = {ToDoTitle:'', selectedPriority:'Urgent', activityDetail:''}
+                this.todoData = {ToDoTitle:'', selectedPriority:'A faire', activityDetail:''}
             })
             .catch(err => {
                 console.log(err)
@@ -316,6 +358,7 @@ export default {
                 })
             }
         },
+       
         getCurrentUser(){ //final output from here
             return this.$store.getters.getCurrentuserFormGetters
         },
@@ -367,4 +410,33 @@ export default {
     70%{color:greenyellow}
     100% { color:blue; }
     } */
+        #custom-select select {
+        /* Hide default arrow */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* Style the dropdown box */
+        width: 100%;
+        padding: 0 10px;
+        }
+
+        #custom-select {
+        position: relative;
+        max-width: 400px; /* optional */
+        }
+
+        #custom-select select, #custom-select::after {
+        height: 40px;
+        }
+        
+        #custom-select::after {
+        content: "\25bc"; /* HTML symbol */
+        /* Reposition */
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 10px;
+        line-height: 40px; /* Vertical center text */
+        }
 </style>
