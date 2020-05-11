@@ -1836,7 +1836,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       completeTodo: [],
-      todos: this.value,
+      todos: [],
       newTodo: '',
       filter: 'all',
       editing: null,
@@ -1905,11 +1905,18 @@ __webpack_require__.r(__webpack_exports__);
               val = element.title;
             }
 
+            var valt = element.tstate;
+
+            if (element.tstate === "false") {
+              valt = false;
+            } else if (element.tstate === "true") {
+              valt = true;
+            }
+
             tempTodo.push({
               taskid: element.id,
               name: val,
-              completed: element.tstate,
-              // === 1 ? true : false
+              completed: valt,
               task_priority: element.task_priority,
               end_date: element.end_date
             });
@@ -1947,6 +1954,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var today = new Date();
       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + ' ' + time;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
         title: this.todoData.ToDoTitle,
         description: this.todoData.activityDetail,
@@ -1956,8 +1965,12 @@ __webpack_require__.r(__webpack_exports__);
         end_date: ''
 =======
         task_priority: 'to do',
+<<<<<<< HEAD
         end_date: date
 >>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
+=======
+        end_date: dateTime
+>>>>>>> 397f4931542df7070f51e86e7bc6a5cd1053310f
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()
 
@@ -1966,12 +1979,17 @@ __webpack_require__.r(__webpack_exports__);
           name: _this3.todoData.ToDoTitle,
           completed: false,
 <<<<<<< HEAD
+<<<<<<< HEAD
           task_priority: _this3.todoData.selectedPriority,
           end_date: ''
 =======
           task_priority: 'to do',
           end_date: date
 >>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
+=======
+          task_priority: 'A faire',
+          end_date: dateTime
+>>>>>>> 397f4931542df7070f51e86e7bc6a5cd1053310f
         });
 
         _this3.todoData = {
@@ -2092,6 +2110,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
+      console.log('Todos =========>>>>>>>');
+      console.log(this.todos);
       return this.todos;
     }
   },
