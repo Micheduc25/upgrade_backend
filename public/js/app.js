@@ -1800,7 +1800,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       completeTodo: [],
-      todos: this.value,
+      todos: [],
       newTodo: '',
       filter: 'all',
       editing: null,
@@ -1860,11 +1860,18 @@ __webpack_require__.r(__webpack_exports__);
               val = element.title;
             }
 
+            var valt = element.tstate;
+
+            if (element.tstate === "false") {
+              valt = false;
+            } else if (element.tstate === "true") {
+              valt = true;
+            }
+
             tempTodo.push({
               taskid: element.id,
               name: val,
-              completed: element.tstate,
-              // === 1 ? true : false
+              completed: valt,
               task_priority: element.task_priority,
               end_date: element.end_date
             });
@@ -1902,12 +1909,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var today = new Date();
       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + ' ' + time;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
         title: '',
         description: this.newTodo,
         tstate: false,
         task_priority: 'to do',
-        end_date: date
+        end_date: dateTime
       }).then(function (res) {
         console.log(res); //this.actualiseTaskList()
 
@@ -1915,8 +1924,8 @@ __webpack_require__.r(__webpack_exports__);
           taskid: res.data.id,
           name: _this3.newTodo,
           completed: false,
-          task_priority: 'to do',
-          end_date: date
+          task_priority: 'A faire',
+          end_date: dateTime
         });
 
         _this3.newTodo = '';
@@ -2033,6 +2042,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
+      console.log('Todos =========>>>>>>>');
+      console.log(this.todos);
       return this.todos;
     }
   },

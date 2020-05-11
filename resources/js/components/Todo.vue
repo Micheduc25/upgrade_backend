@@ -67,7 +67,7 @@ export default {
     data(){
         return {
             completeTodo:[],
-            todos: this.value,
+            todos: [],
             newTodo: '',
             filter: 'all',
             editing: null,
@@ -123,10 +123,17 @@ export default {
                              }else{
                                  val = element.title
                              }
+                             
+                            let valt = element.tstate
+                            if(element.tstate === "false"){
+                                valt = false
+                            }else if(element.tstate === "true"){
+                                valt = true
+                            }
                             tempTodo.push({
                                 taskid: element.id,
                                 name:  val,
-                                completed: element.tstate, // === 1 ? true : false
+                                completed: valt,
                                 task_priority: element.task_priority,
                                 end_date: element.end_date,
                             })
@@ -175,7 +182,7 @@ export default {
                     taskid: res.data.id,
                     name : this.newTodo,
                     completed: false,
-                    task_priority:'to do',
+                    task_priority:'A faire',
                     end_date: dateTime,
                 })
                 this.newTodo = ''
@@ -279,6 +286,8 @@ export default {
             }else if(this.filter === 'done'){
                 return this.todos.filter(todo => todo.completed)
             }
+            console.log('Todos =========>>>>>>>')
+            console.log(this.todos)
             return this.todos
         }
     },
