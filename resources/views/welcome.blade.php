@@ -16,7 +16,7 @@
     @include('shared._weekend') --}}
     {{-- @include('layouts/partials/_nav', ['age' => 22]) --}}
     <sign-up></sign-up>
-    <example-component></example-component>
+    <!-- <example-component></example-component> -->
 @endsection
 
 @section('footer')

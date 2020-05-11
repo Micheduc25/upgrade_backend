@@ -1725,10 +1725,390 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Todo.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\resources\\js\\components\\Todo.vue: Unexpected token (116:0)\n\n\u001b[0m \u001b[90m 114 | \u001b[39m            description\u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 115 | \u001b[39m            currentUserName\u001b[33m:\u001b[39m\u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 116 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 117 | \u001b[39m            priorities\u001b[33m:\u001b[39m [\u001b[32m'Urgent'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Important'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Urgent and Important'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Faire'\u001b[39m]\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 118 | \u001b[39m            todoData\u001b[33m:\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m 119 | \u001b[39m                 \u001b[33mToDoTitle\u001b[39m\u001b[33m:\u001b[39m\u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.unexpected (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:8757:16)\n    at Parser.parseIdentifierName (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10748:18)\n    at Parser.parseIdentifier (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10726:23)\n    at Parser.parseMaybePrivateName (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10079:19)\n    at Parser.parsePropertyName (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10550:126)\n    at Parser.parseObjectMember (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10451:10)\n    at Parser.parseObj (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10374:25)\n    at Parser.parseExprAtom (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9995:28)\n    at Parser.parseExprSubscripts (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)\n    at Parser.parseExpression (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9332:23)\n    at Parser.parseReturnStatement (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11448:28)\n    at Parser.parseStatementContent (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11129:21)\n    at Parser.parseStatement (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11081:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11656:25)\n    at Parser.parseBlockBody (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11642:10)\n    at Parser.parseBlock (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:11626:10)\n    at Parser.parseFunctionBody (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10634:24)\n    at Parser.parseFunctionBodyAndFinish (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10617:10)\n    at Parser.parseMethod (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10579:10)\n    at Parser.parseObjectMethod (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10495:19)\n    at Parser.parseObjPropValue (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10537:23)\n    at Parser.parseObjectMember (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10461:10)\n    at Parser.parseObj (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:10374:25)\n    at Parser.parseExprAtom (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9995:28)\n    at Parser.parseExprSubscripts (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9602:23)\n    at Parser.parseMaybeUnary (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9582:21)\n    at Parser.parseExprOps (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9452:23)\n    at Parser.parseMaybeConditional (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9425:23)\n    at Parser.parseMaybeAssign (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\@babel\\parser\\lib\\index.js:9380:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+ //import Login from "./login.vue"
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Todo',
+  props: {
+    value: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    } // currentUser:{
+    // },
+
+  },
+  data: function data() {
+    return {
+      completeTodo: [],
+      todos: [],
+      newTodo: '',
+      filter: 'all',
+      editing: null,
+      oldTask: null,
+      taskid: '',
+      description: '',
+      currentUserName: '',
+      priorities: ['Urgent', 'Important', 'Urgent and Important', 'Faire'],
+      todoData: {
+        ToDoTitle: '',
+        activityDetail: '',
+        selectedPriority: 'Urgent'
+      },
+      currentUser: {}
+    };
+  },
+  components: {
+    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  beforeMount: function beforeMount() {
+    console.log("Getting user before mount");
+    console.log(this.getCurrentUser); //this.currentUser = this.getCurrentUser.user;
+
+    console.log("Getting Store before mount"); //this.$store1.setState(this.$store.state)
+
+    console.log(this.$store.state.currentUser);
+  },
+  mounted: function mounted() {
+    console.log('Mounted all');
+    console.log(this.$store.state.currentUser);
+    console.log("window.local test =-====>");
+    console.log(JSON.parse(window.localStorage.currentUser));
+    this.currentUser = JSON.parse(window.localStorage.currentUser).currentUser;
+    this.getTasks();
+  },
+  watch: {
+    value: function value(_value) {
+      this.todos = _value;
+    }
+  },
+  methods: {
+    getTasks: function getTasks() {
+      var _this = this;
+
+      console.log(this.currentUser.username);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'GET',
+        url: "/api/tasks/".concat(this.currentUser.id)
+      }).then(function (result) {
+        console.log(result.data);
+
+        if (result.data !== "" && result.data !== null) {
+          //this.gooduser = true
+          //this.currentUser = result.data
+          //this.currentUserName = this.currentUser.username
+          var tempTodo = [];
+          result.data.forEach(function (element) {
+            var val = '';
+
+            if (element.description !== '' && element.description !== undefined && element.description !== null) {
+              val = element.description;
+            } else {
+              val = element.title;
+            }
+
+            var valt = element.tstate;
+
+            if (element.tstate === "false") {
+              valt = false;
+            } else if (element.tstate === "true") {
+              valt = true;
+            }
+
+            tempTodo.push({
+              taskid: element.id,
+              name: val,
+              completed: valt,
+              task_priority: element.task_priority,
+              end_date: element.end_date
+            });
+
+            _this.completeTodo.push(element);
+          });
+          _this.todos = tempTodo; //console.log(this.gooduser)
+        } else {
+          console.log('Aucune tache'); //console.log(this.gooduser)
+          //console.log(result.data)
+
+          console.log(result); //getCurrentUser
+          //window.location.href = '/'
+        }
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    actualiseTaskList: function actualiseTaskList() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'GET',
+        url: "/api/tasks/".concat(this.currentUser.id)
+      }).then(function (result) {
+        result.data.forEach(function (element) {
+          _this2.completeTodo.push(element);
+        });
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    addTodo: function addTodo() {
+      var _this3 = this;
+
+      var today = new Date();
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + ' ' + time;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
+        title: '',
+        description: this.newTodo,
+        tstate: false,
+        task_priority: 'to do',
+        end_date: dateTime
+      }).then(function (res) {
+        var _this3$todos$push;
+
+        console.log(res); //this.actualiseTaskList()
+
+        _this3.todos.push((_this3$todos$push = {
+          taskid: res.data.id,
+          name: _this3.todoData.ToDoTitle,
+          completed: false,
+          task_priority: _this3.todoData.selectedPriority,
+          end_date: ''
+        }, _defineProperty(_this3$todos$push, "task_priority", 'to do'), _defineProperty(_this3$todos$push, "task_priority", 'A faire'), _defineProperty(_this3$todos$push, "end_date", dateTime), _this3$todos$push));
+
+        _this3.todoData = {
+          ToDoTitle: '',
+          selectedPriority: 'Urgent',
+          activityDetail: ''
+        };
+      })["catch"](function (err) {
+        console.log(err);
+      }); //this.$emit('input', this.todos)
+    },
+    deleteTodo: function deleteTodo(todo) {
+      var _this4 = this;
+
+      console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
+        _this4.todos = _this4.todos.filter(function (t) {
+          return t !== todo;
+        });
+
+        _this4.$emit('input', _this4.todos); //this.actualiseTaskList()
+
+      })["catch"](function (err) {
+        alert("Erreur de suppression ! Veuillez reessayer.");
+        console.log(err); //this.actualiseTaskList()
+      });
+    },
+    deleteCompleted: function deleteCompleted() {
+      this.todos = this.todos.filter(function (todo) {
+        return !todo.completed;
+      });
+      this.$emit('input', this.todos);
+    },
+    editTodo: function editTodo(todo) {
+      this.editing = todo;
+      this.oldTask = todo.name;
+    },
+    chageTaskState: function chageTaskState(todo) {
+      todo.completed = !todo.completed;
+      console.log('todo.name');
+      console.log(todo.name);
+      console.log(todo);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do'
+      }).then(function (res) {//this.editing = null
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    doneEdit: function doneEdit(todo) {
+      var _this5 = this;
+
+      //console.log(this.completeTodo.find(todo))
+      //this.actualiseTaskList()
+      //console.log(todo.name)
+      // console.log(this.todos.indexOf(todo))
+      // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
+      //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do'
+      }).then(function (res) {
+        _this5.editing = null;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    cancelEdit: function cancelEdit() {
+      this.editing.name = this.oldTask;
+      this.editing = null;
+    }
+  },
+  computed: {
+    allDone: {
+      get: function get() {
+        return this.remaining === 0;
+      },
+      set: function set(value) {
+        this.todos.forEach(function (todo) {
+          todo.completed = value;
+        });
+      }
+    },
+    getCurrentUser: function getCurrentUser() {
+      //final output from here
+      return this.$store.getters.getCurrentuserFormGetters;
+    },
+    isConnected: function isConnected() {
+      return this.currentUser !== undefined ? true : false;
+    },
+    hasTodos: function hasTodos() {
+      return this.todos.length > 0;
+    },
+    doneTask: function doneTask() {
+      return this.todos.filter(function (todo) {
+        return todo.completed;
+      }).length > 0;
+    },
+    remaining: function remaining() {
+      return this.todos.filter(function (todo) {
+        return !todo.completed;
+      }).length;
+    },
+    filteredTodos: function filteredTodos() {
+      if (this.filter === 'todo') {
+        return this.todos.filter(function (todo) {
+          return !todo.completed;
+        });
+      } else if (this.filter === 'done') {
+        return this.todos.filter(function (todo) {
+          return todo.completed;
+        });
+      }
+
+      console.log('Todos =========>>>>>>>');
+      console.log(this.todos);
+      return this.todos;
+    }
+  },
+  directives: {
+    focus: function focus(el, value) {
+      if (value) {
+        vue__WEBPACK_IMPORTED_MODULE_0___default.a.nextTick(function () {
+          el.focus;
+        });
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -1747,21 +2127,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
 /* harmony import */ var _Todo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todo.vue */ "./resources/js/components/Todo.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1924,6 +2289,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1975,12 +2342,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
 /* harmony import */ var _Todo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todo.vue */ "./resources/js/components/Todo.vue");
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -38644,18 +39005,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", [
-      _vm._v("\n<<<<<<< HEAD\n            "),
-      _c(
-        "h3",
-        {
-          staticClass:
-            "w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg"
-        },
-        [_vm._v("Welcome " + _vm._s(this.currentUser.username))]
-      ),
-      _vm._v("\n=======\n            "),
       _vm.isConnected
-        ? _c("h3", [_vm._v("Welcome " + _vm._s(this.currentUser.username))])
+        ? _c(
+            "h3",
+            {
+              staticClass:
+                "w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg"
+            },
+            [_vm._v("Welcome " + _vm._s(this.currentUser.username))]
+          )
         : _c(
             "h3",
             [
@@ -38664,12 +39022,10 @@ var render = function() {
             ],
             1
           ),
-      _vm._v(
-        "\n>>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7\n            "
-      ),
+      _vm._v(" "),
       _c("section", { staticClass: "todoapp" }, [
         _c("header", { staticClass: "header" }, [
-          _c("h1", { staticClass: "mt-16" }, [_vm._v("Todo")]),
+          _c("h1", { staticClass: "mt-8" }, [_vm._v("Todo")]),
           _vm._v(" "),
           _c(
             "div",
@@ -38678,7 +39034,7 @@ var render = function() {
               _c("div", { staticClass: "w-full md:w-64 px-3 mb-6 md:mb-0" }, [
                 _c("label", { staticClass: "text-blue-800 font-bold " }, [
                   _vm._v(
-                    "\n                            Title\n                        "
+                    "\n                        Title\n                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -38772,9 +39128,12 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "flex justify-center px-4 items-center flex-wrap" },
+            {
+              staticClass:
+                "flex flex-col justify-center px-4 items-center flex-wrap"
+            },
             [
-              _c("div", [
+              _c("div", { staticClass: "w-full md:w-64 px-3 mb-6 md:mb-4" }, [
                 _c("textarea", {
                   directives: [
                     {
@@ -38785,12 +39144,11 @@ var render = function() {
                     }
                   ],
                   staticClass:
-                    "border-2 border-gray-200 rounded sm:mr-12 focus:bg-white focus:border-gray-500 ",
+                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
                   attrs: {
                     name: "",
+                    cols: "4",
                     id: "",
-                    cols: "30",
-                    rows: "3",
                     placeholder: "Enter todo description here"
                   },
                   domProps: { value: _vm.todoData.activityDetail },
@@ -38867,7 +39225,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("label", { attrs: { for: "toggle-all" } }, [
-            _vm._v("\n                    Mark all as complete")
+            _vm._v("\n                Mark all as complete")
           ]),
           _vm._v(" "),
           _c(
@@ -39040,7 +39398,7 @@ var render = function() {
           [
             _c("span", { staticClass: "todo-count" }, [
               _c("strong", [_vm._v(_vm._s(_vm.remaining))]),
-              _vm._v(" taches a faire\n                ")
+              _vm._v(" taches a faire\n            ")
             ]),
             _vm._v(" "),
             _c("ul", { staticClass: "filters" }, [
@@ -39143,8 +39501,112 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("mynav"),
+      _vm._v(" "),
+      _vm.gooduser
+        ? _c("div", [
+            _c("form", { attrs: { action: "", method: "post" } }, [
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "text-blue-800 font-bold ",
+                    attrs: { for: "uname" }
+                  },
+                  [_vm._v("Username")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
+                    }
+                  ],
+                  staticClass:
+                    "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
+                  attrs: { type: "text", name: "username" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "text-blue-800 font-bold ",
+                    attrs: { for: "pwd" }
+                  },
+                  [_vm._v("Password")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass:
+                    "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
+                  attrs: { type: "password", name: "password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+                _c("input", {
+                  staticClass:
+                    "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+                  attrs: { type: "submit", name: "login", value: "Login" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.login($event)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        : _c(
+            "div",
+            [_c("Todo", { attrs: { currentUser: _vm.currentUser } })],
+            1
+          )
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -39165,119 +39627,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    {
-      staticClass:
-        "navbar navbar-expand-sm bg-dark bg-black flex pt-6 px-4 mb-6 rounded-b md:rounded-bl-full"
-    },
-    [
-      _c(
-        "ul",
-        {
-          staticClass:
-            "navbar-nav flex flex-wrap w-full justify-start justify-center"
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass:
-                "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "text-teal-500 hover:text-white",
-                  attrs: { href: "" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.gotoAbout($event)
-                    }
-                  }
-                },
-                [_vm._v("About")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass:
-                "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "text-teal-500 hover:text-white",
-                  attrs: { href: "" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.gotoLogin($event)
-                    }
-                  }
-                },
-                [_vm._v("TodoList")]
-              )
-            ]
-          ),
-          _c("li", { staticClass: "nav-item" }, [
+  return _c("div", [
+    _c(
+      "nav",
+      {
+        staticClass:
+          "navbar-expand-sm bg-dark bg-black flex pt-6 px-4 mb-6 mx-auto rounded-b md:rounded-bl-full"
+      },
+      [
+        _c(
+          "ul",
+          {
+            staticClass:
+              "navbar-nav flex flex-wrap w-full justify-start justify-center"
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
             _c(
-              "a",
+              "li",
               {
-                staticClass: "nav-link",
-                attrs: { href: "" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.gotoTodo($event)
-                  }
-                }
+                staticClass:
+                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
               },
-              [_vm._v("TodoList")]
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-teal-500 hover:text-white",
+                    attrs: { href: "" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.gotoAbout($event)
+                      }
+                    }
+                  },
+                  [_vm._v("About")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass:
+                  "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-teal-500 hover:text-white",
+                    attrs: { href: "" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.gotoTodo($event)
+                      }
+                    }
+                  },
+                  [_vm._v("TodoList")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass:
+                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "disabled text-teal-500 hover:text-white",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.logOut($event)
+                      }
+                    }
+                  },
+                  [_vm._v("LogOut")]
+                )
+              ]
             )
-          ]),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _vm._m(4)
-        ]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "button",
-            {
-              staticClass: "nav-link",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.logOut($event)
-                }
-              }
-            },
-            [_vm._v(" LogOut")]
-          )
-        ])
-      ])
-    ]
-  )
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -39395,36 +39845,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        { staticClass: "nav-link", attrs: { href: "http://todo.local" } },
-        [
-          _c("span", { staticClass: "glyphicon glyphicon-user" }),
-          _vm._v(" Sign Up")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        { staticClass: "nav-link", attrs: { href: "http://todo.local/login" } },
-        [
-          _c("span", { staticClass: "glyphicon glyphicon-log-in" }),
-          _vm._v(" Login")
-        ]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -39444,8 +39864,164 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c(
+        "form",
+        {
+          staticClass: " px-8 sm:px-4 ml-10 md:px-0",
+          attrs: { action: "", method: "post" }
+        },
+        [
+          _vm.showWarning
+            ? _c("div", { staticClass: "text-red-700 font-bold bg-red-100" }, [
+                _vm._v(
+                  "Password does not correspond with confirm password, try again!"
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "uname" }
+              },
+              [_vm._v("Username")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.username,
+                  expression: "username"
+                }
+              ],
+              staticClass:
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
+              attrs: { type: "text", name: "username" },
+              domProps: { value: _vm.username },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.username = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "pwd" }
+              },
+              [_vm._v("Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass:
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
+              attrs: { type: "password", name: "password" },
+              domProps: { value: _vm.password },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold ",
+                attrs: { for: "confirmpassword" }
+              },
+              [_vm._v("Confirm Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cpassword,
+                  expression: "cpassword"
+                }
+              ],
+              staticClass:
+                "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6",
+              attrs: { type: "password", name: "cpassword" },
+              domProps: { value: _vm.cpassword },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.cpassword = $event.target.value
+                  },
+                  function($event) {
+                    _vm.showWarning = false
+                  }
+                ]
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col items-start mb-6" }, [
+            _c("input", {
+              staticClass:
+                "border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white",
+              attrs: { type: "submit", name: "signup", value: "Sign Up" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.signup($event)
+                }
+              }
+            })
+          ])
+        ]
+      )
+    ])
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -55902,15 +56478,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ./resources/js/components/Todo.vue ***!
   \******************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Todo_vue_vue_type_template_id_56644c31___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Todo.vue?vue&type=template&id=56644c31& */ "./resources/js/components/Todo.vue?vue&type=template&id=56644c31&");
 /* harmony import */ var _Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Todo.vue?vue&type=script&lang=js& */ "./resources/js/components/Todo.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/todo.css?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo.css?vue&type=style&index=0&lang=css& */ "./resources/js/components/todo.css?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55942,15 +56517,13 @@ component.options.__file = "resources/js/components/Todo.vue"
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Todo.vue?vue&type=script&lang=js& ***!
   \*******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Todo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Todo.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Todo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -56045,15 +56618,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************!*\
   !*** ./resources/js/components/mynav.vue ***!
   \*******************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mynav.vue?vue&type=template&id=06df9d88& */ "./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&");
 /* harmony import */ var _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mynav.vue?vue&type=script&lang=js& */ "./resources/js/components/mynav.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -56083,7 +56655,7 @@ component.options.__file = "resources/js/components/mynav.vue"
 /*!********************************************************************!*\
   !*** ./resources/js/components/mynav.vue?vue&type=script&lang=js& ***!
   \********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56115,15 +56687,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/components/signup.vue ***!
   \********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _signup_vue_vue_type_template_id_358611ba___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./signup.vue?vue&type=template&id=358611ba& */ "./resources/js/components/signup.vue?vue&type=template&id=358611ba&");
 /* harmony import */ var _signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup.vue?vue&type=script&lang=js& */ "./resources/js/components/signup.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -56153,7 +56724,7 @@ component.options.__file = "resources/js/components/signup.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/signup.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56300,7 +56871,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\n\r\n@tailwind base;\r\n             ^\r\n      Expected \"{\".\n   ╷\n17 │ @tailwind base;\r\n   │               ^\n   ╵\n  stdin 17:15  root stylesheet\r\n      in D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\resources\\sass\\app.scss (line 17, column 15)\n    at D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass-loader\\dist\\index.js:89:7\n    at Function.call$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:87203:16)\n    at _render_closure1.call$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:76994:12)\n    at _RootZone.runBinary$3$3 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _AsyncAwaitCompleter.completeError$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23491:12)\n    at Object._asyncRethrow (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3256:17)\n    at D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:13326:20\n    at _wrapJsFunctionForAsync_closure.$protected (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3279:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23512:12)\n    at _awaitOnObject_closure0.call$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23504:25)\n    at _RootZone.runBinary$3$3 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _Future__asyncCompleteError_closure.call$0 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:24194:18)\n    at Object._microtaskLoop (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3550:21)\n    at StaticClosure._startMicrotaskLoop (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:3556:11)\n    at _AsyncRun__scheduleImmediateJsOverride_internalCallback.call$0 (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:23409:21)\n    at invokeClosure (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:1360:26)\n    at Immediate.<anonymous> (D:\\ACADEMICS\\internship\\todo\\todo_laravel_vuejs_neo4j\\node_modules\\sass\\sass.dart.js:1381:18)\n    at processImmediate (internal/timers.js:456:21)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

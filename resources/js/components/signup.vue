@@ -1,15 +1,11 @@
 <template>
         <div>
             <div>
-                <form action="" method="post" class=" px-8 sm:px-4 md:px-0">
+                <form action="" method="post" class=" px-8 sm:px-4 ml-10 md:px-0">
                     <div v-if="showWarning" class="text-red-700 font-bold bg-red-100">Password does not correspond with confirm password, try again!</div>
                     <div class="flex flex-col items-start mb-6">
                         <label for="uname" class="text-blue-800 font-bold ">Username</label>
                         <input type="text" name="username" @input="showWarning=false" v-model="username" class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded-tr sm:rounded-tr-full rounded-bl sm:rounded-bl-full sm:pl-6">
-                <form  action="" method="post" >
-                    <div class="form-group">
-                        <label for="uname">Username</label>
-                        <input type="text" name="username" v-model="username" class="form-control">
                     </div>
                     <div class="flex flex-col items-start mb-6">
                         <label for="pwd" class="text-blue-800 font-bold ">Password</label>
@@ -21,11 +17,9 @@
                     </div>
                     <div class="flex flex-col items-start mb-6">
                         <input type="submit" name="signup" @click.prevent="signup" class="border-blue-400 border-2 px-12 py-2  rounded-bl-full rounded-tr-full bg-teal-500 hover:bg-blue-500 text-white" value="Sign Up">
-                    <div class="form-group">
-                        <input type="submit" name="signup" v-on:click.prevent="signup" class="btn btn-primary" value="Sign Up">
                     </div>
                 </form>
-                <button class="btn btn-primary"  @click="signup">test 2</button>
+                <!-- <button class="btn btn-primary"  @click="signup">test 2</button> -->
             </div>
         </div>
 </template>

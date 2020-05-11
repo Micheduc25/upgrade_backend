@@ -1,15 +1,15 @@
 <template>
     <div>
         <div>
-<<<<<<< HEAD
-            <h3 class="w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg">Welcome {{ this.currentUser.username }}</h3>
-=======
-            <h3 v-if="isConnected">Welcome {{ this.currentUser.username }}</h3>
+            <h3 v-if="isConnected" class="w-full text-center  text-teal-500 font-2xl italic font-bold welcomemsg">Welcome {{ this.currentUser.username }}</h3>
             <h3 v-else>You must <router-link to="/login">login</router-link> </h3>
->>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
             <section class="todoapp">
+
+
+
+                
             <header class="header">
-                <h1 class="mt-16">Todo</h1>
+                <h1 class="mt-8">Todo</h1>
 
                 <!-- container of title and priority input -->
                 <div class="flex justify-center px-4 flex-wrap pt-4 mb-4">
@@ -34,10 +34,10 @@
                  </div>
 
                       <!-- section for input of todo details -->
-                <div class="flex justify-center px-4 items-center flex-wrap">
-                    <div> 
+                <div class="flex flex-col justify-center px-4 items-center flex-wrap">
+                    <div class="w-full md:w-64 px-3 mb-6 md:mb-4"> 
                         <!-- <input type="text" class="new-todo" placeholder="Ajouter une tache" v-model="todoData. activityDetail" @keyup.enter="addTodo"> -->
-                        <textarea v-model="todoData. activityDetail" name="" id="" cols="30" rows="3" placeholder="Enter todo description here" class="border-2 border-gray-200 rounded sm:mr-12 focus:bg-white focus:border-gray-500 "></textarea>
+                        <textarea v-model="todoData. activityDetail" name="" cols="4" id="" placeholder="Enter todo description here" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></textarea>
                     </div>
 
                     <div class="flex flex-col items-center mb-6">
@@ -113,18 +113,15 @@ export default {
             taskid: '',
             description: '',
             currentUserName:'',
-<<<<<<< HEAD
             priorities: ['Urgent', 'Important', 'Urgent and Important', 'Faire'],
             todoData:{
                  ToDoTitle:'',
                  activityDetail:'',
                  selectedPriority: 'Urgent',
-            }
-=======
+            },
             currentUser:{
 
             },
->>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
         }
     },
     components: {
@@ -217,34 +214,27 @@ export default {
 
             )
         },
-<<<<<<< HEAD
-        addTodo(){   
-            axios.post(`api/addtask/${this.currentUser.id}`, {title: this.todoData.ToDoTitle, description:this.todoData.activityDetail, tstate: false, task_priority:this.todoData.selectedPriority,  end_date:''}).then(res => {
-=======
         addTodo(){  
             var today = new Date();
             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var dateTime = date+' '+time; 
             axios.post(`api/addtask/${this.currentUser.id}`, {title: '', description:this.newTodo, tstate: false, task_priority:'to do',  end_date:dateTime}).then(res => {
->>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
                 console.log(res)
                 //this.actualiseTaskList()
                 this.todos.push({
                     taskid: res.data.id,
                     name : this.todoData.ToDoTitle,
                     completed: false,
-<<<<<<< HEAD
-<<<<<<< HEAD
                     task_priority:this.todoData.selectedPriority,
                     end_date: '',
-=======
+
                     task_priority:'to do',
-=======
+
                     task_priority:'A faire',
->>>>>>> 397f4931542df7070f51e86e7bc6a5cd1053310f
+
                     end_date: dateTime,
->>>>>>> c667db2971fde39352b69ef11e1d9e5eed9e0dd7
+
                 })
                 this.todoData = {ToDoTitle:'', selectedPriority:'Urgent', activityDetail:''}
             })
