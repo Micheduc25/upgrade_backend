@@ -1735,18 +1735,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+var _methods;
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
+//
+//
 //
 //
 //
@@ -1880,8 +1874,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       description: '',
       currentUserName: '',
       priorities: ['A faire', 'important', 'urgent', 'urgent et importan'],
-      sortOrder: ['end_date', 'name', 'task_priority'],
-      sortBy: 'end_date',
+      sortOrder: ['date', 'name', 'priority'],
+      sortBy: 'date',
       sortDirection: 'ASC',
       todoData: {
         ToDoTitle: '',
@@ -1915,17 +1909,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.todos = _value;
     }
   },
-  methods: {
-    orderTask: function orderTask(value) {
+  methods: (_methods = {
+    orderTaskByName: function orderTaskByName() {
+      this.todos = this.todos.sort(function (a, b) {
+        var nameA = a.name,
+            nameB = b.name;
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+      }); // console.log(this.todos.sort(compare));
       //  console.log(_.orderBy(this.todos, value));
       //  return this.todos.sortBy(value)
-      var sortedBy = _toConsumableArray(this.todos).sort(function (first, second) {
-        return first.value > second.value;
-      });
-
-      console.log(this.todos.sort(function (a, b) {
-        return a.value > b.value ? 1 : -1;
-      })); // var tempar = this.todos
+      // let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
+      // console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
+      // var tempar = this.todos
       //  for (var i=0; i<tempar.length; i++){
       //      var temp 
       //      for (var j=0; j<tempar; j++){
@@ -1938,177 +1936,198 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       //  }
       //  console.log(tempar)
       //  return tempar
-    },
-    getTasks: function getTasks() {
-      var _this = this;
-
-      console.log(this.currentUser.username);
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'GET',
-        url: "/api/tasks/".concat(this.currentUser.id)
-      }).then(function (result) {
-        console.log(result.data);
-
-        if (result.data !== "" && result.data !== null) {
-          //this.gooduser = true
-          //this.currentUser = result.data
-          //this.currentUserName = this.currentUser.username
-          var tempTodo = [];
-          result.data.forEach(function (element) {
-            var val = '';
-
-            if (element.name !== '' && element.name !== undefined && element.name !== null) {
-              val = element.name;
-            } else {
-              val = element.description;
-            }
-
-            var valt = element.tstate;
-
-            if (element.tstate === "false") {
-              valt = false;
-            } else if (element.tstate === "true") {
-              valt = true;
-            }
-
-            tempTodo.push({
-              taskid: element.id,
-              name: val,
-              description: element.description,
-              completed: valt,
-              task_priority: element.task_priority,
-              end_date: element.end_date
-            });
-
-            _this.completeTodo.push(element);
-          });
-          _this.todos = tempTodo; //console.log(this.gooduser)
-        } else {
-          console.log('Aucune tache'); //console.log(this.gooduser)
-          //console.log(result.data)
-
-          console.log(result); //getCurrentUser
-          //window.location.href = '/'
-        }
-      }, function (error) {
-        console.log(error);
-      });
-    },
-    actualiseTaskList: function actualiseTaskList() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'GET',
-        url: "/api/tasks/".concat(this.currentUser.id)
-      }).then(function (result) {
-        result.data.forEach(function (element) {
-          _this2.completeTodo.push(element);
-        });
-      }, function (error) {
-        console.log(error);
-      });
-    },
-    addTodo: function addTodo() {
-      var _this3 = this;
-
-      var today = new Date();
-      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date + ' ' + time;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
-        name: this.todoData.ToDoTitle,
-        description: this.todoData.activityDetail,
-        tstate: false,
-        task_priority: this.todoData.selectedPriority,
-        end_date: dateTime
-      }).then(function (res) {
-        console.log(res); //this.actualiseTaskList()www.wi
-
-        _this3.todos.push({
-          taskid: res.data.id,
-          name: _this3.todoData.ToDoTitle,
-          description: _this3.todoData.activityDetail,
-          completed: false,
-          task_priority: _this3.todoData.selectedPriority,
-          end_date: dateTime
-        });
-
-        _this3.todoData = {
-          ToDoTitle: '',
-          selectedPriority: 'A faire',
-          activityDetail: ''
-        };
-      })["catch"](function (err) {
-        console.log(err);
-      }); //this.$emit('input', this.todos)
-    },
-    deleteTodo: function deleteTodo(todo) {
-      var _this4 = this;
-
-      console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
-        _this4.todos = _this4.todos.filter(function (t) {
-          return t !== todo;
-        });
-
-        _this4.$emit('input', _this4.todos); //this.actualiseTaskList()
-
-      })["catch"](function (err) {
-        alert("Erreur de suppression ! Veuillez reessayer.");
-        console.log(err); //this.actualiseTaskList()
-      });
-    },
-    deleteCompleted: function deleteCompleted() {
-      this.todos = this.todos.filter(function (todo) {
-        return !todo.completed;
-      });
-      this.$emit('input', this.todos);
-    },
-    editTodo: function editTodo(todo) {
-      this.editing = todo;
-      this.oldTask = todo.name;
-    },
-    chageTaskState: function chageTaskState(todo) {
-      todo.completed = !todo.completed;
-      console.log('todo.name');
-      console.log(todo.name);
-      console.log(todo);
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: '',
-        description: todo.name,
-        tstate: todo.completed,
-        task_priority: 'to do'
-      }).then(function (res) {//this.editing = null
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    },
-    doneEdit: function doneEdit(todo) {
-      var _this5 = this;
-
-      //console.log(this.completeTodo.find(todo))
-      //this.actualiseTaskList()
-      //console.log(todo.name)
-      // console.log(this.todos.indexOf(todo))
-      // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
-      //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: '',
-        description: todo.name,
-        tstate: todo.completed,
-        task_priority: 'to do'
-      }).then(function (res) {
-        _this5.editing = null;
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    },
-    cancelEdit: function cancelEdit() {
-      this.editing.name = this.oldTask;
-      this.editing = null;
     }
-  },
+  }, _defineProperty(_methods, "orderTaskByName", function orderTaskByName() {
+    this.todos = this.todos.sort(function (a, b) {
+      var nameA = a.name,
+          nameB = b.name;
+      if (nameA < nameB) //sort string ascending
+        return -1;
+      if (nameA > nameB) return 1;
+      return 0; //default return value (no sorting)
+    });
+  }), _defineProperty(_methods, "orderTaskByPriority", function orderTaskByPriority() {
+    this.todos = this.todos.sort(function (a, b) {
+      var nameA = a.task_priority,
+          nameB = b.task_priority;
+      if (nameA < nameB) //sort string ascending
+        return -1;
+      if (nameA > nameB) return 1;
+      return 0; //default return value (no sorting)
+    });
+  }), _defineProperty(_methods, "reorder", function reorder() {
+    if (this.sortBy == 'date') {
+      this.orderTaskByName();
+    }
+
+    if (this.sortBy == 'name') {
+      this.orderTaskByName();
+    }
+
+    if (this.sortBy == 'priority') {
+      this.orderTaskByPriority();
+    }
+  }), _defineProperty(_methods, "getTasks", function getTasks() {
+    var _this = this;
+
+    console.log(this.currentUser.username);
+    axios__WEBPACK_IMPORTED_MODULE_1___default()({
+      method: 'GET',
+      url: "/api/tasks/".concat(this.currentUser.id)
+    }).then(function (result) {
+      console.log(result.data);
+
+      if (result.data !== "" && result.data !== null) {
+        //this.gooduser = true
+        //this.currentUser = result.data
+        //this.currentUserName = this.currentUser.username
+        var tempTodo = [];
+        result.data.forEach(function (element) {
+          var val = '';
+
+          if (element.name !== '' && element.name !== undefined && element.name !== null) {
+            val = element.name;
+          } else {
+            val = element.description;
+          }
+
+          var valt = element.tstate;
+
+          if (element.tstate === "false") {
+            valt = false;
+          } else if (element.tstate === "true") {
+            valt = true;
+          }
+
+          tempTodo.push({
+            taskid: element.id,
+            name: val,
+            description: element.description,
+            completed: valt,
+            task_priority: element.task_priority,
+            end_date: element.end_date
+          });
+
+          _this.completeTodo.push(element);
+        });
+        _this.todos = tempTodo; //console.log(this.gooduser)
+      } else {
+        console.log('Aucune tache'); //console.log(this.gooduser)
+        //console.log(result.data)
+
+        console.log(result); //getCurrentUser
+        //window.location.href = '/'
+      }
+    }, function (error) {
+      console.log(error);
+    });
+  }), _defineProperty(_methods, "actualiseTaskList", function actualiseTaskList() {
+    var _this2 = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default()({
+      method: 'GET',
+      url: "/api/tasks/".concat(this.currentUser.id)
+    }).then(function (result) {
+      result.data.forEach(function (element) {
+        _this2.completeTodo.push(element);
+      });
+    }, function (error) {
+      console.log(error);
+    });
+  }), _defineProperty(_methods, "addTodo", function addTodo() {
+    var _this3 = this;
+
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
+      name: this.todoData.ToDoTitle,
+      description: this.todoData.activityDetail,
+      tstate: false,
+      task_priority: this.todoData.selectedPriority,
+      end_date: dateTime
+    }).then(function (res) {
+      console.log(res); //this.actualiseTaskList()www.wi
+
+      _this3.todos.push({
+        taskid: res.data.id,
+        name: _this3.todoData.ToDoTitle,
+        description: _this3.todoData.activityDetail,
+        completed: false,
+        task_priority: _this3.todoData.selectedPriority,
+        end_date: dateTime
+      });
+
+      _this3.todoData = {
+        ToDoTitle: '',
+        selectedPriority: 'A faire',
+        activityDetail: ''
+      };
+    })["catch"](function (err) {
+      console.log(err);
+    }); //this.$emit('input', this.todos)
+  }), _defineProperty(_methods, "deleteTodo", function deleteTodo(todo) {
+    var _this4 = this;
+
+    console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
+      _this4.todos = _this4.todos.filter(function (t) {
+        return t !== todo;
+      });
+
+      _this4.$emit('input', _this4.todos); //this.actualiseTaskList()
+
+    })["catch"](function (err) {
+      alert("Erreur de suppression ! Veuillez reessayer.");
+      console.log(err); //this.actualiseTaskList()
+    });
+  }), _defineProperty(_methods, "deleteCompleted", function deleteCompleted() {
+    this.todos = this.todos.filter(function (todo) {
+      return !todo.completed;
+    });
+    this.$emit('input', this.todos);
+  }), _defineProperty(_methods, "editTodo", function editTodo(todo) {
+    this.editing = todo;
+    this.oldTask = todo.name;
+  }), _defineProperty(_methods, "chageTaskState", function chageTaskState(todo) {
+    todo.completed = !todo.completed;
+    console.log('todo.name');
+    console.log(todo.name);
+    console.log(todo);
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+      title: '',
+      description: todo.name,
+      tstate: todo.completed,
+      task_priority: 'to do'
+    }).then(function (res) {//this.editing = null
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }), _defineProperty(_methods, "doneEdit", function doneEdit(todo) {
+    var _this5 = this;
+
+    //console.log(this.completeTodo.find(todo))
+    //this.actualiseTaskList()
+    //console.log(todo.name)
+    // console.log(this.todos.indexOf(todo))
+    // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
+    //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+      title: '',
+      description: todo.name,
+      tstate: todo.completed,
+      task_priority: 'to do'
+    }).then(function (res) {
+      _this5.editing = null;
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }), _defineProperty(_methods, "cancelEdit", function cancelEdit() {
+    this.editing.name = this.oldTask;
+    this.editing = null;
+  }), _methods),
   computed: {
     allDone: {
       get: function get() {
@@ -39131,21 +39150,11 @@ var render = function() {
             "div",
             {
               staticClass:
-                "flex justify-end bg-gray-200 border border-gray-200 items-center",
+                "flex justify-end bg-gray-200 text-blue-600 items-center",
               attrs: { id: "custom-select" }
             },
             [
-              _c(
-                "button",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.orderTask("name")
-                    }
-                  }
-                },
-                [_vm._v("sortBy")]
-              ),
+              _c("span", [_vm._v("SortBy")]),
               _vm._v(" "),
               _c(
                 "select",
@@ -39154,13 +39163,13 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.sortedOrder,
-                      expression: "sortedOrder"
+                      value: _vm.sortBy,
+                      expression: "sortBy"
                     }
                   ],
                   staticClass:
-                    "block appearance-none bg-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: { id: "priority" },
+                    "block border-2 border-teal-200 appearance-none bg-gray-200 py-3 border-box px-4 pr-8 rounded-bl rounded-tl leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                  attrs: { id: "change_sortOrder" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -39171,26 +39180,14 @@ var render = function() {
                           var val = "_value" in o ? o._value : o.value
                           return val
                         })
-                      _vm.sortedOrder = $event.target.multiple
+                      _vm.sortBy = $event.target.multiple
                         ? $$selectedVal
                         : $$selectedVal[0]
                     }
                   }
                 },
-                _vm._l(_vm.sortOrder, function(item) {
-                  return _c("option", [
-                    _c(
-                      "button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.todos = _vm.orderTask(item)
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(item))]
-                    )
-                  ])
+                _vm._l(_vm.sortOrder, function(order) {
+                  return _c("option", [_vm._v(_vm._s(order))])
                 }),
                 0
               ),
@@ -39212,6 +39209,16 @@ var render = function() {
                     }
                   })
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "py-3 px-4 border-3 border-teal-200 shadow text-blue-600 font-bold bg-teal-200 rounded-br rounded-tr",
+                  on: { click: _vm.reorder }
+                },
+                [_vm._v("sort")]
               )
             ]
           ),

@@ -11,14 +11,16 @@
             <header class="header">
                 <h1 class="mt-8">Todo</h1>
                 <!-- sorting -->
-                <div id="custom-select" class="flex justify-end bg-gray-200 border border-gray-200 items-center">
-                    <button @click="orderTask('name')">sortBy</button>
-                    <select v-model="sortedOrder"
-                        id="priority"
-                        class="block appearance-none bg-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
-                        <option v-for="item in sortOrder" ><button @click="todos = orderTask(item)">{{item}}</button></option>
+                <div id="custom-select" class="flex justify-end bg-gray-200 text-blue-600 items-center">
+                    <span>SortBy</span>
+                    <select v-model="sortBy"
+                        id="change_sortOrder"
+                        class="block border-2 border-teal-200 appearance-none bg-gray-200 py-3 border-box px-4 pr-8 rounded-bl rounded-tl leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+    
+                        <option v-for="order in  sortOrder">{{order}}</option>
                     </select>
                         <svg class="h-4 w-4 -ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        <button @click="reorder" class="py-3 px-4 border-3 border-teal-200 shadow text-blue-600 font-bold bg-teal-200 rounded-br rounded-tr">sort</button>
                 </div>
                 <!-- container of title and priority input -->
                 <div class="flex justify-center px-4 flex-wrap pt-4 mb-4">
@@ -135,8 +137,8 @@ export default {
             description: '',
             currentUserName:'',
             priorities: [ 'A faire', 'important', 'urgent', 'urgent et importan'],
-            sortOrder:['end_date','name', 'task_priority'],
-            sortBy: 'end_date',
+            sortOrder:['date','name', 'priority'],
+            sortBy: 'date',
             sortDirection: 'ASC',
             todoData:{
                  ToDoTitle:'',
@@ -173,11 +175,21 @@ export default {
         }
     },
     methods:{
-          orderTask (value) {
+           orderTaskByName () {
+            this.todos = this.todos.sort(function(a, b){
+                var nameA=a.name, nameB=b.name
+                if (nameA < nameB) //sort string ascending
+                    return -1 
+                if (nameA > nameB)
+                    return 1
+                return 0 //default return value (no sorting)
+            })
+
+                // console.log(this.todos.sort(compare));
             //  console.log(_.orderBy(this.todos, value));
             //  return this.todos.sortBy(value)
-            let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
-            console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
+            // let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
+            // console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
             // var tempar = this.todos
             //  for (var i=0; i<tempar.length; i++){
             //      var temp 
@@ -194,6 +206,39 @@ export default {
             //  console.log(tempar)
             //  return tempar
             
+        },  
+        orderTaskByName () {
+            this.todos = this.todos.sort(function(a, b){
+                var nameA=a.name, nameB=b.name
+                if (nameA < nameB) //sort string ascending
+                    return -1 
+                if (nameA > nameB)
+                    return 1
+                return 0 //default return value (no sorting)
+            })
+            
+        },
+         orderTaskByPriority () {
+            this.todos = this.todos.sort(function(a, b){
+                var nameA=a.task_priority, nameB=b.task_priority
+                if (nameA < nameB) //sort string ascending
+                    return -1 
+                if (nameA > nameB)
+                    return 1
+                return 0 //default return value (no sorting)
+            })
+            
+        },
+        reorder(){
+            if(this.sortBy=='date'){
+                this.orderTaskByName()
+            }
+            if(this.sortBy=='name'){
+                this.orderTaskByName()
+            }
+            if(this.sortBy=='priority'){
+                this.orderTaskByPriority()
+            }
         },
         getTasks(){
             console.log(this.currentUser.username)
@@ -395,6 +440,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style src="./todo.css">
