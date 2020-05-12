@@ -1735,10 +1735,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1866,6 +1867,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       completeTodo: [],
       todos: [],
+      todobools: [],
       newTodo: '',
       filter: 'all',
       editing: null,
@@ -1903,13 +1905,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log(JSON.parse(window.localStorage.currentUser));
     this.currentUser = JSON.parse(window.localStorage.currentUser).currentUser;
     this.getTasks();
+
+    for (var i = 0; i < length(this.todos); i++) {
+      this.todobools[i] = true;
+    }
   },
   watch: {
     value: function value(_value) {
       this.todos = _value;
     }
   },
-  methods: (_methods = {
+  methods: {
+    orderTaskByDate: function orderTaskByDate() {
+      this.todos = this.todos.sort(function (a, b) {
+        var nameA = a.end_date,
+            nameB = b.end_date;
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
+    },
     orderTaskByName: function orderTaskByName() {
       this.todos = this.todos.sort(function (a, b) {
         var nameA = a.name,
@@ -1918,216 +1934,218 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return -1;
         if (nameA > nameB) return 1;
         return 0; //default return value (no sorting)
-      }); // console.log(this.todos.sort(compare));
-      //  console.log(_.orderBy(this.todos, value));
-      //  return this.todos.sortBy(value)
-      // let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
-      // console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
-      // var tempar = this.todos
-      //  for (var i=0; i<tempar.length; i++){
-      //      var temp 
-      //      for (var j=0; j<tempar; j++){
-      //          if(tempar[i].value > tempar[j].value){
-      //              temp = tempar[i]
-      //              tempar[i] = tempar[j]
-      //              tempar[j] = temp
-      //          }
-      //      }
-      //  }
-      //  console.log(tempar)
-      //  return tempar
-    }
-  }, _defineProperty(_methods, "orderTaskByName", function orderTaskByName() {
-    this.todos = this.todos.sort(function (a, b) {
-      var nameA = a.name,
-          nameB = b.name;
-      if (nameA < nameB) //sort string ascending
-        return -1;
-      if (nameA > nameB) return 1;
-      return 0; //default return value (no sorting)
-    });
-  }), _defineProperty(_methods, "orderTaskByPriority", function orderTaskByPriority() {
-    this.todos = this.todos.sort(function (a, b) {
-      var nameA = a.task_priority,
-          nameB = b.task_priority;
-      if (nameA < nameB) //sort string ascending
-        return -1;
-      if (nameA > nameB) return 1;
-      return 0; //default return value (no sorting)
-    });
-  }), _defineProperty(_methods, "reorder", function reorder() {
-    if (this.sortBy == 'date') {
-      this.orderTaskByName();
-    }
-
-    if (this.sortBy == 'name') {
-      this.orderTaskByName();
-    }
-
-    if (this.sortBy == 'priority') {
-      this.orderTaskByPriority();
-    }
-  }), _defineProperty(_methods, "getTasks", function getTasks() {
-    var _this = this;
-
-    console.log(this.currentUser.username);
-    axios__WEBPACK_IMPORTED_MODULE_1___default()({
-      method: 'GET',
-      url: "/api/tasks/".concat(this.currentUser.id)
-    }).then(function (result) {
-      console.log(result.data);
-
-      if (result.data !== "" && result.data !== null) {
-        //this.gooduser = true
-        //this.currentUser = result.data
-        //this.currentUserName = this.currentUser.username
-        var tempTodo = [];
-        result.data.forEach(function (element) {
-          var val = '';
-
-          if (element.name !== '' && element.name !== undefined && element.name !== null) {
-            val = element.name;
-          } else {
-            val = element.description;
-          }
-
-          var valt = element.tstate;
-
-          if (element.tstate === "false") {
-            valt = false;
-          } else if (element.tstate === "true") {
-            valt = true;
-          }
-
-          tempTodo.push({
-            taskid: element.id,
-            name: val,
-            description: element.description,
-            completed: valt,
-            task_priority: element.task_priority,
-            end_date: element.end_date
-          });
-
-          _this.completeTodo.push(element);
-        });
-        _this.todos = tempTodo; //console.log(this.gooduser)
-      } else {
-        console.log('Aucune tache'); //console.log(this.gooduser)
-        //console.log(result.data)
-
-        console.log(result); //getCurrentUser
-        //window.location.href = '/'
+      });
+    },
+    orderTaskByPriority: function orderTaskByPriority() {
+      this.todos = this.todos.sort(function (a, b) {
+        var nameA = a.task_priority,
+            nameB = b.task_priority;
+        if (nameA < nameB) //sort string ascending
+          return -1;
+        if (nameA > nameB) return 1;
+        return 0; //default return value (no sorting)
+      });
+    },
+    reorder: function reorder() {
+      if (this.sortBy == 'date') {
+        this.orderTaskByName();
       }
-    }, function (error) {
-      console.log(error);
-    });
-  }), _defineProperty(_methods, "actualiseTaskList", function actualiseTaskList() {
-    var _this2 = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_1___default()({
-      method: 'GET',
-      url: "/api/tasks/".concat(this.currentUser.id)
-    }).then(function (result) {
-      result.data.forEach(function (element) {
-        _this2.completeTodo.push(element);
+      if (this.sortBy == 'name') {
+        this.orderTaskByName();
+      }
+
+      if (this.sortBy == 'priority') {
+        this.orderTaskByPriority();
+      }
+    },
+    getColor: function getColor(val) {
+      if (val == 'A faire') {
+        return 'bg-green-300';
+      }
+
+      if (val == 'important') {
+        return 'bg-blue-300';
+      }
+
+      if (val == 'urgent') {
+        return 'bg-orange-300';
+      }
+
+      if (val == 'urgent et importan') {
+        return 'bg-red-300';
+      }
+    },
+    getTasks: function getTasks() {
+      var _this = this;
+
+      console.log(this.currentUser.username);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'GET',
+        url: "/api/tasks/".concat(this.currentUser.id)
+      }).then(function (result) {
+        console.log(result.data);
+
+        if (result.data !== "" && result.data !== null) {
+          //this.gooduser = true
+          //this.currentUser = result.data
+          //this.currentUserName = this.currentUser.username
+          var tempTodo = [];
+          result.data.forEach(function (element) {
+            var val = '';
+
+            if (element.name !== '' && element.name !== undefined && element.name !== null) {
+              val = element.name;
+            } else {
+              val = element.description;
+            }
+
+            var valt = element.tstate;
+
+            if (element.tstate === "false") {
+              valt = false;
+            } else if (element.tstate === "true") {
+              valt = true;
+            }
+
+            tempTodo.push({
+              taskid: element.id,
+              name: val,
+              description: element.description,
+              completed: valt,
+              task_priority: element.task_priority,
+              end_date: element.end_date
+            });
+
+            _this.completeTodo.push(element);
+          });
+          _this.todos = tempTodo; //console.log(this.gooduser)
+        } else {
+          console.log('Aucune tache'); //console.log(this.gooduser)
+          //console.log(result.data)
+
+          console.log(result); //getCurrentUser
+          //window.location.href = '/'
+        }
+      }, function (error) {
+        console.log(error);
       });
-    }, function (error) {
-      console.log(error);
-    });
-  }), _defineProperty(_methods, "addTodo", function addTodo() {
-    var _this3 = this;
+    },
+    actualiseTaskList: function actualiseTaskList() {
+      var _this2 = this;
 
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
-      name: this.todoData.ToDoTitle,
-      description: this.todoData.activityDetail,
-      tstate: false,
-      task_priority: this.todoData.selectedPriority,
-      end_date: dateTime
-    }).then(function (res) {
-      console.log(res); //this.actualiseTaskList()www.wi
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'GET',
+        url: "/api/tasks/".concat(this.currentUser.id)
+      }).then(function (result) {
+        result.data.forEach(function (element) {
+          _this2.completeTodo.push(element);
+        });
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    addTodo: function addTodo() {
+      var _this3 = this;
 
-      _this3.todos.push({
-        taskid: res.data.id,
-        name: _this3.todoData.ToDoTitle,
-        description: _this3.todoData.activityDetail,
-        completed: false,
-        task_priority: _this3.todoData.selectedPriority,
+      var today = new Date();
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + ' ' + time;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/addtask/".concat(this.currentUser.id), {
+        name: this.todoData.ToDoTitle,
+        description: this.todoData.activityDetail,
+        tstate: false,
+        task_priority: this.todoData.selectedPriority,
         end_date: dateTime
+      }).then(function (res) {
+        console.log(res); //this.actualiseTaskList()www.wi
+
+        _this3.todos.push({
+          taskid: res.data.id,
+          name: _this3.todoData.ToDoTitle,
+          description: _this3.todoData.activityDetail,
+          completed: false,
+          task_priority: _this3.todoData.selectedPriority,
+          end_date: dateTime
+        });
+
+        _this3.todoData = {
+          ToDoTitle: '',
+          selectedPriority: 'A faire',
+          activityDetail: ''
+        };
+      })["catch"](function (err) {
+        console.log(err);
+      }); //this.$emit('input', this.todos)
+    },
+    deleteTodo: function deleteTodo(todo) {
+      var _this4 = this;
+
+      console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
+        _this4.todos = _this4.todos.filter(function (t) {
+          return t !== todo;
+        });
+
+        _this4.$emit('input', _this4.todos); //this.actualiseTaskList()
+
+      })["catch"](function (err) {
+        alert("Erreur de suppression ! Veuillez reessayer.");
+        console.log(err); //this.actualiseTaskList()
       });
-
-      _this3.todoData = {
-        ToDoTitle: '',
-        selectedPriority: 'A faire',
-        activityDetail: ''
-      };
-    })["catch"](function (err) {
-      console.log(err);
-    }); //this.$emit('input', this.todos)
-  }), _defineProperty(_methods, "deleteTodo", function deleteTodo(todo) {
-    var _this4 = this;
-
-    console.log(todo.taskid); //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/destroytask/".concat(todo.taskid, "/").concat(this.currentUser.id)).then(function (res) {
-      _this4.todos = _this4.todos.filter(function (t) {
-        return t !== todo;
+    },
+    deleteCompleted: function deleteCompleted() {
+      this.todos = this.todos.filter(function (todo) {
+        return !todo.completed;
       });
+      this.$emit('input', this.todos);
+    },
+    editTodo: function editTodo(todo) {
+      this.editing = todo;
+      this.oldTask = todo.name;
+    },
+    chageTaskState: function chageTaskState(todo) {
+      todo.completed = !todo.completed;
+      console.log('todo.name');
+      console.log(todo.name);
+      console.log(todo);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do'
+      }).then(function (res) {//this.editing = null
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    doneEdit: function doneEdit(todo) {
+      var _this5 = this;
 
-      _this4.$emit('input', _this4.todos); //this.actualiseTaskList()
-
-    })["catch"](function (err) {
-      alert("Erreur de suppression ! Veuillez reessayer.");
-      console.log(err); //this.actualiseTaskList()
-    });
-  }), _defineProperty(_methods, "deleteCompleted", function deleteCompleted() {
-    this.todos = this.todos.filter(function (todo) {
-      return !todo.completed;
-    });
-    this.$emit('input', this.todos);
-  }), _defineProperty(_methods, "editTodo", function editTodo(todo) {
-    this.editing = todo;
-    this.oldTask = todo.name;
-  }), _defineProperty(_methods, "chageTaskState", function chageTaskState(todo) {
-    todo.completed = !todo.completed;
-    console.log('todo.name');
-    console.log(todo.name);
-    console.log(todo);
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-      title: '',
-      description: todo.name,
-      tstate: todo.completed,
-      task_priority: 'to do'
-    }).then(function (res) {//this.editing = null
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  }), _defineProperty(_methods, "doneEdit", function doneEdit(todo) {
-    var _this5 = this;
-
-    //console.log(this.completeTodo.find(todo))
-    //this.actualiseTaskList()
-    //console.log(todo.name)
-    // console.log(this.todos.indexOf(todo))
-    // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
-    //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-      title: '',
-      description: todo.name,
-      tstate: todo.completed,
-      task_priority: 'to do'
-    }).then(function (res) {
-      _this5.editing = null;
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  }), _defineProperty(_methods, "cancelEdit", function cancelEdit() {
-    this.editing.name = this.oldTask;
-    this.editing = null;
-  }), _methods),
+      //console.log(this.completeTodo.find(todo))
+      //this.actualiseTaskList()
+      //console.log(todo.name)
+      // console.log(this.todos.indexOf(todo))
+      // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
+      //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
+        title: '',
+        description: todo.name,
+        tstate: todo.completed,
+        task_priority: 'to do'
+      }).then(function (res) {
+        _this5.editing = null;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    cancelEdit: function cancelEdit() {
+      this.editing.name = this.oldTask;
+      this.editing = null;
+    }
+  },
   computed: {
     allDone: {
       get: function get() {
@@ -7113,6 +7131,25 @@ __webpack_require__.r(__webpack_exports__);
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "a:hover{\n  text-decoration:none;\n  /* text-shadow: blue 2px 4px 5px; */\n  box-shadow: blue 2px 4px 15px;\n}\n@media only screen and (max-width: 600px){\nli:hover{\n    text-decoration:none;\n    /* text-shadow: blue 2px 4px 5px; */\n    box-shadow: blue 2px 4px 15px;\n}\na:hover{\n    text-decoration:none;\n    /* text-shadow: blue 2px 4px 5px; */\n    box-shadow: transparent 2px 4px 15px;\n}\n}\n", ""]);
+
+// exports
 
 
 /***/ }),
@@ -38446,6 +38483,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./mynav.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./resources/js/components/todo.css?vue&type=style&index=0&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/todo.css?vue&type=style&index=0&lang=css& ***!
@@ -39468,122 +39535,168 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "view" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: todoelt.completed,
-                          expression: "todoelt.completed"
-                        }
-                      ],
-                      staticClass: "toggle w-4 h-4 bg-blue-500 z-10",
-                      attrs: { type: "checkbox", name: "" },
-                      domProps: {
-                        checked: Array.isArray(todoelt.completed)
-                          ? _vm._i(todoelt.completed, null) > -1
-                          : todoelt.completed
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.chageTaskState(todoelt)
-                        },
-                        change: function($event) {
-                          var $$a = todoelt.completed,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  todoelt,
-                                  "completed",
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  todoelt,
-                                  "completed",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(todoelt, "completed", $$c)
+                  _c(
+                    "div",
+                    {
+                      staticClass: "view p-2",
+                      class: [_vm.getColor(todoelt.task_priority)]
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: todoelt.completed,
+                            expression: "todoelt.completed"
                           }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "bg-gray-200 shadow" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass:
-                            "text-gold-300 text-lg font-bold uppercase",
-                          on: {
-                            dblclick: function($event) {
-                              return _vm.editTodo(todoelt)
-                            }
-                          }
+                        ],
+                        staticClass: "toggle w-4 h-4 bg-blue-500 z-10",
+                        attrs: { type: "checkbox", name: "" },
+                        domProps: {
+                          checked: Array.isArray(todoelt.completed)
+                            ? _vm._i(todoelt.completed, null) > -1
+                            : todoelt.completed
                         },
-                        [_vm._v(_vm._s(todoelt.name))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-blue-600 w-full text-base" },
-                        [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "ml-4 justify",
-                              on: {
-                                dblclick: function($event) {
-                                  return _vm.editTodo(todoelt)
-                                }
+                        on: {
+                          click: function($event) {
+                            return _vm.chageTaskState(todoelt)
+                          },
+                          change: function($event) {
+                            var $$a = todoelt.completed,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    todoelt,
+                                    "completed",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    todoelt,
+                                    "completed",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
                               }
-                            },
-                            [_vm._v(_vm._s(todoelt.description))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "label",
+                            } else {
+                              _vm.$set(todoelt, "completed", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.todobools[idx]
+                        ? _c(
+                            "div",
                             {
-                              staticClass:
-                                "bg-teal-200 italic text-red-600 font-bold text-sm",
+                              staticClass: "bg-gray-200 shadow",
                               on: {
-                                dblclick: function($event) {
-                                  return _vm.editTodo(todoelt)
+                                click: function($event) {
+                                  _vm.todobools[idx] = !_vm.todobools[idx]
                                 }
                               }
                             },
                             [
-                              _vm._v(
-                                "Priority:" +
-                                  _vm._s(todoelt.task_priority) +
-                                  " >>>>>>>>> created on:" +
-                                  _vm._s(todoelt.end_date)
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "text-gold-300 text-lg font-bold uppercase -mb-6",
+                                  on: {
+                                    dblclick: function($event) {
+                                      return _vm.editTodo(todoelt)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(todoelt.name))]
                               )
                             ]
                           )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("button", {
-                      staticClass: "destroy",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.deleteTodo(todoelt)
+                        : _c(
+                            "div",
+                            {
+                              staticClass: "bg-gray-200 shadow",
+                              on: {
+                                click: function($event) {
+                                  _vm.todobools[idx] = !_vm.todobools[idx]
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "text-gold-300 text-lg font-bold uppercase -mb-6",
+                                  on: {
+                                    dblclick: function($event) {
+                                      return _vm.editTodo(todoelt)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(todoelt.name))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "text-blue-600 w-full text-base"
+                                },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "ml-4 justify -mb-2",
+                                      on: {
+                                        dblclick: function($event) {
+                                          return _vm.editTodo(todoelt)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(todoelt.description))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "bg-teal-200 italic text-red-600 font-bold text-sm",
+                                      on: {
+                                        dblclick: function($event) {
+                                          return _vm.editTodo(todoelt)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        ">>>>>>>>> created on:" +
+                                          _vm._s(todoelt.end_date) +
+                                          "<<<<<<<<<< "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                      _vm._v(" "),
+                      _c("button", {
+                        staticClass: "destroy",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.deleteTodo(todoelt)
+                          }
                         }
-                      }
-                    })
-                  ]),
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -39950,7 +40063,7 @@ var render = function() {
               "li",
               {
                 staticClass:
-                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
               },
               [
                 _c(
@@ -39976,7 +40089,7 @@ var render = function() {
               "li",
               {
                 staticClass:
-                  "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+                  "mr-4 flex justify-center md:w-16 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
               },
               [
                 _c(
@@ -40006,7 +40119,7 @@ var render = function() {
               "li",
               {
                 staticClass:
-                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+                  "mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
               },
               [
                 _c(
@@ -40040,7 +40153,7 @@ var staticRenderFns = [
       "li",
       {
         staticClass:
-          "active mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-6 border-b-2 sm:border-b-0 border-teal-700"
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
       },
       [
         _c(
@@ -40062,7 +40175,7 @@ var staticRenderFns = [
       "li",
       {
         staticClass:
-          " mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+          " mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
       },
       [
         _c(
@@ -40084,7 +40197,7 @@ var staticRenderFns = [
       "li",
       {
         staticClass:
-          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
       },
       [
         _c(
@@ -40106,7 +40219,7 @@ var staticRenderFns = [
       "li",
       {
         staticClass:
-          "mr-4 flex justify-center md:w-16 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+          "mr-4 flex justify-center md:w-16 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
       },
       [
         _c(
@@ -40131,7 +40244,7 @@ var staticRenderFns = [
       "li",
       {
         staticClass:
-          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-1/2 mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
+          "mr-4 flex justify-center md:w-12 sm:w-1/3 w-full mb-3 pb-3 border-b-2 sm:border-b-0 border-teal-700"
       },
       [
         _c(
@@ -57005,7 +57118,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mynav.vue?vue&type=template&id=06df9d88& */ "./resources/js/components/mynav.vue?vue&type=template&id=06df9d88&");
 /* harmony import */ var _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mynav.vue?vue&type=script&lang=js& */ "./resources/js/components/mynav.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -57013,7 +57128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["render"],
   _mynav_vue_vue_type_template_id_06df9d88___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -57042,6 +57157,22 @@ component.options.__file = "resources/js/components/mynav.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./mynav.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./mynav.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/mynav.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_mynav_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

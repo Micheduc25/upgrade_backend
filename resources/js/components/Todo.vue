@@ -68,17 +68,22 @@
                     Mark all as complete</label>
                 <ul class="todo-list">
                     <li class="todo" :class="{completed: todoelt.completed, editing: todoelt === editing}" :key="idx" v-for="(todoelt, idx) in filteredTodos">
-                        <div class="view">
+                        <div class="view p-2" :class="[getColor(todoelt.task_priority)]">
                             <input type="checkbox" name="" class="toggle w-4 h-4 bg-blue-500 z-10" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
-                            <div class="bg-gray-200 shadow">
-                                <label class="text-gold-300 text-lg font-bold uppercase" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
+                            
+                            <div class="bg-gray-200 shadow"  @click="todobools[idx] =!todobools[idx]" v-if="todobools[idx]">
+                                <label class="text-gold-300 text-lg font-bold uppercase -mb-6" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
+                            </div>
+                            <div class="bg-gray-200 shadow" v-else  @click="todobools[idx] =!todobools[idx]">
+                                <label class="text-gold-300 text-lg font-bold uppercase -mb-6" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
                                
                                 <div class="text-blue-600 w-full text-base">
-                                     <label class="ml-4 justify" @dblclick="editTodo(todoelt)">{{ todoelt.description }}</label>
-                                      <label class="bg-teal-200 italic text-red-600 font-bold text-sm" @dblclick="editTodo(todoelt)">Priority:{{ todoelt.task_priority }} >>>>>>>>> created on:{{todoelt.end_date}}</label>
+                                     <label class="ml-4 justify -mb-2" @dblclick="editTodo(todoelt)">{{ todoelt.description }}</label>
+                                      <label class="bg-teal-200 italic text-red-600 font-bold text-sm" @dblclick="editTodo(todoelt)">>>>>>>>>> created on:{{todoelt.end_date}}<<<<<<<<<< </label>
                                 </div>
 
                             </div>
+                            
                             <button class="destroy" @click.prevent="deleteTodo(todoelt)"></button>
                         </div>
                         <input type="text" class="edit" v-model="todoelt.name" @keyup.enter="doneEdit(todoelt)" @blur="doneEdit(todoelt)" @keyup.esc="cancelEdit" v-focus="todoelt === editing">
@@ -129,6 +134,7 @@ export default {
         return {
             completeTodo:[],
             todos: [],
+            todobools:[],
             newTodo: '',
             filter: 'all',
             editing: null,
@@ -168,6 +174,10 @@ export default {
         console.log(JSON.parse(window.localStorage.currentUser))
         this.currentUser = JSON.parse(window.localStorage.currentUser).currentUser
         this.getTasks()
+        for(var i=0; i<length(this.todos); i++){
+            this.todobools[i] = true
+        }
+        
     },
     watch: {
         value(value){
@@ -175,9 +185,9 @@ export default {
         }
     },
     methods:{
-           orderTaskByName () {
+           orderTaskByDate () {
             this.todos = this.todos.sort(function(a, b){
-                var nameA=a.name, nameB=b.name
+                var nameA=a.end_date, nameB=b.end_date
                 if (nameA < nameB) //sort string ascending
                     return -1 
                 if (nameA > nameB)
@@ -185,27 +195,6 @@ export default {
                 return 0 //default return value (no sorting)
             })
 
-                // console.log(this.todos.sort(compare));
-            //  console.log(_.orderBy(this.todos, value));
-            //  return this.todos.sortBy(value)
-            // let sortedBy = [...this.todos].sort((first, second) => first.value > second.value)
-            // console.log(this.todos.sort((a, b) => (a.value > b.value) ? 1 : -1))
-            // var tempar = this.todos
-            //  for (var i=0; i<tempar.length; i++){
-            //      var temp 
-            //      for (var j=0; j<tempar; j++){
-            //          if(tempar[i].value > tempar[j].value){
-            //              temp = tempar[i]
-            //              tempar[i] = tempar[j]
-            //              tempar[j] = temp
-            //          }
-                 
-                    
-            //      }
-            //  }
-            //  console.log(tempar)
-            //  return tempar
-            
         },  
         orderTaskByName () {
             this.todos = this.todos.sort(function(a, b){
@@ -239,6 +228,22 @@ export default {
             if(this.sortBy=='priority'){
                 this.orderTaskByPriority()
             }
+        },
+        getColor(val){
+              
+            if(val=='A faire'){
+                return 'bg-green-300'
+            }
+            if(val=='important'){
+                return 'bg-blue-300'
+            }
+            if(val=='urgent'){
+                return 'bg-orange-300'
+            }
+            if(val=='urgent et importan'){
+                return 'bg-red-300'
+            }
+    
         },
         getTasks(){
             console.log(this.currentUser.username)
