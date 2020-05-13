@@ -48,14 +48,23 @@ class User1Controller extends Controller
      * @param  \App\User1  $user1
      * @return \Illuminate\Http\Response
      */
-    public function show(User1 $user1)
+    public function show($id)
     {
-        return (TaskModel::where('username', $user1->id)->task);
+        $user = User1::find($id);
+        return $user;
+    }
+    public function getAllUser($id)
+    {
+        $user = User1::findOrFail($id);
+        if($user->role == "administrator" || $user->role == "super_administrator"){
+            return User1::all();
+        }
+        return;
     }
 
     public function getUserTasks($id)
     {
-        return (User1::find($id)->task);
+        return (User1::findOrFail($id)->task);
         //return (User1::where('id', $id)->task);
     }
     public function getCurrentUser($id)

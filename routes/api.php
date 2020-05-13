@@ -29,7 +29,7 @@ Route::post('maddtask/{id}', 'TasksController@maddtask');
 Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
 Route::put('updatetask/{id}', 'TasksController@updatetask');
 
-
+Route::get('/getallusers/{id}', 'User1Controller@getAllUser');
 
 // Route::Resources(
 //     [
