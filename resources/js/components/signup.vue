@@ -1,7 +1,7 @@
 <template>
         <div>
             <div>
-                <form action="" method="post" class=" px-8 sm:px-4 ml-10 md:px-0">
+                <form action="" method="post" class="px-2 sm:px-0">
                     <div v-if="showWarning" class="text-red-700 font-bold bg-red-100">Password does not correspond with confirm password, try again!</div>
                     <div class="flex flex-col items-start mb-6">
                         <label for="uname" class="text-blue-800 font-bold ">Username</label>

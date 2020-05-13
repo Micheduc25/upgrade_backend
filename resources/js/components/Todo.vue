@@ -71,10 +71,10 @@
                         <div class="view p-2" :class="[getColor(todoelt.task_priority)]">
                             <input type="checkbox" name="" class="toggle w-4 h-4 bg-blue-500 z-10" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
                             
-                            <div class="bg-gray-200 shadow"  @click="todobools[idx] =!todobools[idx]" v-if="todobools[idx]">
-                                <label class="text-gold-300 text-lg font-bold uppercase -mb-6" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
+                            <div class="bg-gray-200 shadow"  @click="todobools[idx] =!todobools[idx]" >
+                                <label class="text-gold-300 text-lg font-bold uppercase" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
                             </div>
-                            <div class="bg-gray-200 shadow" v-else  @click="todobools[idx] =!todobools[idx]">
+                            <!-- <div class="bg-gray-200 shadow" v-else  @click="todobools[idx] =!todobools[idx]">
                                 <label class="text-gold-300 text-lg font-bold uppercase -mb-6" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
                                
                                 <div class="text-blue-600 w-full text-base">
@@ -82,7 +82,7 @@
                                       <label class="bg-teal-200 italic text-red-600 font-bold text-sm" @dblclick="editTodo(todoelt)">>>>>>>>>> created on:{{todoelt.end_date}}<<<<<<<<<< </label>
                                 </div>
 
-                            </div>
+                            </div> -->
                             
                             <button class="destroy" @click.prevent="deleteTodo(todoelt)"></button>
                         </div>
