@@ -40587,7 +40587,7 @@ var render = function() {
           )
         ])
       : _c("div", {}, [
-          _c("div", { staticClass: "mb-2 flex flex-col" }, [
+          _c("div", { staticClass: "mb-2 flex flex-col items-start" }, [
             _c(
               "label",
               {
@@ -40621,7 +40621,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-2 flex flex-col" }, [
+          _c("div", { staticClass: "mb-2 flex flex-col items-start" }, [
             _c(
               "label",
               {

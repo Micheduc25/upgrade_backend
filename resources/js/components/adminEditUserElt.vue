@@ -9,11 +9,11 @@
         </button>
     </div>
     <div v-else class="">
-        <div class="mb-2 flex flex-col">
+        <div class="mb-2 flex flex-col items-start">
             <label for="username" class="text-blue-800 font-bold">Username</label>
             <input type="text" class="w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4" v-model="user.user" name="username">
         </div>
-         <div  class="mb-2 flex flex-col">
+         <div  class="mb-2 flex flex-col items-start">
             <label for="password" class="text-blue-800 font-bold">Password</label>
             <input class="w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4" v-model="user.password" name="password" type="text">
         </div>
