@@ -57,14 +57,14 @@ class User1Controller extends Controller
     {
         $user = User1::findOrFail($id);
         if($user->role == "administrator" || $user->role == "super_administrator"){
-            return $user;
+            return User1::all();
         }
         return;
     }
 
     public function getUserTasks($id)
     {
-        return (User1::find($id)->task);
+        return (User1::findOrFail($id)->task);
         //return (User1::where('id', $id)->task);
     }
     public function getCurrentUser($id)
