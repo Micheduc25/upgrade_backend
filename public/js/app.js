@@ -2255,6 +2255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _adminEditUserElt_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./adminEditUserElt.vue */ "./resources/js/components/adminEditUserElt.vue");
 //
 //
 //
@@ -2365,6 +2366,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Hello",
   data: function data() {
@@ -2379,6 +2385,9 @@ __webpack_require__.r(__webpack_exports__);
         showWarning: false
       }
     };
+  },
+  components: {
+    'edit-tool': _adminEditUserElt_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     // all the methods with b infont of them indicate that they are functions used by the buttons on the left
@@ -2429,6 +2438,70 @@ __webpack_require__.r(__webpack_exports__);
     // the function bellow is used to delete a user
     deleteUser: function deleteUser(index) {
       this.users.splice(index, 1);
+    },
+    editUser: function editUser(data, idx) {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['users', 'user', 'idx'],
+  data: function data() {
+    return {
+      edit: false,
+      tasks: [{
+        name: 'Demo',
+        edit: false
+      }]
+    };
+  },
+  methods: {
+    submitUserEdit: function submitUserEdit() {
+      this.users[this.idx] = this.user;
+      this.$emit('updatedUsers', this.users);
+      this.edit = false;
     }
   },
   components: {}
@@ -40194,7 +40267,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6",
+                        "w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
                       attrs: { type: "text", name: "username" },
                       domProps: { value: _vm.addUserData.userName },
                       on: {
@@ -40237,7 +40310,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6",
+                        "w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
                       attrs: { type: "password", name: "password" },
                       domProps: { value: _vm.addUserData.password },
                       on: {
@@ -40280,7 +40353,7 @@ var render = function() {
                         }
                       ],
                       staticClass:
-                        "w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6",
+                        "w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
                       attrs: { type: "password", name: "cpassword" },
                       domProps: { value: _vm.addUserData.cpassword },
                       on: {
@@ -40325,7 +40398,32 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.currentbtnFxn == "bModifyUser" ? _c("div") : _vm._e(),
+        _vm.currentbtnFxn == "bModifyUser"
+          ? _c(
+              "div",
+              _vm._l(_vm.users, function(user, idx) {
+                return _c(
+                  "div",
+                  {
+                    staticClass:
+                      "shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full"
+                  },
+                  [
+                    _c("edit-tool", {
+                      attrs: { users: _vm.users, user: user, idx: idx },
+                      on: {
+                        updatedUsers: function($event) {
+                          _vm.users = $event
+                        }
+                      }
+                    })
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          : _vm._e(),
         _vm._v(" "),
         _vm.currentbtnFxn == "bViewUsers"
           ? _c(
@@ -40401,7 +40499,7 @@ var render = function() {
                         "shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between"
                     },
                     [
-                      _c("div", [
+                      _c("div", { staticClass: "pl-2" }, [
                         _vm._v(
                           "\n          " + _vm._s(user.user) + "\n        "
                         )
@@ -40446,6 +40544,129 @@ var render = function() {
           : _vm._e()
       ]
     )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    !_vm.edit
+      ? _c("div", { staticClass: "flex justify-between" }, [
+          _c("div", [_vm._v("\n        " + _vm._s(_vm.user.user) + "\n    ")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "font-bold text-blue-400 hover:text-blue-600 ",
+              on: {
+                click: function($event) {
+                  _vm.edit = true
+                }
+              }
+            },
+            [_vm._v("\n          Edit\n      ")]
+          )
+        ])
+      : _c("div", {}, [
+          _c("div", { staticClass: "mb-2 flex flex-col" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold",
+                attrs: { for: "username" }
+              },
+              [_vm._v("Username")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.user,
+                  expression: "user.user"
+                }
+              ],
+              staticClass:
+                "w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
+              attrs: { type: "text", name: "username" },
+              domProps: { value: _vm.user.user },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "user", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2 flex flex-col" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 font-bold",
+                attrs: { for: "password" }
+              },
+              [_vm._v("Password")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.password,
+                  expression: "user.password"
+                }
+              ],
+              staticClass:
+                "w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
+              attrs: { name: "password", type: "text" },
+              domProps: { value: _vm.user.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "password", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "border-blue-400 border-2 px-12 py-2 rounded-full bg-teal-500 hover:bg-blue-500 text-white",
+            attrs: { type: "submit", name: "addUser", value: "Done" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.submitUserEdit($event)
+              }
+            }
+          })
+        ])
   ])
 }
 var staticRenderFns = []
@@ -57709,6 +57930,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_vue_vue_type_template_id_5c321c94_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_vue_vue_type_template_id_5c321c94_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/adminEditUserElt.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/adminEditUserElt.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./adminEditUserElt.vue?vue&type=template&id=927f3318& */ "./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318&");
+/* harmony import */ var _adminEditUserElt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./adminEditUserElt.vue?vue&type=script&lang=js& */ "./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _adminEditUserElt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/adminEditUserElt.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_adminEditUserElt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./adminEditUserElt.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/adminEditUserElt.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_adminEditUserElt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./adminEditUserElt.vue?vue&type=template&id=927f3318& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/adminEditUserElt.vue?vue&type=template&id=927f3318&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_adminEditUserElt_vue_vue_type_template_id_927f3318___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

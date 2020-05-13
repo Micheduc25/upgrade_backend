@@ -31,7 +31,7 @@
               name="username"
               @input="addUserData.showWarning=false"
               v-model="addUserData.userName"
-              class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6"
+              class="w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4"
             />
           </div>
           <div class="flex flex-col items-start mb-6">
@@ -41,7 +41,7 @@
               name="password"
               @input="addUserData.showWarning=false"
               v-model="addUserData.password"
-              class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6"
+              class="w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4"
             />
           </div>
           <div class="flex flex-col items-start mb-6">
@@ -51,7 +51,7 @@
               name="cpassword"
               @input="addUserData.showWarning=false"
               v-model="addUserData.cpassword"
-              class="w-full h-10 border-2 border-blue-500 focus:shadow-outline rounded sm:pl-6"
+              class="w-full h-8 border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4"
             />
           </div>
           <div class="flex flex-col items-start mb-6">
@@ -68,6 +68,10 @@
 
       <div v-if="currentbtnFxn=='bModifyUser'">
         <!-- this is where the admin can modify a user -->
+        <div v-for="(user, idx) in users" class="shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full">
+          <edit-tool @updatedUsers="users=$event" :users="users" :user="user" :idx="idx"></edit-tool>
+        </div>
+        
         
       </div>
 
@@ -91,7 +95,7 @@
         <!-- Here the admin can delete a user -->
         <span class="text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark">There are {{users.length}} Users in the Database</span>
         <div v-for="(user, idx) in users" class="shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between">
-          <div>
+          <div class="pl-2">
             {{user.user}}
           </div>
           <div class="transform crossHolder rotate-45 -ml-2" @click="deleteUser(idx)">
@@ -109,6 +113,7 @@
 </template>
 
 <script>
+import editTool from "./adminEditUserElt.vue";
 export default {
   name: "Hello",
   data() {
@@ -123,6 +128,9 @@ export default {
         showWarning: false
       }
     };
+  },
+  components: {
+    'edit-tool':editTool
   },
   methods: {
     // all the methods with b infont of them indicate that they are functions used by the buttons on the left
@@ -174,11 +182,14 @@ export default {
     // the function bellow is used to delete a user
     deleteUser(index){
       this.users.splice(index, 1)
+    },
+    editUser(data, idx){
+
     }
 
     
   },
-  components: {}
+  
 };
 </script>
 <style scoped>
