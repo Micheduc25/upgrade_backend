@@ -94,11 +94,11 @@
       <div v-if="currentbtnFxn=='bDeleteUsers'" class="flex flex-col items-center">
         <!-- Here the admin can delete a user -->
         <span class="text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark">There are {{users.length}} Users in the Database</span>
-        <div v-for="(user, idx) in users" class="shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between">
+        <div v-for="(user, idx) in users" class="shadow border-2 py-2 pr-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between">
           <div class="pl-2">
             {{user.user}}
           </div>
-          <div class="transform crossHolder rotate-45 -ml-2" @click="deleteUser(idx)">
+          <div class="transform crossHolder rotate-45 -ml-4" @click="deleteUser(idx)">
             <div class="h-4 cross rounded-full bg-red-500 transform rotate-90"></div>
             <div class="h-4 cross rounded-full bg-red-500 -mt-4"></div>
           </div>

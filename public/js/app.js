@@ -40496,7 +40496,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between"
+                        "shadow border-2 py-2 pr-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between"
                     },
                     [
                       _c("div", { staticClass: "pl-2" }, [
@@ -40508,7 +40508,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "transform crossHolder rotate-45 -ml-2",
+                          staticClass: "transform crossHolder rotate-45 -ml-4",
                           on: {
                             click: function($event) {
                               return _vm.deleteUser(idx)
