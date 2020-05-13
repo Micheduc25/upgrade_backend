@@ -75,8 +75,9 @@
         v-if="currentbtnFxn=='bViewUsers'"
       >
         <!-- this is where the admin can see all the users in the system -->
-        <span class="text-normal md:text-xl font-bold text-center">Users in the Database</span>
-        <div v-for="(user, idx) in users" class="shadow border-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold">
+        <span class="text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark">Users in the Database</span>
+        <span class="text-normal md:text-xl font-bold text-center" v-if="users.length==0">Currently there is no User in the Database</span>
+        <div v-for="(user, idx) in users" class="shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full">
           <div>
             {{user.user}}
           </div>
@@ -86,8 +87,20 @@
         </div>
       </div>
 
-      <div v-if="currentbtnFxn=='bDeleteUsers'">Here the admin can delete a user</div>
-
+      <div v-if="currentbtnFxn=='bDeleteUsers'" class="flex flex-col items-center">
+        <!-- Here the admin can delete a user -->
+        <span class="text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark">There are {{users.length}} Users in the Database</span>
+        <div v-for="(user, idx) in users" class="shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between">
+          <div>
+            {{user.user}}
+          </div>
+          <div class="transform crossHolder rotate-45 -ml-2" @click="deleteUser(idx)">
+            <div class="h-4 cross rounded-full bg-red-500 transform rotate-90"></div>
+            <div class="h-4 cross rounded-full bg-red-500 -mt-4"></div>
+          </div>
+        </div>
+      </div>
+        
       <div
         v-if="currentbtnFxn=='bViewUserTasks'"
       >this is where the admin can view all the tasks of a particular user</div>
@@ -137,6 +150,7 @@ export default {
       if (this.addUserData.password == this.addUserData.cpassword) {
         if (this.addUserData.userName != "") {
           this.users.push({user:this.addUserData.userName, password:this.addUserData.password}),
+          alert('user '+ this.addUserData.userName +' was successfully added')
           this.addUserData = {
             password: "",
             cpassword: "",
@@ -147,16 +161,22 @@ export default {
           alert('Please user name cannot be empty');
         }
       } else {
+        this.addUserData = {
+            password: "",
+            cpassword: "",
+            userName: this.addUserData.userName,
+          };
         this.addUserData.showWarning = true;
+        
       }
     },
 
-    addTodo() {
-      this.tasks.push({
-        name: "vuejs",
-        completed: false
-      });
+    // the function bellow is used to delete a user
+    deleteUser(index){
+      this.users.splice(index, 1)
     }
+
+    
   },
   components: {}
 };
@@ -178,8 +198,21 @@ button:focus {
   border-top-color: black;
   color: white;
 }
+button:hover {
+  background-color: darkblue;
+  border-top-color: black;
+  color: white;
+}
 input:not(:last-of-type) {
   padding-left: 8px;
+}
+.cross{
+  width:3px;
+  opacity: 0.5;
+}
+.crossHolder:hover .cross{
+  opacity: 1;
+  background-color: indigo;
 }
 
 </style>

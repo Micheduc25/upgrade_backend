@@ -2352,6 +2352,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Hello",
   data: function data() {
@@ -2394,7 +2407,8 @@ __webpack_require__.r(__webpack_exports__);
           this.users.push({
             user: this.addUserData.userName,
             password: this.addUserData.password
-          }), this.addUserData = {
+          }), alert('user ' + this.addUserData.userName + ' was successfully added');
+          this.addUserData = {
             password: "",
             cpassword: "",
             userName: "",
@@ -2404,14 +2418,17 @@ __webpack_require__.r(__webpack_exports__);
           alert('Please user name cannot be empty');
         }
       } else {
+        this.addUserData = {
+          password: "",
+          cpassword: "",
+          userName: this.addUserData.userName
+        };
         this.addUserData.showWarning = true;
       }
     },
-    addTodo: function addTodo() {
-      this.tasks.push({
-        name: "vuejs",
-        completed: false
-      });
+    // the function bellow is used to delete a user
+    deleteUser: function deleteUser(index) {
+      this.users.splice(index, 1);
     }
   },
   components: {}
@@ -7346,7 +7363,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".maincontainer[data-v-5c321c94] {\n  min-height: 55vh;\n}\nbutton[data-v-5c321c94] {\n  border: 2px solid black;\n  border-top-color: transparent;\n  margin-bottom: 20px;\n  padding: 10px 0;\n}\nbutton[data-v-5c321c94]:focus {\n  background-color: teal;\n  border-top-color: black;\n  color: white;\n}\ninput[data-v-5c321c94]:not(:last-of-type) {\n  padding-left: 8px;\n}\r\n\r\n", ""]);
+exports.push([module.i, ".maincontainer[data-v-5c321c94] {\n  min-height: 55vh;\n}\nbutton[data-v-5c321c94] {\n  border: 2px solid black;\n  border-top-color: transparent;\n  margin-bottom: 20px;\n  padding: 10px 0;\n}\nbutton[data-v-5c321c94]:focus {\n  background-color: teal;\n  border-top-color: black;\n  color: white;\n}\nbutton[data-v-5c321c94]:hover {\n  background-color: darkblue;\n  border-top-color: black;\n  color: white;\n}\ninput[data-v-5c321c94]:not(:last-of-type) {\n  padding-left: 8px;\n}\n.cross[data-v-5c321c94]{\n  width:3px;\n  opacity: 0.5;\n}\n.crossHolder:hover .cross[data-v-5c321c94]{\n  opacity: 1;\n  background-color: indigo;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -40318,17 +40335,29 @@ var render = function() {
                 _c(
                   "span",
                   {
-                    staticClass: "text-normal md:text-xl font-bold text-center"
+                    staticClass:
+                      "text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark"
                   },
                   [_vm._v("Users in the Database")]
                 ),
+                _vm._v(" "),
+                _vm.users.length == 0
+                  ? _c(
+                      "span",
+                      {
+                        staticClass:
+                          "text-normal md:text-xl font-bold text-center"
+                      },
+                      [_vm._v("Currently there is no User in the Database")]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm._l(_vm.users, function(user, idx) {
                   return _c(
                     "div",
                     {
                       staticClass:
-                        "shadow border-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold"
+                        "shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full"
                     },
                     [
                       _c("div", [
@@ -40345,7 +40374,67 @@ var render = function() {
           : _vm._e(),
         _vm._v(" "),
         _vm.currentbtnFxn == "bDeleteUsers"
-          ? _c("div", [_vm._v("Here the admin can delete a user")])
+          ? _c(
+              "div",
+              { staticClass: "flex flex-col items-center" },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "text-normal md:text-xl mb-2 font-bold text-center w-full bg-dark py-4 text-teal-500 shadow border-2 border-dark"
+                  },
+                  [
+                    _vm._v(
+                      "There are " +
+                        _vm._s(_vm.users.length) +
+                        " Users in the Database"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.users, function(user, idx) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass:
+                        "shadow border-2 py-2 border-gray-300 bg-blue-200 text-center mb-2 font-bold w-full flex justify-between"
+                    },
+                    [
+                      _c("div", [
+                        _vm._v(
+                          "\n          " + _vm._s(user.user) + "\n        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "transform crossHolder rotate-45 -ml-2",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteUser(idx)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", {
+                            staticClass:
+                              "h-4 cross rounded-full bg-red-500 transform rotate-90"
+                          }),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass:
+                              "h-4 cross rounded-full bg-red-500 -mt-4"
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.currentbtnFxn == "bViewUserTasks"
