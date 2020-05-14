@@ -108,4 +108,15 @@ class User1Controller extends Controller
     {
         //
     }
+
+    public function destroyUser($id)
+    {
+        $user = User1::findOrFail($id);
+        $tasks = $user->task;
+        foreach ($tasks as $task) {
+            $task->delete();
+        }
+        $user->delete();
+        return 204;
+    }
 }

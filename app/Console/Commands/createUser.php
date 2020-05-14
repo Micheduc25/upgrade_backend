@@ -39,9 +39,41 @@ class createUser extends Command
      */
     public function handle()
     {
-        $user = User1::find(46);
-        $user->role = "super_administrator";
-        $user->save();
+
+        // $user = User1::findOrFail(483);
+        // $tasks = $user->task;
+        // foreach($tasks as $task){
+        //     $task->delete();
+        // }
+        // $user->delete();
+
+        // $t1 = TaskModel::create([
+        //     'title' => 'title 1',
+        //     'description' => 'My first task',
+        //     'task_priority' => 'A faire',
+        //     'tstate' => false,
+        // ]);
+
+        // $t2 = TaskModel::create([
+        //     'title' => 'title 2',
+        //     'description' => 'My second task',
+        //     'task_priority' => 'A faire',
+        //     'tstate' => false,
+        // ]);
+
+        // $u1 = User1::create([
+        //     'username' => 'rodyl1',
+        //     'password' => 'root',
+        // ]);
+        // $u1->task()->save($t1);
+        // $u1->task()->save($t2);
+        // $t1->user1()->save($u1);
+        // $t2->user1()->save($u1);
+
+        // $user = User1::find(46);
+        // $user->role = "super_administrator";
+        // $user->save();
+
         // $users = User1::all();
 
         // foreach($users as $user){
