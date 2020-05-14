@@ -68,12 +68,12 @@
                     Mark all as complete</label>
                 <ul class="todo-list">
                     <li class="todo" :class="{completed: todoelt.completed, editing: todoelt === editing}" :key="idx" v-for="(todoelt, idx) in filteredTodos">
-                        <div class="view p-2" :class="[getColor(todoelt.task_priority)]">
-                            <input type="checkbox" name="" class="toggle w-4 h-4 bg-blue-500 z-10" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
-                            
-                            <div class="bg-gray-200 shadow"  @click="todobools[idx] =!todobools[idx]" >
+                        <div class="view p-2 m-1 shadow rounded" :class="[getColor(todoelt.task_priority)]">
+                            <input type="checkbox" name="" class="hover:bg-blue-500 w-4 h-4 bg-blue-500 absolute z-10" v-model="todoelt.completed" @click="chageTaskState(todoelt)">
+                            <todo-elt :todoelt="todoelt" @doneEdit="editTodo($event)"></todo-elt>
+                            <!-- <div class="bg-gray-200 shadow"  @click="todobools[idx] =!todobools[idx]" >
                                 <label class="text-gold-300 text-lg font-bold uppercase" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
-                            </div>
+                            </div> -->
                             <!-- <div class="bg-gray-200 shadow" v-else  @click="todobools[idx] =!todobools[idx]">
                                 <label class="text-gold-300 text-lg font-bold uppercase -mb-6" @dblclick="editTodo(todoelt)">{{ todoelt.name }}</label>
                                
@@ -116,6 +116,7 @@ import Vue from 'vue'
 import axios from 'axios'
 //import Login from "./login.vue"
 import mynav from "./mynav.vue"
+import ToDoelt from "./todoelt.vue"
 
 export default {
     name:'Todo',
@@ -158,6 +159,7 @@ export default {
     },
     components: {
         mynav,
+        'todo-elt':ToDoelt
     },
     beforeMount(){
         console.log("Getting user before mount")
@@ -364,7 +366,7 @@ export default {
             console.log(todo.name)
             console.log(todo)
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do'})
+                {title:todo.name, description: todo.description, tstate: todo.completed, task_priority:todo.task_priority})
                 .then(res => {
                     //this.editing = null
                 })
@@ -381,7 +383,7 @@ export default {
             // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
             //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
             axios.put(`/api/updatetask/${todo.taskid}`, 
-                {title:'', description: todo.name, tstate: todo.completed, task_priority:'to do' })
+                {title:todo.name, description: todo.description, tstate: todo.completed, task_priority:todo.task_priority })
                 .then(res => {
                     this.editing = null
                 })

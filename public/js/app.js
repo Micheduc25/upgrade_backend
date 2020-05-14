@@ -1735,6 +1735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mynav_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mynav.vue */ "./resources/js/components/mynav.vue");
+/* harmony import */ var _todoelt_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./todoelt.vue */ "./resources/js/components/todoelt.vue");
 //
 //
 //
@@ -1851,6 +1852,7 @@ __webpack_require__.r(__webpack_exports__);
  //import Login from "./login.vue"
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Todo',
   props: {
@@ -1888,7 +1890,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
-    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    mynav: _mynav_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'todo-elt': _todoelt_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   beforeMount: function beforeMount() {
     console.log("Getting user before mount");
@@ -2112,10 +2115,10 @@ __webpack_require__.r(__webpack_exports__);
       console.log(todo.name);
       console.log(todo);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: '',
-        description: todo.name,
+        title: todo.name,
+        description: todo.description,
         tstate: todo.completed,
-        task_priority: 'to do'
+        task_priority: todo.task_priority
       }).then(function (res) {//this.editing = null
       })["catch"](function (err) {
         console.log(err);
@@ -2131,10 +2134,10 @@ __webpack_require__.r(__webpack_exports__);
       // console.log(this.completeTodo[this.todos.indexOf(todo)].taskid)
       //let currentId = this.completeTodo[this.todos.indexOf(todo)].taskid
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/updatetask/".concat(todo.taskid), {
-        title: '',
-        description: todo.name,
+        title: todo.name,
+        description: todo.description,
         tstate: todo.completed,
-        task_priority: 'to do'
+        task_priority: todo.task_priority
       }).then(function (res) {
         _this5.editing = null;
       })["catch"](function (err) {
@@ -2887,6 +2890,84 @@ __webpack_require__.r(__webpack_exports__);
     computed: {},
     mounted: function mounted() {
       console.log('Component signup mounted.');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/todoelt.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/todoelt.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      displayFull: false,
+      editElt: false
+    };
+  },
+  // props:['todos','todoelt','idx'],
+  props: ['todoelt'],
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  methods: {
+    submitTaskEdit: function submitTaskEdit() {
+      this.editElt = false; // this.todos[this.idx]= todoelt
+
+      this.$emit('doneEdit', this.todoelt);
     }
   }
 });
@@ -39876,7 +39957,7 @@ var render = function() {
                   _c(
                     "div",
                     {
-                      staticClass: "view p-2",
+                      staticClass: "view p-2 m-1 shadow rounded",
                       class: [_vm.getColor(todoelt.task_priority)]
                     },
                     [
@@ -39889,7 +39970,8 @@ var render = function() {
                             expression: "todoelt.completed"
                           }
                         ],
-                        staticClass: "toggle w-4 h-4 bg-blue-500 z-10",
+                        staticClass:
+                          "hover:bg-blue-500 w-4 h-4 bg-blue-500 absolute z-10",
                         attrs: { type: "checkbox", name: "" },
                         domProps: {
                           checked: Array.isArray(todoelt.completed)
@@ -39929,32 +40011,14 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "bg-gray-200 shadow",
-                          on: {
-                            click: function($event) {
-                              _vm.todobools[idx] = !_vm.todobools[idx]
-                            }
+                      _c("todo-elt", {
+                        attrs: { todoelt: todoelt },
+                        on: {
+                          doneEdit: function($event) {
+                            return _vm.editTodo($event)
                           }
-                        },
-                        [
-                          _c(
-                            "label",
-                            {
-                              staticClass:
-                                "text-gold-300 text-lg font-bold uppercase",
-                              on: {
-                                dblclick: function($event) {
-                                  return _vm.editTodo(todoelt)
-                                }
-                              }
-                            },
-                            [_vm._v(_vm._s(todoelt.name))]
-                          )
-                        ]
-                      ),
+                        }
+                      }),
                       _vm._v(" "),
                       _c("button", {
                         staticClass: "destroy",
@@ -39965,7 +40029,8 @@ var render = function() {
                           }
                         }
                       })
-                    ]
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -41243,6 +41308,204 @@ var render = function() {
         ]
       )
     ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    !_vm.editElt
+      ? _c(
+          "div",
+          {
+            on: {
+              dblclick: function($event) {
+                _vm.editElt = true
+              }
+            }
+          },
+          [
+            !_vm.displayFull
+              ? _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.displayFull = true
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "bg-gray-200 shadow" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "text-gold-300 text-lg font-bold uppercase"
+                        },
+                        [_vm._v(_vm._s(_vm.todoelt.name))]
+                      )
+                    ])
+                  ]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "bg-gray-200 shadow",
+                    on: {
+                      click: function($event) {
+                        _vm.displayFull = false
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "bg-gray-200 shadow" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "text-gold-300 text-lg font-bold uppercase -mb-6"
+                        },
+                        [_vm._v(_vm._s(_vm.todoelt.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-blue-600 w-full text-base" },
+                        [
+                          _c("label", { staticClass: "ml-4 justify -mb-2" }, [
+                            _vm._v(_vm._s(_vm.todoelt.description))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "bg-teal-200 italic text-red-600 font-bold text-sm"
+                            },
+                            [
+                              _vm._v(
+                                ">>>>>>>>> created on:" +
+                                  _vm._s(_vm.todoelt.end_date) +
+                                  ">>>>>>>>> "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.editElt
+      ? _c("div", { staticClass: "w-4/5 mx-auto pb-2 shadow px-2" }, [
+          _c(
+            "div",
+            { staticClass: "mb-2 flex flex-col items-start justify-start" },
+            [
+              _c(
+                "label",
+                {
+                  staticClass: "text-blue-800 text-base font-bold pl-0 -mb-4",
+                  attrs: { for: "taskname" }
+                },
+                [_vm._v("Task name")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.todoelt.name,
+                    expression: "todoelt.name"
+                  }
+                ],
+                staticClass:
+                  "w-full h-8 text-base border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
+                attrs: { type: "text", name: "taskname" },
+                domProps: { value: _vm.todoelt.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.todoelt, "name", $event.target.value)
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2 flex flex-col items-start" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-blue-800 text-base font-bold pl-0 -mb-4",
+                attrs: { for: "description" }
+              },
+              [_vm._v("Task Description")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.todoelt.description,
+                  expression: "todoelt.description"
+                }
+              ],
+              staticClass:
+                "w-full h-8 text-base border-2 border-blue-500 focus:shadow-outline rounded pl-2 sm:pl-4",
+              attrs: { name: "description", type: "text" },
+              domProps: { value: _vm.todoelt.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.todoelt, "description", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "border-blue-400 border-2 px-8 py-2 rounded bg-teal-500 hover:bg-blue-500 text-base hover:shadow text-white",
+            attrs: { type: "submit", name: "addUser", value: "Done" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.submitTaskEdit($event)
+              }
+            }
+          })
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -58242,6 +58505,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_todo_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/todoelt.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/todoelt.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true& */ "./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true&");
+/* harmony import */ var _todoelt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todoelt.vue?vue&type=script&lang=js& */ "./resources/js/components/todoelt.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _todoelt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6a95c8ac",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/todoelt.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/todoelt.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/todoelt.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_todoelt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./todoelt.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/todoelt.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_todoelt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/todoelt.vue?vue&type=template&id=6a95c8ac&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_todoelt_vue_vue_type_template_id_6a95c8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
