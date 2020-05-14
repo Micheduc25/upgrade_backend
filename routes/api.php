@@ -24,6 +24,7 @@ Route::get('/getCurrentUser', 'LoginController@getCurrentUser');
 Route::post('/login/checklogin', 'LoginController@checklogin');
 Route::post('/login/register', 'LoginController@register');
 Route::get('tasks/{id}', 'User1Controller@getUserTasks');
+Route::delete('destroyUser/{id}', 'User1Controller@destroyUser');
 Route::post('addtask/{id}', 'TasksController@store');
 Route::post('maddtask/{id}', 'TasksController@maddtask');
 Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
