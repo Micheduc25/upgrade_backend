@@ -41038,7 +41038,7 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "text-teal-500 hover:text-white",
-            attrs: { href: "http://127.0.0.1:8000" }
+            attrs: { href: "http://todo:local" }
           },
           [_vm._v("Home")]
         )
@@ -41104,7 +41104,7 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "text-teal-500 hover:text-white",
-            attrs: { href: "http://127.0.0.1:8000" }
+            attrs: { href: "http://todo:local" }
           },
           [
             _c("span", { staticClass: "glyphicon glyphicon-user" }),
@@ -41129,7 +41129,7 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "text-teal-500 hover:text-white",
-            attrs: { href: "http://127.0.0.1:8000/login" }
+            attrs: { href: "http://todo:local/login" }
           },
           [
             _c("span", { staticClass: "glyphicon glyphicon-log-in" }),
@@ -58691,8 +58691,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\ACADEMICS\internship\todo\todo_laravel_vuejs_neo4j\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\ACADEMICS\internship\todo\todo_laravel_vuejs_neo4j\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\DYLAN\Documents\LARAVEL\todo1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
