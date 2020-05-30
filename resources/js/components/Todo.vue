@@ -17,7 +17,7 @@
                         id="change_sortOrder"
                         class="block border-2 border-teal-200 appearance-none bg-gray-200 py-3 border-box px-4 pr-8 rounded-bl rounded-tl leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
     
-                        <option v-for="order in  sortOrder">{{order}}</option>
+                        <option v-for="(order, idx) in  sortOrder" :key="idx">{{order}}</option>
                     </select>
                         <svg class="h-4 w-4 -ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                         <button @click="reorder" class="py-3 px-4 border-3 border-teal-200 shadow text-blue-600 font-bold bg-teal-200 rounded-br rounded-tr">sort</button>
@@ -40,7 +40,7 @@
                             <select v-model="todoData.selectedPriority"
                                 id="priority"
                                 class="block appearance-none bg-gray-200 w-full text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
-                                <option v-for="priority in priorities">{{priority}}</option>
+                                <option v-for="(priority, idx) in priorities" :key="idx">{{priority}}</option>
                             </select>
                              <svg class="h-4 w-4 -ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                         </div>

@@ -40,7 +40,21 @@ class createUser extends Command
     public function handle()
     {
 
-        // $user = User1::findOrFail(483);
+        $supervisor = User1::findOrFail(22);
+        $oversees = $supervisor->supervise;
+        foreach( $oversees as $oversee ){
+            $supervisor->supervise()->detach($oversee->id);
+            $oversee->superviser_par()->detach(22);
+        }
+        // $user1 = User1::findOrFail(121);
+        // $user2 = User1::findOrFail(141);
+        // $supervisor->supervise()->save($user1);
+        // $supervisor->supervise()->save($user2);
+        // //$supervisor->supervise()->detach(141);
+        // $user1->superviser_par()->save($supervisor);
+        // $user2->superviser_par()->save($supervisor);
+        // $user->role = "super_administrator";
+        // $user->save();
         // $tasks = $user->task;
         // foreach($tasks as $task){
         //     $task->delete();
@@ -63,8 +77,18 @@ class createUser extends Command
 
         // $u1 = User1::create([
         //     'username' => 'rodyl1',
-        //     'password' => 'root',
+        //     'password' => '0000',
+        //     'role' => "user",
         // ]);
+        // $u2 = User1::create([
+        //     'username' => 'rodyl2',
+        //     'password' => '0000',
+        //     'role' => "user",
+        // ]);
+        // $user->supervise()->save($u1);
+        // $user->supervise()->save($u2);
+        // $u1->superviser_par()->save($user);
+        // $u2->superviser_par()->save($user);
         // $u1->task()->save($t1);
         // $u1->task()->save($t2);
         // $t1->user1()->save($u1);

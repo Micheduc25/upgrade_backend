@@ -62,6 +62,48 @@ class User1Controller extends Controller
         return;
     }
 
+    /**
+     * set user role as supervisor
+     */
+    public function makesprvsr($id){
+        $user = User1::findOrFail($id);
+        $user->role = "supervisor";
+        $user->save();
+    }
+    /**
+     * set user role as supervisor
+     */
+    public function removesprvsr($id){
+        $supervisor = User1::findOrFail($id);
+        $oversees = $supervisor->supervise;
+        foreach( $oversees as $oversee ){
+            $supervisor->supervise()->detach($oversee->id);
+            $oversee->superviser_par()->detach($id);
+        }
+
+        $supervisor->role = "user";
+        $supervisor->save();
+    }
+    /**
+     * 
+     */
+    public function oversee($id, $usersidtab){
+        $supervisor = User1::findOrFail($id);
+        if($user->role == "supervisor"){
+            foreach($usersidtab as $id){
+                $user = User1::findOrFail($id);
+                $supervisor->supervise()->save($user);
+                $user->superviser_par()->save($supervisor);
+            }
+            return response()->json([
+                
+            ], 200);
+        }
+        return response()->json([
+                "baduser"=>"Selected user is not a supervisor"
+        ], 500);
+    }
+
     public function getUserTasks($id)
     {
         return (User1::findOrFail($id)->task);

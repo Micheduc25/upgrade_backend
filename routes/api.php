@@ -31,6 +31,9 @@ Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
 Route::put('updatetask/{id}', 'TasksController@updatetask');
 
 Route::get('/getallusers/{id}', 'User1Controller@getAllUser');
+Route::post('/makesprvsr/{id}', 'User1Controller@makesprvsr');
+Route::post('/removesprvsr/{id}', 'User1Controller@removesprvsr');
+Route::post('/oversee/{id}/{usersidtab}', 'User1Controller@oversee');
 
 // Route::Resources(
 //     [

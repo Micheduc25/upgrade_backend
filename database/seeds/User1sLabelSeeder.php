@@ -36,10 +36,12 @@ class User1sLabelSeeder extends Seeder
         $u1 = User1::create([
             'username'=>'rodyl',
             'password'=>'root',
+            'role'=>'super_administrator',
         ]);
         $u2 = User1::create([
             'username'=>'joy',
             'password'=>'1234',
+            'role'=>'supervisor',
         ]);
 
         $u1->task()->save($t1);
