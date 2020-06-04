@@ -34,6 +34,8 @@ Route::get('/getallusers/{id}', 'User1Controller@getAllUser');
 Route::post('/makesprvsr/{id}', 'User1Controller@makesprvsr');
 Route::post('/removesprvsr/{id}', 'User1Controller@removesprvsr');
 Route::post('/oversee/{id}/{usersidtab}', 'User1Controller@oversee');
+Route::get('/overseelist/{id}', 'User1Controller@overseelist');
+Route::get('/getSupervisors/{id}', 'User1Controller@getSupervisors');
 
 // Route::Resources(
 //     [

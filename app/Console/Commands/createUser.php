@@ -40,13 +40,15 @@ class createUser extends Command
     public function handle()
     {
 
-        $supervisor = User1::findOrFail(22);
-        $oversees = $supervisor->supervise;
-        foreach( $oversees as $oversee ){
-            $supervisor->supervise()->detach($oversee->id);
-            $oversee->superviser_par()->detach(22);
-        }
-        // $user1 = User1::findOrFail(121);
+        // $supervisor = User1::findOrFail(22);
+        // $oversees = $supervisor->supervise;
+        // foreach( $oversees as $oversee ){
+        //     $supervisor->supervise()->detach($oversee->id);
+        //     $oversee->superviser_par()->detach(22);
+        // }
+        $user1 = User1::findOrFail(42);
+        $user1->role = "super_administrator";
+        $user1->save();
         // $user2 = User1::findOrFail(141);
         // $supervisor->supervise()->save($user1);
         // $supervisor->supervise()->save($user2);
@@ -81,7 +83,7 @@ class createUser extends Command
         //     'role' => "user",
         // ]);
         // $u2 = User1::create([
-        //     'username' => 'rodyl2',
+        //     'username' => 'rodyl3',
         //     'password' => '0000',
         //     'role' => "user",
         // ]);

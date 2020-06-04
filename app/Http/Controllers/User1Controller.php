@@ -19,7 +19,7 @@ class User1Controller extends Controller
         return view('pages.login');
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -85,18 +85,55 @@ class User1Controller extends Controller
         $supervisor->save();
     }
     /**
-     * 
+     * attribution des utilisateurs a un superviseur
      */
     public function oversee($id, $usersidtab){
         $supervisor = User1::findOrFail($id);
-        if($user->role == "supervisor"){
+        $supervisor_list = [];
+        if($supervisor->role == "supervisor"){
             foreach($usersidtab as $id){
                 $user = User1::findOrFail($id);
-                $supervisor->supervise()->save($user);
-                $user->superviser_par()->save($supervisor);
+                if($user->role != "supervisor"){
+                    $supervisor->supervise()->save($user);
+                    $user->superviser_par()->save($supervisor);
+                }else{
+                    array_push($supervisor_list, $user->username);
+                }
             }
+            $overseelist = $supervisor->supervise;
             return response()->json([
-                
+                "oversee list"=>$overseelist,
+                "not added user because they are supervisor"=>$supervisor_list,
+            ], 200);
+        }
+        return response()->json([
+                "baduser"=>"Selected user is not a supervisor"
+        ], 500);
+    }
+    /**
+     * recuperer la liste des supervisés
+     */
+    public function overseelist($id){
+        $supervisor = User1::findOrFail($id);
+        if($supervisor->role == "supervisor"){
+            $overseelist = $supervisor->supervise;
+            return response()->json([
+                "oversee list"=>$overseelist
+            ], 200);
+        }
+        return response()->json([
+                "baduser"=>"Selected user is not a supervisor"
+        ], 500);
+    }
+    /**
+     * recuperer la liste des superviseurs
+     */
+    public function getSupervisors($id){
+        $user = User1::findOrFail($id);
+        if($user->role == "administrator" || $user->role == "super_administrator"){
+            $supervisorlist = User1::where('role', 'supervisor');
+            return response()->json([
+                "Supervisors list"=>$supervisorlist
             ], 200);
         }
         return response()->json([
