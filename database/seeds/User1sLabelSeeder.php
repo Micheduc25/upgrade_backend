@@ -17,6 +17,7 @@ class User1sLabelSeeder extends Seeder
             'description' => 'My first task',
             'task_priority' => 'A faire',
             'tstate'=>false,
+            'synchronized'=>true,
         ]);
 
         $t2 = TaskModel::create([
@@ -24,6 +25,7 @@ class User1sLabelSeeder extends Seeder
             'description'=> 'My second task',
             'task_priority' => 'A faire',
             'tstate'=>false,
+            'synchronized'=>true,
         ]);
 
         $t3 = TaskModel::create([
@@ -31,6 +33,7 @@ class User1sLabelSeeder extends Seeder
             'description' => 'My third task',
             'task_priority' => 'A faire',
             'tstate'=>false,
+            'synchronized'=>true
         ]);
 
         $u1 = User1::create([
