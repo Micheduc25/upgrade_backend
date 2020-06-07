@@ -131,7 +131,7 @@ class User1Controller extends Controller
     public function getSupervisors($id){
         $user = User1::findOrFail($id);
         if($user->role == "administrator" || $user->role == "super_administrator"){
-            $supervisorlist = User1::where('role', 'supervisor');
+            $supervisorlist = User1::all()->where('role', 'supervisor');
             return response()->json([
                 "Supervisors list"=>$supervisorlist
             ], 200);
