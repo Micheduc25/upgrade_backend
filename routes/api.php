@@ -35,7 +35,8 @@ Route::post('/makesprvsr/{id}', 'User1Controller@makesprvsr');
 Route::post('/removesprvsr/{id}', 'User1Controller@removesprvsr');
 Route::post('/oversee/{id}', 'User1Controller@oversee');
 Route::get('/overseelist/{id}', 'User1Controller@overseelist');
-Route::get('/getSupervisors/{id}', 'User1Controller@getSupervisors');
+Route::get('/getSupervisors/{id}', 'User1Controller@getSupervisors');//updateuser
+Route::put('updateuser/{id}', 'User1Controller@updateuser');
 
 // Route::Resources(
 //     [
