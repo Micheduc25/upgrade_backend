@@ -87,9 +87,10 @@ class User1Controller extends Controller
     /**
      * attribution des utilisateurs a un superviseur
      */
-    public function oversee($id, $usersidtab){
+    public function oversee(Request $request, $id){
         $supervisor = User1::findOrFail($id);
         $supervisor_list = [];
+        $usersidtab=$request->input('membersId');
         if($supervisor->role == "supervisor"){
             foreach($usersidtab as $id){
                 $user = User1::findOrFail($id);
