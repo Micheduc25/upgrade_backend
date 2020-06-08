@@ -107,7 +107,9 @@ class User1Controller extends Controller
             ], 200);
         }
         return response()->json([
-                "baduser"=>"Selected user is not a supervisor"
+                "baduser"=>"Selected user is not a supervisor",
+                "role"=>$supervisor->role,
+                "members list"=>$usersidtab
         ], 500);
     }
     /**
