@@ -63,6 +63,19 @@ class User1Controller extends Controller
     }
 
     /**
+     *
+     */
+    public function updateuser(Request $request, $id)
+    {
+        $user = User1::findOrFail($id);
+        $user->update($request->all());
+        return response()->json([
+                "updated user"=>$user
+        ], 500);
+
+    }
+
+    /**
      * set user role as supervisor
      */
     public function makesprvsr($id){
