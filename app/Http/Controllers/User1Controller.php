@@ -96,8 +96,7 @@ class User1Controller extends Controller
                 $user = User1::findOrFail($id);
                 if($user->role != "supervisor"){
                     $supervisor->supervise()->save($user);
-                    $user->superviser_par()->associate($supervisor);
-                    $user->save();
+                    $user->superviser_par()->save($supervisor);
                 }else{
                     array_push($supervisor_list, $user->username);
                 }
