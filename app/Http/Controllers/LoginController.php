@@ -56,6 +56,7 @@ class LoginController extends Controller
             'username'=>$request->input('username'),
             'password'=>$request->input('password'),
             'role'=>$request->input('role'),
+            'supervisor'=>$request->input('supervisor'),
         ]);
 
 
