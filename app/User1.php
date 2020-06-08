@@ -21,7 +21,7 @@ class User1 extends NeoEloquent{
         return $this->hasMany('App\User1', 'supervise');
     }
     public function superviser_par(){
-        return $this->hasOne('App\User1', 'superviser par');
+        return $this->belongsTo('App\User1', 'superviser par');
     }
 
 
