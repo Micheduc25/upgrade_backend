@@ -69,7 +69,10 @@ class User1Controller extends Controller
     {
         $user = User1::findOrFail($id);
         $user->update($request->all());
-        return $user;
+        return response()->json([
+                "updated user"=>$user
+        ], 500);
+
     }
 
     /**
