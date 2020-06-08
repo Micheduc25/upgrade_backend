@@ -49,18 +49,19 @@ class LoginController extends Controller
         return $user;
         // echo($user1_data);
         // return $user1_data;
-        
+
     }
     public function register(Request $request){
         $user = User1::create([
             'username'=>$request->input('username'),
             'password'=>$request->input('password'),
+            'role'=>$request->input('role'),
         ]);
 
 
         $this->currentUser = $user;
         return ($user);
-        
+
     }
 
     public function getCurrentUser(){
