@@ -33,7 +33,7 @@ Route::put('updatetask/{id}', 'TasksController@updatetask');
 Route::get('/getallusers/{id}', 'User1Controller@getAllUser');
 Route::post('/makesprvsr/{id}', 'User1Controller@makesprvsr');
 Route::post('/removesprvsr/{id}', 'User1Controller@removesprvsr');
-Route::post('/removeovrsmbr/{sid}/{mid}', 'User1Controller@removeovrsmbr');
+Route::delete('/removeovrsmbr/{sid}/{mid}', 'User1Controller@removeovrsmbr');
 Route::post('/oversee/{id}', 'User1Controller@oversee');
 Route::get('/overseelist/{id}', 'User1Controller@overseelist');
 Route::get('/getSupervisors/{id}', 'User1Controller@getSupervisors');//updateuser
