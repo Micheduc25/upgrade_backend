@@ -71,7 +71,7 @@ class User1Controller extends Controller
         $user->update($request->all());
         return response()->json([
                 "updated user"=>$user
-        ], 500);
+        ], 200);
 
     }
 
@@ -84,7 +84,7 @@ class User1Controller extends Controller
         $user->save();
     }
     /**
-     * set user role as supervisor
+     * remove supervisor role
      */
     public function removesprvsr($id){
         $supervisor = User1::findOrFail($id);
@@ -96,6 +96,26 @@ class User1Controller extends Controller
 
         $supervisor->role = "user";
         $supervisor->save();
+    }
+
+    /**
+     * remove member on oversee list
+     */
+    public function removeovrsmbr($sid, $mid){
+        $supervisor = User1::findOrFail($sid);
+        $member = User1::findOrFail($mid);
+        //$oversees = $supervisor->supervise;
+        $supervisor->supervise()->detach($member->id);
+        $member->superviser_par()->detach($supervisor->id);
+        $member->supervisor = null;
+        $member->save();
+
+        return response()->json([
+                "status"=>"success",
+                "content"=>"L'utilisateur ".$member->username
+                ." a bien été retiré de la liste des membres du superviseur ".$supervisor->username,
+            ], 200);
+
     }
     /**
      * attribution des utilisateurs a un superviseur
