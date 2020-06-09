@@ -130,6 +130,8 @@ class User1Controller extends Controller
                 if($user->role != "supervisor"){
                     $supervisor->supervise()->save($user);
                     $user->superviser_par()->save($supervisor);
+                    $user->supervisor = $supervisor->id;
+                    $user->save();
                     array_push($user_list, $user);
                 }
             }
