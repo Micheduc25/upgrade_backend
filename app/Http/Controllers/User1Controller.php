@@ -122,7 +122,7 @@ class User1Controller extends Controller
      */
     public function oversee(Request $request, $id){
         $supervisor = User1::findOrFail($id);
-        $supervisor_list = [];
+        $user_list = [];
         $usersidtab=$request->input('membersId');
         if($supervisor->role == "supervisor"){
             foreach($usersidtab as $id){
@@ -130,14 +130,12 @@ class User1Controller extends Controller
                 if($user->role != "supervisor"){
                     $supervisor->supervise()->save($user);
                     $user->superviser_par()->save($supervisor);
-                }else{
-                    array_push($supervisor_list, $user->username);
+                    array_push($user_list, $user);
                 }
             }
-            $overseelist = $supervisor->supervise;
+            //$overseelist = $supervisor->supervise;
             return response()->json([
-                "oversee list"=>$overseelist,
-                "not added user because they are supervisor"=>$supervisor_list,
+                "oversee list"=>$user_list,
             ], 200);
         }
         return response()->json([
