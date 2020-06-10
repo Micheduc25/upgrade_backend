@@ -40,15 +40,15 @@ class User1sLabelSeeder extends Seeder
             'username'=>'rodyl',
             'password'=>'root',
             'role'=>'super_administrator',
-            'updated_tasks'=>null,
-            'deleted_tasks'=>null,
+            'updated_tasks'=>[0,],
+            'deleted_tasks'=>[0,],
         ]);
         $u2 = User1::create([
             'username'=>'joy',
             'password'=>'1234',
             'role'=>'supervisor',
-            'updated_tasks'=>null,
-            'deleted_tasks'=>null,
+            'updated_tasks'=>[0,],
+            'deleted_tasks'=>[0,],
         ]);
 
         $u1->task()->save($t1);
