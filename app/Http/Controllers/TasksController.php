@@ -18,7 +18,7 @@ class TasksController extends Controller
         // return view('pages.about',[
         //     'pages'=>TaskModel::all(),
         // ]);User1::$currentUser
-        
+
         $tasks =  TaskModel::all();
         return response()->json([
             "tasks" => $tasks
@@ -34,7 +34,7 @@ class TasksController extends Controller
     {
         //
     }
-    
+
     public function maddtask(Request $request, $id)
     {
         $user = User1::find($id);
@@ -52,7 +52,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $id)
-    {   
+    {
         $user = User1::find($id);
         $task = TaskModel::create($request->all());
 
@@ -68,7 +68,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(TaskModel $taskModel){
-        
+
     }
 
     /**
@@ -99,6 +99,21 @@ class TasksController extends Controller
         $task->update($request->all());
         return $task;
     }
+    public function updatetask_ad(Request $request, $aid, $tid)
+    {
+        $user = User1::findOrFail($aid);
+        $updated_tasks_tab = [];
+        if($user->role == "administrator" || $user->role == "super_administrator"  || $user->role == "supervisor"){
+            $task = TaskModel::findOrFail($tid);
+            $task->update($request->all());
+            $updated_tasks_tab = $user->updated_tasks;
+            array_push($updated_tasks_tab, $task->id);
+            $user->updated_tasks=$updated_tasks_tab;
+            $user->save();
+            return 201;
+        }
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -121,5 +136,24 @@ class TasksController extends Controller
         $user->task()->detach($id);
         $task->delete();
         return 204;
+    }
+    public function destroyTask_ad($aid, $uid, $tid)
+    {
+        $admin = User1::find($aid);
+        $deleted_tasks_tab = [];
+        if($admin->role == "administrator" || $admin->role == "super_administrator" || $admin->role == "supervisor"){
+            $user = User1::find($uid);
+            $task = TaskModel::findOrFail($tid);
+            $task->user1()->detach();
+            $user->task()->detach($tid);
+            array_push($deleted_tasks_tab, $task->id);
+            $task->delete();
+            $deleted_tasks_tab = $user->deleted_tasks;
+
+            $user->deleted_tasks=$deleted_tasks_tab;
+            $user->save();
+            return 204;
+        }
+
     }
 }

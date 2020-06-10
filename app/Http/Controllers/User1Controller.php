@@ -183,6 +183,15 @@ class User1Controller extends Controller
         return (User1::findOrFail($id)->task);
         //return (User1::where('id', $id)->task);
     }
+    public function getOnChangeUserTasks($id)
+    {
+        $user = User1::findOrFail($id);
+        return response()->json([
+            "updatet tasks" => $user->updated_tasks,
+            "deleted tasks" => $user->deleted_tasks
+        ], 200);
+        //return (User1::where('id', $id)->task);
+    }
     public function getCurrentUser($id)
     {
         $user = User1::find($id);
