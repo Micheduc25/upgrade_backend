@@ -121,7 +121,7 @@ class TasksController extends Controller
             $gooduser->updated_tasks=$updated_tasks_tab;
             $gooduser->save();
             return response()->json([
-                $gooduser->updated_tasks 
+                $gooduser->updated_tasks
             ], 200);
         }
 
@@ -152,21 +152,24 @@ class TasksController extends Controller
     public function destroyTask_ad($aid, $uid, $tid)
     {
         $admin = User1::find($aid);
-        $deleted_tasks_tab = [];
+        $deleted_tasks_tab = "";
         if($admin->role == "administrator" || $admin->role == "super_administrator" || $admin->role == "supervisor"){
             $user = User1::find($uid);
             $task = TaskModel::findOrFail($tid);
             $task->user1()->detach();
             $user->task()->detach($tid);
-            if($user->deleted_tasks!=null){
-                $deleted_tasks_tab = $user->deleted_tasks;
+            if($user->deleted_tasks!=null || $user->deleted_tasks==""){
+                $deleted_tasks_tab = "".$task->id;
+                    // array_push($updated_tasks_tab, $user->updated_tasks);
+            }else{
+                $deleted_tasks_tab = "".$user->deleted_tasks.",".$task->id;
             }
-            array_push($deleted_tasks_tab, $task->id);
+            //array_push($deleted_tasks_tab, $task->id);
             $task->delete();
             $user->deleted_tasks=$deleted_tasks_tab;
             $user->save();
-            
-            return 204;
+
+            return $task->id;
         }
 
     }
