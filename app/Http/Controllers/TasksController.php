@@ -102,24 +102,27 @@ class TasksController extends Controller
     public function updatetask_ad(Request $request, $aid, $uid, $tid)
     {
         $user = User1::findOrFail($aid);
-        $updated_tasks_tab = [];
+        $updated_tasks_tab = "";
         if($user->role == "administrator" || $user->role == "super_administrator"  || $user->role == "supervisor"){
             $task = TaskModel::findOrFail($tid);
             $gooduser = User1::findOrFail($uid);
             $task->update($request->all());
-            if($user->updated_tasks!=null && gettype($user->updated_tasks) == "integer"){
-                //$updated_tasks_tab = $user->updated_tasks;
-                array_push($updated_tasks_tab, $user->updated_tasks);
-            }else if($user->updated_tasks!=null && gettype($user->updated_tasks) == "array"){
-                $updated_tasks_tab = $user->updated_tasks;
+            if($gooduser->updated_tasks==null || $gooduser->updated_tasks=="") {
+                $updated_tasks_tab = "".$task->id;
+                // array_push($updated_tasks_tab, $user->updated_tasks);
+            }else{
+                $updated_tasks_tab = "".$gooduser->updated_tasks.",".$task->id;
             }
+            // else if($user->updated_tasks!=null && gettype($user->updated_tasks) == "array"){
+            //     $updated_tasks_tab = $user->updated_tasks;
+            // }
             //$updated_tasks_tab = $user->updated_tasks;
-            array_push($updated_tasks_tab, $task->id);
+            // array_push($updated_tasks_tab, $task->id);
             $gooduser->updated_tasks=$updated_tasks_tab;
             $gooduser->save();
             return response()->json([
-                "user tab" => $gooduser->updated_tasks
-            ], 201);
+                $gooduser->updated_tasks 
+            ], 200);
         }
 
     }

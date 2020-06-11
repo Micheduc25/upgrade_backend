@@ -57,8 +57,8 @@ class LoginController extends Controller
             'password'=>$request->input('password'),
             'role'=>$request->input('role'),
             'supervisor'=>$request->input('supervisor'),
-            'updated_tasks'=>[0,],
-            'deleted_tasks'=>[0,],
+            'updated_tasks'=>"",
+            'deleted_tasks'=>"",
         ]);
 
 
