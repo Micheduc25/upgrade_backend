@@ -158,7 +158,7 @@ class TasksController extends Controller
             $task = TaskModel::findOrFail($tid);
             $task->user1()->detach();
             $user->task()->detach($tid);
-            if($user->deleted_tasks!=null || $user->deleted_tasks==""){
+            if($user->deleted_tasks==null || $user->deleted_tasks==""){
                 $deleted_tasks_tab = "".$task->id;
                     // array_push($updated_tasks_tab, $user->updated_tasks);
             }else{

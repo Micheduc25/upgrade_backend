@@ -29,7 +29,7 @@ Route::delete('destroyUser/{id}', 'User1Controller@destroyUser');
 Route::post('addtask/{id}', 'TasksController@store');
 Route::post('maddtask/{id}', 'TasksController@maddtask');
 Route::delete('destroytask/{id}/{uid}', 'TasksController@destroyTask');
-Route::delete('destroytask_ad/{aid/{uid}/{tid}', 'TasksController@destroyTask_ad');
+Route::delete('destroytask_ad/{aid}/{uid}/{tid}', 'TasksController@destroyTask_ad');
 Route::put('updatetask/{id}', 'TasksController@updatetask');
 Route::put('updatetask_ad/{aid}/{uid}/{tid}', 'TasksController@updatetask_ad');
 
