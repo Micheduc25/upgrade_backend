@@ -92,6 +92,8 @@ class User1Controller extends Controller
         foreach( $oversees as $oversee ){
             $supervisor->supervise()->detach($oversee->id);
             $oversee->superviser_par()->detach($supervisor->id);
+            $oversee->supervisor=null;
+            $oversee->save();
         }
 
         $supervisor->role = "user";
