@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "browser-sync": "^2.26.7",
+        "global": "^4.4.0",
         "js-cookie": "^2.2.1",
         "tailwindcss": "^1.4.5",
         "vue-router": "^3.1.6",
